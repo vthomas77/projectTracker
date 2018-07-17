@@ -5,6 +5,8 @@ require('angular'); // TODO : Can't be saved globally, check why
 global.$ = global.jQuery = require('jquery');
 require('angular-route');
 require('angular-resource');
+require('angular-gantt');
+require('angular-moment');
 
 // Close your eyes (>~v~<)
 // This is because electron-webpack actually harcode default loaded html
@@ -22,7 +24,7 @@ import AppConfig from './app/AppConfig';
 import identity from './app/identity/module';
 
 export default angular
-.module('myApp', [ 'ngRoute', 'ngResource',
+.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt',
     identity.name
 ])
 
