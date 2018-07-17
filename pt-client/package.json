@@ -14,11 +14,11 @@
     "angular-moment": "^1.2.0",
     "angular-resource": "^1.7.0",
     "angular-route": "^1.7.0",
-    "electron-webpack": "^2.0.1",
     "jquery": "^3.3.1",
     "source-map-support": "^0.5.5"
   },
   "devDependencies": {
+    "electron-webpack": "^2.0.1",
     "electron": "2.0.0",
     "electron-builder": "^20.11.1",
     "webpack": "^4.8.1"

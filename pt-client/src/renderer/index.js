@@ -22,10 +22,12 @@ require('angular-moment');
 //main
 import AppConfig from './app/AppConfig';
 import identity from './app/identity/module';
+import test2 from './app/test/module';
 
 export default angular
 .module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt',
-    identity.name
+    identity.name,
+    test2.name
 ])
 
 .config(AppConfig)
