@@ -11,11 +11,11 @@ const localOptions = { usernameField: 'email' };
 const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
   User.findOne({ email: email }, function(err, user) {
     if(err) { return done(err); }
-    if(!user) { return done(null, false, { error: 'Your login details could not be verified. Please try again.' }); }
+    if(!user) { return done(null, false, { error: 'Incorrect email.' }); }
 
     user.comparePassword(password, function(err, isMatch) {
       if (err) { return done(err); }
-      if (!isMatch) { return done(null, false, { error: "Your login details could not be verified. Please try again." }); }
+      if (!isMatch) { return done(null, false, { error: 'Incorrect password.' }); }
 
       return done(null, user);
     });
@@ -28,6 +28,7 @@ const jwtOptions = {
   // Telling Passport where to find the secret
   secretOrKey: config.secret
 };
+
 
 // Setting up JWT login strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken'),
 
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
-    expiresIn: 10080 // in seconds
+    expiresIn: 3600 // in seconds
   });
 };
 
@@ -13,13 +13,13 @@ function generateToken(user) {
 function setUserInfo(request) {
   return {
     _id: request._id,
-    firstName: request.profile.firstName,
-    lastName: request.profile.lastName,
+    username: request.username,
     email: request.email,
-    role: request.role,
+    level: request.level,
+    cost: request.cost
   }};
 
-  //========================================
+//========================================
 // Login Route
 //========================================
 exports.login = function(req, res, next) {
@@ -28,8 +28,11 @@ exports.login = function(req, res, next) {
 
   res.status(200).json({
     token: 'JWT ' + generateToken(userInfo),
-    user: userInfo
+    //user: userInfo
+    user: req.user
   });
+
+
 }
 
 
@@ -73,14 +76,11 @@ exports.register = function(req, res, next) {
         email: email,
         password: password,
         cost: 750,
-        level: ProjectManager
+        level: "ProjectManager"
       });
 
       user.save(function(err, user) {
         if (err) { return next(err); }
-
-        // Subscribe member to Mailchimp list
-        // mailchimp.subscribeToNewsletter(user.email);
 
         // Respond with JWT if user was created
 
