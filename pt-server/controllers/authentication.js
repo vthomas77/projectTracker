@@ -59,6 +59,7 @@ exports.register = function(req, res, next) {
   }
 
   User.findOne({ email: email }, function(err, existingUser) {
+
       if (err) { return next(err); }
 
       // If user is not unique, return error
@@ -68,9 +69,11 @@ exports.register = function(req, res, next) {
 
       // If email is unique and password was provided, create account
       let user = new User({
+        username: username,
         email: email,
         password: password,
-        profile: { firstName: firstName, lastName: lastName }
+        cost: 750,
+        level: ProjectManager
       });
 
       user.save(function(err, user) {
