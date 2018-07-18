@@ -1,6 +1,6 @@
 'use strict';
 
-export default /*@ngInject*/ function IdentityStore($q) {
+export default /*@ngInject*/ function IdentityStore($q, clientConfig) {
 
 	var loginStore = {
 		login: login
@@ -8,7 +8,7 @@ export default /*@ngInject*/ function IdentityStore($q) {
 	return loginStore;
 
 	function login( loginRequest ) {
-		console.log('Coucou');
+		console.log(clientConfig.API_URL);
 	};
 
 };

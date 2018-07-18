@@ -25,5 +25,10 @@
   },
   "resolutions": {
     "webpack-sources": "1.0.1"
+  },
+  "electronWebpack": {
+    "renderer": {
+      "webpackConfig": "webpack.renderer.additions.js"
+    }
   }
 }

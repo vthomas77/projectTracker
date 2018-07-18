@@ -5,7 +5,7 @@ export default /*@ngInject*/ function LoginController( IdentityStore, localStora
   	
   	startFront();
   	// vm.launch = ;
-
+    IdentityStore.login();
   	function startFront() {
   		
   	}
