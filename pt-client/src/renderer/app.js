@@ -1,9 +1,9 @@
 'use strict';
 
-// Vendor.js
+// Vendor.js - Couldn't be done in one of the entry point to export as global variables (for angular/jquery)
 const css = require('./css/style.css').toString();
 require('bootstrap');
-import 'bootstrap/dist/css/bootstrap.min.css';
+require('bootstrap/dist/css/bootstrap.min.css');
 
 global.$ = global.jQuery = require('jquery');
 require('angular'); 
@@ -18,8 +18,8 @@ require('angular-moment');
 // So here it goes ...
     $('body').attr('ng-app', 'myApp');
     $('#app').attr('ng-controller', 'LoginController as LoginController');
-    var test = $("<div id='pickme'></div>");
-    $('#app').append(test);
+    var entryPoint = $("<div id='pickme'></div>");
+    $('#app').append(entryPoint);
     $('#pickme').attr('ng-include', 'LoginController.launch');
 // You can open now <( °v° )>
 
@@ -34,6 +34,7 @@ export default angular
     identity.name,
     core.name
 ])
+
 .value('clientConfig', {
     API_URL: process.env.API_URL
 })
