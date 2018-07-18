@@ -1,8 +1,8 @@
 'use strict';
 
-export default /*@ngInject*/ function IdentityResource( $resource, $http ) {
+export default /*@ngInject*/ function IdentityResource( $resource, $http, clientConfig ) {
 	return {
-		User: $resource('http://127.0.0.1:3000' + "/identity/:action", {}, {
+		User: $resource( clientConfig.API_URL + "/identity/:action", {}, {
 			login: { params: { action: "login" }, method: 'POST' },
 			logout: { params: { action: "logout" }, method: 'POST' }
 		})

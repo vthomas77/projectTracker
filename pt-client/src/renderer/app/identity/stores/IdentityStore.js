@@ -8,7 +8,15 @@ export default /*@ngInject*/ function IdentityStore($q, clientConfig) {
 	return loginStore;
 
 	function login( loginRequest ) {
-		console.log(clientConfig.API_URL);
+		var data;
+		var defer = $q.defer();
+		var call = IdentityResource.User.login(loginRequest).$promise; 
+		call.then(function(data){
+			defer.resolve(data);
+		}, function(){
+			defer.reject();
+		});
+		return defer.promise;
 	};
 
 };
