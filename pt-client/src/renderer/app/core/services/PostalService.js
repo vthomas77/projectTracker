@@ -1,7 +1,6 @@
 'use strict';
 
 export default /*@ngInject*/ function PostalService() {
-
 	function PostalService() {
 		this.channel = postal.channel();
 	};

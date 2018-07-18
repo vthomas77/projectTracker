@@ -1,8 +1,12 @@
 'use strict';
 
 // Vendor.js
-require('angular'); // TODO : Can't be saved globally, check why
+const css = require('./css/style.css').toString();
+require('bootstrap');
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 global.$ = global.jQuery = require('jquery');
+require('angular'); 
 require('angular-route');
 require('angular-resource');
 require('angular-gantt');
@@ -20,12 +24,15 @@ require('angular-moment');
 // You can open now <( °v° )>
 
 //module
-import AppConfig from './app/AppConfig';
 import identity from './app/identity/module';
+import core from './app/core/module';
+
+import AppConfig from './AppConfig.js'
 
 export default angular
 .module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt',
     identity.name,
+    core.name
 ])
 .value('clientConfig', {
     API_URL: process.env.API_URL

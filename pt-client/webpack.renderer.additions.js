@@ -1,6 +1,7 @@
 /* webpack.renderer.additions.js */
 var fs = require("fs");
 var webpack = require("webpack");
+var path = require("path");
 
 var getApiServer = function() {
     var apiServer;
@@ -20,7 +21,10 @@ var definePluginInstance = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  plugins: [
-    definePluginInstance
-  ]
+    plugins: [
+        definePluginInstance
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "/src/renderer/"),
+    }
 }
