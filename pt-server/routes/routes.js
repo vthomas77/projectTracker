@@ -45,13 +45,6 @@ module.exports = function(app) {
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
-  // ----
-  // Test
-  // ----
-
-  // Dashboard route
-  apiRoutes.get('/dashboard', requireAuth, function(req, res) {
-    res.send('It worked! Username is: ' + req.user.username + '.');
-  });
+  // List project route
 
 };
