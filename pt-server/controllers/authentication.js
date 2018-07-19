@@ -1,40 +1,36 @@
-const jwt = require('jsonwebtoken'),
-      crypto = require('crypto'),
-      User = require('../models/userModel'),
-      config = require('../config/main');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const User = require('../models/userModel');
+const config = require('../config/main');
 
+// Generate a token
 function generateToken(user) {
-  return jwt.sign(user, config.secret, {
-    expiresIn: 3600 // in seconds
-  });
+  return jwt.sign(user, config.secret, {expiresIn: config.tokenDuration});
 };
 
-// Set user info from request
+// Set user info for token generation
 function setUserInfo(request) {
   return {
     _id: request._id,
     username: request.username,
     email: request.email,
-    level: request.level,
-    cost: request.cost
+    role: request.level
   }};
 
-//========================================
+// -----------
 // Login Route
-//========================================
+// -----------
+
 exports.login = function(req, res, next) {
 
   let userInfo = setUserInfo(req.user);
 
   res.status(200).json({
-    token: 'JWT ' + generateToken(userInfo),
+    token: generateToken(userInfo),
     //user: userInfo
-    user: req.user
   });
 
-
 }
-
 
 //========================================
 // Registration Route

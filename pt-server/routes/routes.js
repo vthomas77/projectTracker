@@ -1,31 +1,29 @@
 const express = require('express');
 const passport = require('passport');
-const passportService = require('../config/passport');
+const passportLocalService = require('../config/passportLocal');
+const passportJWTService = require('../config/passport');
 const AuthenticationController = require('../controllers/authentication');
+const ProjectController = require('../controllers/project');
 
-
-// Middleware to require login/auth
+// Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-// Authenticate via username and password
-// Use Local strategy
-// Disable persistent login
-// Send Unauthorized if wrong credential
+// Authenticate with username and password
 const requireLogin = passport.authenticate('local', { session: false });
-
-// Constants for role types
-//const REQUIRE_ADMIN = "Admin",
-//    REQUIRE_PROJECTMANAGER = "ProjectManager",
-//      REQUIRE_DEVELOPPER = "Developper";
 
 module.exports = function(app) {
 
-  // Initializing route groups
+  // Route groups
   const apiRoutes = express.Router();
   const authRoutes = express.Router();
+  const projectRoutes = express.Router();
 
   // Set api route group
   app.use('/api', apiRoutes);
+
+  // --------------
+  // Authentication
+  // --------------
 
   // Set auth sub route group
   apiRoutes.use('/auth', authRoutes);
@@ -36,6 +34,20 @@ module.exports = function(app) {
   // Login route
   // Need email and password parameter
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
+
+  // -------
+  // Project
+  // -------
+
+  // Set project sub route group
+  apiRoutes.use('/project', projectRoutes);
+
+  // Create project route
+  projectRoutes.post('/create', ProjectController.create);
+
+  // ----
+  // Test
+  // ----
 
   // Dashboard route
   apiRoutes.get('/dashboard', requireAuth, function(req, res) {

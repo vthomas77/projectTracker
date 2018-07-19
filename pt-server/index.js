@@ -3,7 +3,7 @@ const app = express();
 const config = require('./config/main');
 const bodyParser =require('body-parser');
 const mongoose = require('mongoose');
-const router = require('./routes/loginRoute');
+const router = require('./routes/routes');
 
 //Database connection
 mongoose.connect(config.database);

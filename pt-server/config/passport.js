@@ -4,7 +4,7 @@ const passport = require('passport'),
       JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt,
       LocalStrategy = require('passport-local');
-
+/*
 const localOptions = { usernameField: 'email' };
 
 // Setting up local login strategy
@@ -21,7 +21,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
     });
   });
 });
-
+*/
 const jwtOptions = {
   // Telling Passport to check authorization headers for JWT
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -44,4 +44,4 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 });
 
 passport.use(jwtLogin);
-passport.use(localLogin);
+//passport.use(localLogin);
