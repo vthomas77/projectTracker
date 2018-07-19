@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const passportLocalService = require('../config/passportLocal');
-const passportJWTService = require('../config/passport');
+const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
 
@@ -29,7 +29,7 @@ module.exports = function(app) {
   apiRoutes.use('/auth', authRoutes);
 
   // Registration route
-  authRoutes.post('/register', AuthenticationController.register);
+  authRoutes.post('/register', requireAuth, AuthenticationController.register);
 
   // Login route
   // Need email and password parameter
@@ -43,7 +43,7 @@ module.exports = function(app) {
   apiRoutes.use('/project', projectRoutes);
 
   // Create project route
-  projectRoutes.post('/create', ProjectController.create);
+  projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // ----
   // Test

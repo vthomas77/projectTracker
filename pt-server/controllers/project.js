@@ -1,4 +1,5 @@
 const moment = require('moment');
+const Project = require('../models/projectModel');
 
 // -------------
 // Create Route
@@ -13,11 +14,25 @@ exports.create = function(req, res) {
 
   // Validate parameters
 
-  //if (!name) {
-  //  return res.status(422).send({ error: 'You must enter a project name.'});
-  //}
+  if (!name) {
+    return res.send({ error: 'You must enter a project name.'});
+  }
 
-  return res.send(moment().local().format("YYYY-MM-DD HH-mm-ss"));
+  if (!startDate) {
+    startDate = moment().format("YYYY-MM-DD HH-mm-ss");
+  }
+
+  if(!clientName) {
+    clientName = "";
+  }
+
+  if(!allocatedBudget) {
+    allocatedBudget = 0;
+  }
+
+  createDate = moment().format("YYYY-MM-DD HH-mm-ss");
+
+  return res.send(moment().format("YYYY-MM-DD HH-mm-ss"));
 
 
 }
