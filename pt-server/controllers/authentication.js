@@ -32,86 +32,68 @@ exports.login = function(req, res, next) {
 
 }
 
-//========================================
+// ------------------
 // Registration Route
-//========================================
+// ------------------
+
 exports.register = function(req, res, next) {
 
-  // Check for registration errors
-  const email = req.body.email;
-  const username = req.body.username;
-  const password = req.body.password;
+  // Check if user has admin role
+  if (req.user.level == 'Admin')
+  {
 
-  // Return error if no email provided
-  if (!email) {
-    return res.status(422).send({ error: 'You must enter an email address.'});
-  }
+    // Check for registration errors
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
 
-  // Return error if full name not provided
-  if (!username) {
-    return res.status(422).send({ error: 'You must enter your username.'});
-  }
+    // Return error if no email provided
+    if (!email) {
+      return res.status(422).send({ error: 'You must enter an email address.'});
+    }
 
-  // Return error if no password provided
-  if (!password) {
-    return res.status(422).send({ error: 'You must enter a password.' });
-  }
+    // Return error if full name not provided
+    if (!username) {
+      return res.status(422).send({ error: 'You must enter your username.'});
+    }
 
-  User.findOne({ email: email }, function(err, existingUser) {
+    // Return error if no password provided
+    if (!password) {
+      return res.status(422).send({ error: 'You must enter a password.' });
+    }
 
-      if (err) { return next(err); }
+    User.findOne({ email: email }, function(err, existingUser) {
 
-      // If user is not unique, return error
-      if (existingUser) {
-        return res.status(422).send({ error: 'That email address is already in use.' });
-      }
-
-      // If email is unique and password was provided, create account
-      let user = new User({
-        username: username,
-        email: email,
-        password: password,
-        cost: 750,
-        level: "ProjectManager"
-      });
-
-      user.save(function(err, user) {
         if (err) { return next(err); }
 
-        // Respond with JWT if user was created
+        // If user is not unique, return error
+        if (existingUser) {
+          return res.status(422).send({ error: 'That email address is already in use.' });
+        }
 
-        let userInfo = setUserInfo(user);
-
-        res.status(201).json({
-          token: 'JWT ' + generateToken(userInfo),
-          user: userInfo
+        // If email is unique and password was provided, create account
+        let user = new User({
+          username: username,
+          email: email,
+          password: password,
+          cost: 750,
+          level: "ProjectManager"
         });
-      });
-  });
-}
 
-//========================================
-// Authorization Middleware
-//========================================
+        user.save(function(err, user) {
+          if (err) { return next(err); }
 
-// Role authorization check
-exports.roleAuthorization = function(role) {
-  return function(req, res, next) {
-    const user = req.user;
+          // Respond with JWT if user was created
 
-    User.findById(user._id, function(err, foundUser) {
-      if (err) {
-        res.status(422).json({ error: 'No user was found.' });
-        return next(err);
-      }
+          let userInfo = setUserInfo(user);
 
-      // If user is found, check role.
-      if (foundUser.role == role) {
-        return next();
-      }
-
-      res.status(401).json({ error: 'You are not authorized to view this content.' });
-      return next('Unauthorized');
-    })
+          res.status(201).json({
+            token: generateToken(userInfo),
+            //user: userInfo
+          });
+        });
+    });
+  } else {
+    return res.send({ error: 'You need to be admin to create a ProjectManager Account'});
   }
 }

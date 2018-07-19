@@ -41,7 +41,23 @@ Methode : POST
 Parameter : email, password
 ```
 ```
-Response OK: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjRmMjE3NzNjNWY2ZDFkYjY2Mzc2MWYiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5mciIsInJvbGUiOiJQcm9qZWN0TWFuYWdlciIsImlhdCI6MTUzMTk4Njc5MiwiZXhwIjoxNTMxOTkwMzkyfQ.G_ar6JJsKElKeSHmIG_hJLm_7U5pSX2ypJuIP77ehqM"}
+Response OK: {"token":"***"}
+```
+```
+Response KO : Unauthorized
+```
+#### Register
+```
+Route : /api/auth/register
+```
+```
+Methode : POST
+```
+```
+Parameter : username, email, password
+```
+```
+Response OK: {"token":"***"}
 ```
 ```
 Response KO : Unauthorized
