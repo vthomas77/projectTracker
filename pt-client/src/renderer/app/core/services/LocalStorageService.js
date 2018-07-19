@@ -1,7 +1,7 @@
 'use strict';
 
-export default /*@ngInject*/ function localStorageService( $window ) {
-
+LocalStorageService.$inject = ['$window'];
+export default /*@ngInject*/ function LocalStorageService( $window ) {
 	this.token = function() {
 		return $window.localStorage.token;
 	};
