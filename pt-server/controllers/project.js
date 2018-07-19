@@ -62,3 +62,56 @@ exports.create = function(req, res) {
   });
 
 }
+
+// -------------
+// List Route
+// -------------
+
+exports.listAll = function(req, res) {
+
+  Project.find({}, function(err, existingProjects) {
+
+      if (err) { return next(err); }
+      return res.json({existingProjects});
+
+  });
+}
+
+// -------------
+// Update Route
+// -------------
+
+exports.update = function(req, res) {
+
+  const projectID = req.body.id;
+  const name = req.body.name;
+  const startDate = req.body.startDate;
+  const clientName = req.body.clientName;
+  const allocatedBudget = req.body.allocatedBudget;
+
+  Project.findById(projectID, function (err, existingProject) {
+    if (err) { return next(err); }
+
+    existingProject.set({ name: name });
+    existingProject.save(function (err, updatedProject) {
+     if (err) { return next(err); }
+     res.json({status: 'OK'});
+    });
+ });
+
+}
+
+ // -------------
+ // Delete Route
+ // -------------
+
+ exports.delete = function(req, res) {
+
+   const projectID = req.body.id;
+
+   Project.deleteOne({ _id: projectID }, function (err) {
+     if (err) { return next(err); }
+     res.json({status: 'OK'});
+  });
+
+}
