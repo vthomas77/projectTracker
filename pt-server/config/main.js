@@ -6,5 +6,5 @@ module.exports = {
   // Setting port for server
   'port': 3000,
   // Expiration for token in seconds
-  'tokenDuration': 3600
+  'tokenDuration': 36000
 }
