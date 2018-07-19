@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
-  Username: {
+  name: {
     type: String
   },
   starting_date: {
