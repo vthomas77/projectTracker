@@ -15,8 +15,8 @@ function createMainWindow() {
   // Set url for `win`
   // points to `webpack-dev-server` in development
   // points to `index.html` in production
+  window.webContents.openDevTools()
   if (isDevelopment) {
-    window.webContents.openDevTools()
   }
 
   if (isDevelopment) {

@@ -1,9 +1,10 @@
 'use strict';
+require('angular');
 
-import localStorageService from './services/localStorageService';
-import PostalService from './services/postalService';
+import LocalStorageService from './services/LocalStorageService';
+import PostalService from './services/PostalService';
 
 export default angular.module('core', [])
-    .service('localStorageService', localStorageService)
+    .service('localStorageService', LocalStorageService)
     .factory('PostalService', PostalService)
 ;
