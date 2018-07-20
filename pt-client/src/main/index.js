@@ -8,9 +8,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
-
 function createMainWindow() {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow({
+    'web-preferences': {
+      'web-security': false,
+      'allowRunningInsecureContent': false
+    }
+  })
 
   // Set url for `win`
   // points to `webpack-dev-server` in development
@@ -18,7 +22,6 @@ function createMainWindow() {
   window.webContents.openDevTools()
   if (isDevelopment) {
   }
-
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
   }
