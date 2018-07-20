@@ -28,6 +28,7 @@ import identity from './app/identity/module';
 import core from './app/core/module';
 
 import AppConfig from './AppConfig.js'
+import AppRun from './AppRun.js'
 
 export default angular
 .module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt',
