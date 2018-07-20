@@ -2,6 +2,7 @@
 var fs = require("fs");
 var webpack = require("webpack");
 var path = require("path");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var getApiServer = function() {
     var apiServer;
