@@ -13,7 +13,7 @@ export default /*@ngInject*/ function AlertController() {
     };
 
     vm.close = function(index) {
-    	$rootScope.alerts.splice(index, 1);
+    	$rootScope.alerts.splice(index, 1 );
     };
 
 };
