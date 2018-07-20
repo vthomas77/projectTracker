@@ -14,9 +14,8 @@ export default /*@ngInject*/ function IdentityStore($q, IdentityResource, client
 		var call = IdentityResource.User.login(loginRequest).$promise; 
 		call.then(function(data){
 			defer.resolve(data);
-		}, function(){
-			defer.reject();
-		});
+		})
+		.catch()
 		return defer.promise;
 	};
 

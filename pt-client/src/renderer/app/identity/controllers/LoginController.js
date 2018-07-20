@@ -20,10 +20,10 @@ export default /*@ngInject*/ function LoginController( $rootScope, IdentityStore
 
     function login(user) {
         var loginRequest = {
-            username: user.username,
+            email: user.username,
             password: user.password
         };
-
+        
         IdentityStore.login(loginRequest)
         .then(function(data){
             $window.localStorage.token = data.token;
