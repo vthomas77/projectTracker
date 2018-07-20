@@ -2,17 +2,22 @@
 
 LocalStorageService.$inject = ['$window'];
 export default /*@ngInject*/ function LocalStorageService( $window ) {
-	this.token = function() {
-		return $window.localStorage.token;
+	function LocalStorageService() {
+		this.localStorage = $window.localStorage;
 	};
 
-	this.userId = function() {
-		return $window.localStorage.userId;
+	LocalStorageService.prototype.token = function() {
+		return this.localStorage.token;
 	};
 
-	this.logout = function() {
-		$window.localStorage.token = "";
-		$window.localStorage.userId = "";
+	LocalStorageService.prototype.userId = function() {
+		return this.localStorage.userId;
 	};
 
+	LocalStorageService.prototype.logout = function() {
+		this.localStorage.token = "";
+		this.localStorage.userId = "";
+	};
+
+	return new LocalStorageService();
 };
