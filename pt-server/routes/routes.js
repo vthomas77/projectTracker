@@ -46,5 +46,12 @@ module.exports = function(app) {
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // List project route
+  projectRoutes.post('/listAll', requireAuth, ProjectController.listAll);
+
+  // Update project route
+  projectRoutes.post('/update', requireAuth, ProjectController.update);
+
+  // Delete project route
+  projectRoutes.post('/delete', requireAuth, ProjectController.delete);
 
 };
