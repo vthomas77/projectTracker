@@ -10,22 +10,23 @@ export default /*@ngInject*/ function HttpInterceptor( $q ) {
 	};
 	return interceptor;
 
-	function request(config) {
+	function request( config ) {
 		console.log('Request')
-      return config;
+		//  Token : return res.header('Authorization', jwt)
+     	return config;
     }
 
-    function requestError(config) {
-    	console.log('Config');
-      return config;
-    }
-
-    function response(res) {
+    function response( res ) {
     	console.log('Response');
-      return res;
+    	return res;
     }
 
-    function responseError(rejection) {
+    function requestError( config ) {
+    	console.log('Error requestError');
+    	return config;
+    }
+
+    function responseError( rejection ) {
     	console.log('Error responseError');
      	return $q.reject(rejection);
     }	

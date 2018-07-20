@@ -15,7 +15,7 @@ export default /*@ngInject*/ function IdentityStore($q, IdentityResource, client
 		call.then(function(data){
 			defer.resolve(data);
 		})
-		.catch()
+		.catch(function(data){})
 		return defer.promise;
 	};
 
