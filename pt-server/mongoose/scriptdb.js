@@ -26,13 +26,13 @@ db.once('open', function() {
 
     var Project = new Schema(
         {
-            id_project: Number, name: String, starting_date: {type: Date}, create_date: {type: Date}, client_name: String, budget: Number, num_invoice: Number
+            id_project: Number, name: String, starting_date: String, create_date: String, client_name: String, budget: Number, num_invoice: Number
         }
     );
 
     var Task = new Schema(
         {
-            id_task: Number, num_task: Number, name_task: String, starting_date: {type: Date}, end_date: {type: Date}, predecessor: [Number], id_task_group: Number
+            id_task: Number, num_task: Number, name_task: String, starting_date: String, end_date: String, predecessor: [Number], id_task_group: Number
         }
     );
 
@@ -50,7 +50,7 @@ db.once('open', function() {
 
     var Task_Group = new Schema(
         {
-            id_task_group: Number, id_project: Number, name_task_group: String, starting_date: {type: Date}, end_date: {type: Date}
+            id_task_group: Number, id_project: Number, name_task_group: String, starting_date: String, end_date: String
         }
     );
 
@@ -173,7 +173,7 @@ db.once('open', function() {
 
     var Project_1_data = new Project_model(
         {
-            id_project: 1, name: "Example 1", starting_date: Date.now, create_date: Date.now, client_name: "Client 1", budget: 0, num_invoice: 1
+            id_project: 1, name: "Example 1", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 1", budget: 0, num_invoice: 1
         }
     );
 
@@ -185,7 +185,7 @@ db.once('open', function() {
 
     var Project_2_data = new Project_model(
         {
-            id_project: 2, name: "Example 2", starting_date: Date.now, create_date: Date.now, client_name: "Client 2", budget: 0, num_invoice: 2
+            id_project: 2, name: "Example 2", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
         }
     );
 
@@ -197,7 +197,7 @@ db.once('open', function() {
 
     var Task_1_data = new Task_model(
         {
-            id_task: 1, num_task: 1, name_task: "Task Example 1", starting_date: Date.now, end_date: Date.now, predecessor: [0], id_task_group: 1
+            id_task: 1, num_task: 1, name_task: "Task Example 1", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", predecessor: [0], id_task_group: 1
         }
     );
 
@@ -209,7 +209,7 @@ db.once('open', function() {
 
     var Task_2_data = new Task_model(
         {
-            id_task: 2, num_task: 2, name_task: "Task Example 2", starting_date: Date.now, end_date: Date.now, predecessor: [1], id_task_group: 1
+            id_task: 2, num_task: 2, name_task: "Task Example 2", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", predecessor: [1], id_task_group: 1
         }
     );
 
@@ -221,7 +221,7 @@ db.once('open', function() {
 
     var Task_3_data = new Task_model(
         {
-            id_task: 3, num_task: 3, name_task: "Task Example 3", starting_date: Date.now, end_date: Date.now, predecessor: [0], id_task_group: 2
+            id_task: 3, num_task: 3, name_task: "Task Example 3", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", predecessor: [0], id_task_group: 2
         }
     );
 
@@ -293,7 +293,7 @@ db.once('open', function() {
 
     var Task_Group_1_data = new Task_Group_model(
         {
-            id_task_group: 1, id_project: 1, name_task_group: "Task Group Example 1", starting_date: Date.now, end_date: Date.now
+            id_task_group: 1, id_project: 1, name_task_group: "Task Group Example 1", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05"
         }
     );
 
@@ -305,7 +305,7 @@ db.once('open', function() {
 
     var Task_Group_2_data = new Task_Group_model(
         {
-            id_task_group: 2, id_project: 1, name_task_group: "Task Group Example 2", starting_date: Date.now, end_date: Date.now
+            id_task_group: 2, id_project: 1, name_task_group: "Task Group Example 2", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05"
         }
     );
 
@@ -317,7 +317,7 @@ db.once('open', function() {
 
     var Task_Group_3_data = new Task_Group_model(
         {
-            id_task_group: 3, id_project: 2, name_task_group: "Task Group Example 3", starting_date: Date.now, end_date: Date.now
+            id_task_group: 3, id_project: 2, name_task_group: "Task Group Example 3", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05"
         }
     );
 
