@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon -L index.js"
+    "server": "nodemon -L index.js",
+    "create:db": "node ./mongoose/scriptdb.js"
   },
   "author": "",
   "license": "ISC",
