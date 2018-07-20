@@ -6,6 +6,7 @@
   "scripts": {
     "server": "nodemon -L index.js",
     "create:db": "node ./mongoose/scriptdb.js",
+    "del:db": "mongo ProjectTrackerDB  --eval 'db.dropDatabase()'",
     "clean:install": "rm -rf node_modules && npm install && npm run create:db"
   },
   "author": "",

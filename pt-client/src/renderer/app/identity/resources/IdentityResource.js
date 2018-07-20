@@ -6,9 +6,6 @@ export default /*@ngInject*/ function IdentityResource( $resource, $http, client
 		User: $resource( 'http://' + clientConfig.API_URL + "/api/auth/:action", {}, {
 			login: { params: { action: "login" }, method: 'POST' },
             register: { params: { action: "register" }, method: 'POST' }
-		}),
-		Test: $resource( 'http://' + clientConfig.API_URL + "/", {}, {
-			ab: { method: 'GET'}
 		})
     };
 };
