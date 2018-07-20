@@ -67,12 +67,19 @@ module.exports = function(app) {
   ressourceRoutes.post('/create', requireAuth, RessourceController.create);
 
   // List ressource route
+  // All ressources
   ressourceRoutes.post('/getAll', requireAuth, RessourceController.listAll);
+  // All ressources for a given project
+  ressourceRoutes.post('/getAllProject', requireAuth, RessourceController.listAllProject);
 
   // Delete ressource route
   ressourceRoutes.post('/delete', requireAuth, RessourceController.delete);
 
   // Update ressource route
   ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+
+  // Add ressource Route
+  // Add a ressource to a project
+  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
 };

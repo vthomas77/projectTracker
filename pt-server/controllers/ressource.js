@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const UserProject = require('../models/userProjectModel');
 
 // ------------------
 // Create Route
@@ -76,6 +77,25 @@ exports.listAll = function(req, res) {
   });
 }
 
+exports.listAllProject = function(req, res) {
+
+  const projectID = req.body.ProjectId;
+
+  UserProject.find({id_project:projectID}, function(err, projectUsers) {
+
+      if (err) { return next(err); }
+      var userIDs = projectUsers.map(function (user) { return user.id_user; });
+      User.find({_id: {$in: userIDs}}, function(err, existingUsers) {
+
+          if (err) { return next(err); }
+          var usernames = existingUsers.map(function (user) { return user.username; });
+          return res.json({usernames});
+
+      });
+
+  });
+}
+
 // -------------
 // Delete Route
 // -------------
@@ -112,5 +132,26 @@ exports.update = function(req, res) {
      res.json({status: 'OK'});
     });
  });
+
+}
+
+// -------------
+// Add Route
+// -------------
+
+exports.add = function(req, res) {
+
+  const userID = req.body.UserId;
+  const projectID = req.body.ProjectId;
+
+  let userproject = new UserProject({
+    id_project: projectID,
+    id_user: userID
+  });
+
+  userproject.save(function(err, user) {
+    if (err) { return next(err); }
+    res.json({status: 'OK'});
+  });
 
 }

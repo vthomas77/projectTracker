@@ -29,7 +29,8 @@ mongo
 
 API
 ------
-
+### Authentication
+------
 #### Login
 ```
 Route : /api/auth/login
@@ -56,6 +57,8 @@ Parameter : username, email, password
 ```
 Response OK: {"token":"***"}
 ```
+### Project
+------
 #### Create project
 ```
 Route : /api/project/create
@@ -133,4 +136,32 @@ Parameter : id
 ```
 ```
 Response OK: {status: 'OK'}
+```
+### Ressource
+------
+#### Get all ressources
+```
+Route : api/ressource/getAll
+```
+```
+Methode : POST
+```
+```
+Parameter : None
+```
+```
+Response OK: {"existingUsers": [
+        {
+            "_id": "5b51b931407d961df534c407",
+            "id_user": 0,
+            "username": "init",
+            "email": "init",
+            "password": "init",
+            "cost": 0,
+            "level": 0,
+            "weekly_hour": 0,
+            "__v": 0
+        }
+    ]
+}
 ```
