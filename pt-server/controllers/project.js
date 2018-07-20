@@ -56,7 +56,7 @@ exports.create = function(req, res) {
       // Insert project into database
       project.save(function(err, user) {
         if (err) { return next(err); }
-        return res.send('OK');
+        res.json({status: 'OK'});
       });
 
   });
@@ -92,7 +92,7 @@ exports.update = function(req, res) {
   Project.findById(projectID, function (err, existingProject) {
     if (err) { return next(err); }
 
-    existingProject.set({ name: name });
+    existingProject.set({ name: name, starting_date: startDate, client_name: clientName, budget: allocatedBudget});
     existingProject.save(function (err, updatedProject) {
      if (err) { return next(err); }
      res.json({status: 'OK'});

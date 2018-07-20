@@ -4,6 +4,7 @@ const passportLocalService = require('../config/passportLocal');
 const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
+const RessourceController = require('../controllers/ressource');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -17,6 +18,7 @@ module.exports = function(app) {
   const apiRoutes = express.Router();
   const authRoutes = express.Router();
   const projectRoutes = express.Router();
+  const ressourceRoutes = express.Router();
 
   // Set api route group
   app.use('/api', apiRoutes);
@@ -46,12 +48,38 @@ module.exports = function(app) {
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // List project route
-  projectRoutes.post('/listAll', requireAuth, ProjectController.listAll);
+  projectRoutes.post('/getAll', requireAuth, ProjectController.listAll);
 
   // Update project route
   projectRoutes.post('/update', requireAuth, ProjectController.update);
 
   // Delete project route
   projectRoutes.post('/delete', requireAuth, ProjectController.delete);
+
+  // ---------
+  // Ressource
+  // ---------
+
+  // Set ressource sub route group
+  apiRoutes.use('/ressource', ressourceRoutes);
+
+  // Create ressource route
+  ressourceRoutes.post('/create', requireAuth, RessourceController.create);
+
+  // List ressource route
+  // All ressources
+  ressourceRoutes.post('/getAll', requireAuth, RessourceController.listAll);
+  // All ressources for a given project
+  ressourceRoutes.post('/getAllProject', requireAuth, RessourceController.listAllProject);
+
+  // Delete ressource route
+  ressourceRoutes.post('/delete', requireAuth, RessourceController.delete);
+
+  // Update ressource route
+  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+
+  // Add ressource Route
+  // Add a ressource to a project
+  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
 };
