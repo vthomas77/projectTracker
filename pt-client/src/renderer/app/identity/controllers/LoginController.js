@@ -1,26 +1,14 @@
 'use strict';
 
-LoginController.$inject = ['$rootScope', 'IdentityStore', '$window', 'events', '$location', 'localStorageService'];
-export default /*@ngInject*/ function LoginController( $rootScope, IdentityStore, $window, events, $location, localStorageService ) {
+LoginController.$inject = ['$scope', '$rootScope', 'IdentityStore', '$window', 'events', 'localStorageService', 'PostalService'];
+export default /*@ngInject*/ function LoginController( $scope, $rootScope, IdentityStore, $window, events, localStorageService, PostalService ) {
     var vm = this;
 
     vm.login = login;
-    isLogged();
-
-    function isLogged() {
-        var token = localStorageService.token();
-        if( token !== undefined && token !== "" ) {
-            vm.launch = './app/app.html';
-            $location.path('/dosometest');
-        } else {
-            vm.launch = './app/identity/partials/login.html';
-            $location.path('/login');
-        }
-    }
 
     function login(user) {
         var loginRequest = {
-            email: user.username,
+            email: user.email,
             password: user.password
         };
         
@@ -30,12 +18,8 @@ export default /*@ngInject*/ function LoginController( $rootScope, IdentityStore
             $rootScope.$emit(events.LOGIN_SUCESS);
         });
     };
-
-    $rootScope.$on(events.LOGOUT, function() {
-        isLogged();
-    });
-
-    $rootScope.$on(events.LOGIN_SUCESS, function() {
-        isLogged();
+    debugger;
+    PostalService.subscribe($scope, 'login_failed', function( error ) {
+        vm.error = error.data;
     });
 };
