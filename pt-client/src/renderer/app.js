@@ -20,11 +20,12 @@ require('angular-messages');
 // and this can't be overwriten without too much sacrifices
 // So here it goes ...
     $('body').attr('ng-app', 'myApp');
-    // LoginController
-    // $('#app').attr('class', 'main-vue');
+    // MainController
     $('#app').attr('ng-controller', 'MainController as MainController');
+    // Load this directive if not connected
     var Loggin = $("<identity-directive ng-if='!MainController.connected'></identity-directive>");
     $('#app').append(Loggin);
+    // If connected -> entryPoint of the app with menu and sidebar
     var entryPoint = $(
         "<div ng-if='MainController.connected'>" +
         "<top-navigation></top-navigation>" +
@@ -32,8 +33,6 @@ require('angular-messages');
         "<div ng-view></div>" +
         "</div>");
     $('#app').append(entryPoint);
-    // var entryPoint = $("<main-vue></main-vue>");
-    // $('#pickme').attr('ng-view', 'LoginController.launch');
 // You can open now <( °v° )>
 
 //module

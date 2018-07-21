@@ -12,17 +12,17 @@ export default /*@ngInject*/ function HttpInterceptor( $q ) {
 
 	function request(config) {
 		console.log('Request')
-      return config;
+        return config;
     }
 
     function requestError(config) {
     	console.log('Config');
-      return config;
+        return config;
     }
 
     function response(res) {
     	console.log('Response');
-      return res;
+        return res;
     }
 
     function responseError(rejection) {
