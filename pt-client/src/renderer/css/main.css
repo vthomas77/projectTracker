@@ -1,5 +1,28 @@
+/** Reusable **/
+.pointer{cursor: pointer;}
+
+/** Fonts **/
+
+@font-face {
+  font-family: "Muli";
+  src: url("fonts/Muli-Regular.ttf") format("ttf");
+}
+
+/** Main **/
+html{height: 100vh; overflow: hidden;}
+#pickme {padding: 0 0 0 190px;}
+.navbar-static-top{display: flex; align-items: center;}
+.navbar-custom-menu{margin-left: auto;}
+.nav-menu{flex-direction: row !important;}
+.nav-menu li{margin-left: 10px;}
+.alert-wrapper{position: fixed;z-index: 9999; width: 100%;}
+.alerts{z-index: 9999; opacity: 0.8;margin-bottom: 1px !important; text-align: center;}
+.navbar-static-top{padding: 0 !important;}
+.nav-menu, .navbar-custom-menu, .nav-menu > li, .nav-menu > li > a{height: 50px;  display: flex; align-items: center;}
+.nav-menu > li > a {padding: 15px;}
+
 /** Login **/
-.login-background{background-image: url('../files/sexy.jpg');}
+.login-background{background-image: url('../files/surf.jpg');}
 .fading{
     padding: 20px;
     background-color:rgba(10, 0, 0, 0.3);
@@ -100,4 +123,167 @@ form.login a
 form.login a:hover
 {
     color: #2ecc71;
+}
+
+/** Sidebar **/
+
+ul{list-style: none;}
+.bckg {
+    background-color: #414348;
+    box-shadow: -4px 0px 10px rgba(14, 14, 14, 0.48) inset;
+    width: 190px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+.sidebarHeader {
+    width: 190px;
+    height: 100%;
+    float: left;
+    z-index: 99;
+}
+.sidebarHeader  nav ul li {
+    border-bottom: 1px solid #42454D;
+    padding-left: 48px;
+    transition: all 0.6s;
+    border-top: 1px solid #2E3036;
+}
+.sidebarHeader nav ul {
+    padding: 0;
+}
+
+.sidebarHeader nav ul li a {
+    cursor: pointer !important;
+    display: block !important;
+    color: #b3b3b3 !important;
+    text-decoration: none !important;
+    line-height: 60px;
+    font-size: 18px;
+    position: relative;
+    letter-spacing: 1px;
+    transition: all 0.6s;
+}
+
+.sidebarHeader h1 {
+    text-align: center;
+    font-weight: normal;
+    color: #F6F6EF;
+    line-height: 60px;
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 2px;
+    background-color: #34363A;
+    border-bottom: 1px solid rgba(101, 116, 134, 0.57);
+}
+
+.sidebarHeader nav ul li:hover {
+    background-color: #454952;
+    transition: all 0.6s;
+    border-bottom: 1px solid #797979;
+}
+
+.sidebarHeader nav ul li:hover a {
+    color: #fff !important;
+    transition: all 0.6s;
+}
+
+.sidebarHeader nav ul li a:before {
+    font-family: 'entypo', sans-serif;
+    font-size: 20px;
+    position: absolute;
+    left: -32px;
+}
+
+.sidebarHeader nav ul li:first-child a:before {
+    font-family: 'FontAwesome';
+    content: "\f187";
+}
+.sidebarHeader nav ul li:nth-child(2) a:before {
+    font-family: 'FontAwesome';
+    content: "\f03c";
+}
+.sidebarHeader nav ul li:nth-child(3) a:before {
+    font-family: 'FontAwesome';
+    content: "\f0ae";
+}
+.sidebarHeader nav ul li:nth-child(4) a:before {
+    font-family: 'FontAwesome';
+    content: "\f0c0";
+}
+.sidebarHeader nav ul li:nth-child(5) a:before {
+    font-family: 'FontAwesome';
+    content: "\f037";
+}
+
+.sidebarHeader h1:hover {
+    background-color: #212529;
+    transition: all 0.6s;
+}
+
+/** Menu **/
+
+.title {
+    background-color: #fff;
+    border-bottom: 1px solid #C0C1C0;
+    height: 60px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.title h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 3px;
+    color: #919191;
+    font-weight: normal;
+    padding-left: 40px;
+    line-height: 60px;
+    text-shadow: 1px 1px 2px #fff;
+    position: relative;
+    flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+}
+
+.title h2:before {
+    content: '';
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: -19px;
+    top: 12px;
+    background-color: #34363A;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.title > a:before {
+    content: "\1f464";
+    font-size: 38px;
+    position: absolute;
+    left: -50px;
+    font-family: 'entypo';
+}
+
+.title a {
+    color: #AAA;
+    width: auto;
+    margin: 0 20px;
+    float: right;
+    line-height: 62px;
+    position: relative;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+#right-menu {
+    color: #FFF;
+    background-color: #AAA;
 }

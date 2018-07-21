@@ -17,20 +17,23 @@ require('angular-messages');
 
 // Close your eyes (>~v~<)
 // This is because electron-webpack actually harcode default loaded html
-// and this can't be overwriten without too much sacrifices
+// and this can't be overwriten/choose another html entry point without too much sacrifices
 // So here it goes ...
     $('body').attr('ng-app', 'myApp');
+    // Adminlte css
+    $('body').attr('class', 'skin-blue sidebar-mini');
     // MainController
     $('#app').attr('ng-controller', 'MainController as MainController');
-    // Load this directive if not connected
+    // Directive if not connected
     var Loggin = $("<identity-directive ng-if='!MainController.connected'></identity-directive>");
     $('#app').append(Loggin);
     // If connected -> entryPoint of the app with menu and sidebar
     var entryPoint = $(
         "<div ng-if='MainController.connected'>" +
-        "<top-navigation></top-navigation>" +
-        "<side-navigation></side-navigation>" +
-        "<div ng-view></div>" +
+        "<alert-directive></alert-directive>" + // Alert
+        "<side-navigation></side-navigation>" + // Navbar menu
+        "<top-navigation></top-navigation>" + //Top menu
+        "<div id='pickme' ng-view></div>" +
         "</div>");
     $('#app').append(entryPoint);
 // You can open now <( °v° )>
@@ -38,6 +41,8 @@ require('angular-messages');
 //module
 import common from './app/common/module';
 import identity from './app/identity/module';
+import alert from './app/alert/module';
+
 import core from './app/core/module';
 
 import AppConfig from './AppConfig.js'
@@ -47,9 +52,11 @@ export default angular
 .module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages',
     common.name,
     identity.name,
+    alert.name,
     core.name
 ])
 
+// Value set in settings.json -> check webpack.renderer.addition.js
 .value('clientConfig', {
     API_URL: process.env.API_URL
 })
@@ -59,5 +66,7 @@ export default angular
   LOGIN_FAILED: 'auth-login-failed',
   LOGOUT: 'auth-logout-success'
 })
+
 .run(AppRun)
+
 .config(AppConfig)
