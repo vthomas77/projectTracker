@@ -1,7 +1,7 @@
 'use strict';
 
-HttpInterceptor.$inject = ['$q'];
-export default /*@ngInject*/ function HttpInterceptor( $q ) {
+HttpInterceptor.$inject = ['$q', 'PostalService'];
+export default /*@ngInject*/ function HttpInterceptor( $q, PostalService ) {
 	var interceptor = {
 		request: request,
 		requestError: requestError,
@@ -16,7 +16,7 @@ export default /*@ngInject*/ function HttpInterceptor( $q ) {
     }
 
     function requestError(config) {
-    	console.log('Config');
+    	console.log('Error requestError');
         return config;
     }
 
@@ -27,6 +27,7 @@ export default /*@ngInject*/ function HttpInterceptor( $q ) {
 
     function responseError(rejection) {
     	console.log('Error responseError');
+        PostalService.publish('alert', rejection.statusText);
      	return $q.reject(rejection);
     }	
 };

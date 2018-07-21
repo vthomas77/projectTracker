@@ -1,8 +1,14 @@
 'use strict';
 
-MainController.$inject = ['localStorageService', '$rootScope', 'events'];
-export default /*@ngInject*/ function MainController( localStorageService, $rootScope, events ) {
+MainController.$inject = ['localStorageService', '$rootScope', 'events', '$location'];
+export default /*@ngInject*/ function MainController( localStorageService, $rootScope, events, $location ) {
     var vm = this;
+
+    vm.disconnect = disconnect;
+    vm.createAccount = createAccount;
+    vm.updateAction = updateAction;
+    vm.acceuil = acceuil;
+    vm.action;
     isLogged();
 
     function isLogged() {
@@ -12,6 +18,23 @@ export default /*@ngInject*/ function MainController( localStorageService, $root
         } else {
             vm.connected = false;
         }
+    }
+    function updateAction( event ) {
+        vm.action = event.target.id;
+    }
+
+    function createAccount() {
+        $location.path('/register');
+    }
+
+    function acceuil() {
+        $location.path('/');
+    }
+
+    function disconnect() {
+        localStorageService.logout();
+        $rootScope.$emit(events.LOGOUT);
+        $location.path('/');
     }
 
     $rootScope.$on(events.LOGOUT, function() {

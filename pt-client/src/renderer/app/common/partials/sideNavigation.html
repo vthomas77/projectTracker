@@ -1,1 +1,13 @@
-<p>COUCOU SIDE</p>
+<span class="bckg"></span>
+<section class="sidebarHeader">
+    <h1 class="pointer" ng-click="MainController.acceuil(); MainController.updateAction($event)" id="Dashboard">Project-Track</h1>
+    <nav class="sidebar-treeMenu">
+        <ul>
+            <li><a ng-click="MainController.updateAction($event)" id="Project">Project</a></li>
+            <li><a ng-click="MainController.updateAction($event)" id="TaskGroup">TaskGroup</a></li>
+            <li><a ng-click="MainController.updateAction($event)" id="Task">Task</a></li>
+            <li><a ng-click="MainController.updateAction($event)" id="Ressource">Ressource</a></li>
+            <li><a ng-click="MainController.updateAction($event)" id="Gantt">Gantt</a></li>
+        </ul>
+    </nav>
+</section>

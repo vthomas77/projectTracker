@@ -5,12 +5,19 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
 	$httpProvider.interceptors.push('HttpInterceptor');
     $locationProvider.hashPrefix('!');
 
-    // $routeProvider
-    //     .when('/', {
-    //         template: require('./app/identity/partials/login.html'),
-    //         controller: 'LoginController'
-    //     })
-    //     .when('/mainApp', {
-    //         template: require('./app/app.html')
-    //     })
+    $routeProvider
+        .when('/register', {
+            template: require('./app/identity/partials/login.html')
+        })
+        .when('/', {
+            template: require('./app/common/partials/dashboard.html')
+        })
+        .when("/entity/:entityType", {
+            template: require('./app/entitylist/partials/entityList.html'),
+            controller: "EntityListController"
+        })
+        .when("/entity/:entityType/:entityId", {
+            template: require('./app/common/partials/dashboard.html'),
+            controller: "EntityImportController"
+        })
 };

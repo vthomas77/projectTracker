@@ -13,7 +13,9 @@ function createMainWindow() {
         'web-preferences': {
             'web-security': false,
             'allowRunningInsecureContent': false
-        }
+        },
+        'minWidth': 1200,
+        'minHeight': 600
     })
 
 // Set url for `win`

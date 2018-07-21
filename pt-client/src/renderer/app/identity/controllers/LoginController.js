@@ -18,7 +18,7 @@ export default /*@ngInject*/ function LoginController( $scope, $rootScope, Ident
             $rootScope.$emit(events.LOGIN_SUCESS);
         });
     };
-    debugger;
+
     PostalService.subscribe($scope, 'login_failed', function( error ) {
         vm.error = error.data;
     });
