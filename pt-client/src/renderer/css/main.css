@@ -14,7 +14,7 @@
 
     /* Search */
     .search-animate.ng-enter, .search-animate.ng-leave {
-        transition: 500ms linear all;
+        transition: 300ms linear all;
     }
     .search-animate.ng-leave.ng-leave-active {
         opacity: 0;
