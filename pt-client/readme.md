@@ -14,15 +14,15 @@ yarn clean:install
 ### Tech and Syntax 
 
 - Using angular 1.7.x because we like having those kind of package : [Here](https://www.angular-gantt.com/demo/), and because due to time management it was the easier tech to use 
-- Using Webpack for better handle of App (like getting remote api Url from outside the App)
-- Using ControllerAs Controller syntax : [Check here](https://github.com/johnpapa/angular-styleguide/tree/master/a1#controllers)
+- Using Webpack for better handle of App (like getting remote api Url from outside the App) and better workflow (Quick reloading)
+- Using ControllerAs Controller syntax (Helpful for team to locate where they are and what is going on): [Check here](https://github.com/johnpapa/angular-styleguide/tree/master/a1#controllers)
 - Using ControllerAs with vm
 
 ### Structure
 
 - One file per Controller/Directive ... 
 - Modules are at most as possible self sufficient (core is Intra-App features)
-- Html files are included inside module for better dev flow (And works well with Controller As syntax)
+- Html files are included inside module for better workflow (And works well with Controller As syntax)
 
 ```bash
 .

@@ -32,7 +32,9 @@ export default /*@ngInject*/ function HttpInterceptor( $q, PostalService, LocalS
 
     function responseError(rejection) {
     	console.log('Error responseError');
-        PostalService.publish('alert', rejection.statusText);
+        if(rejection.statusText.length > 0) {
+            PostalService.publish('alert', rejection.statusText);
+        }
      	return $q.reject(rejection);
     }	
 };

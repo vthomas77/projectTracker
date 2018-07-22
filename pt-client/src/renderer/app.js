@@ -14,6 +14,7 @@ require('angular-gantt');
 require('angular-moment');
 require('angular-ui-bootstrap');
 require('angular-messages');
+require('angular-animate');
 
 // Close your eyes (>~v~<)
 // This is because electron-webpack actually harcode default loaded html
@@ -48,7 +49,7 @@ import AppConfig from './AppConfig.js'
 import AppRun from './AppRun.js'
 
 export default angular
-.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages',
+.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages', 'ngAnimate',
     common.name,
     identity.name,
     alert.name,

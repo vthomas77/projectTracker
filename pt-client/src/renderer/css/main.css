@@ -9,7 +9,21 @@
   src: url("fonts/Muli-Regular.ttf") format("ttf");
 }
 
-/** Main **/
+/** Animate **/
+
+    /* Search */
+    .search-animate.ng-enter, .search-animate.ng-leave {
+        transition: 500ms linear all;
+    }
+    .search-animate.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+    .search-animate.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+
+
+/** Main (random css)**/
 html, #app, .fullscreen{height: 100vh; overflow: hidden;}
 #pickme {margin: 0 0 0 190px; height: 100%; background-color: rgba(241, 244, 244, 0.28);}
 .navbar-static-top{display: flex; align-items: center;}
