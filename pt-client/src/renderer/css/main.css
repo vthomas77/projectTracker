@@ -9,8 +9,8 @@
 }
 
 /** Main **/
-html{height: 100vh; overflow: hidden;}
-#pickme {padding: 0 0 0 190px;}
+html, #app, .fullscreen{height: 100vh; overflow: hidden;}
+#pickme {margin: 0 0 0 190px; height: 100%; background-color: rgba(241, 244, 244, 0.28);}
 .navbar-static-top{display: flex; align-items: center;}
 .navbar-custom-menu{margin-left: auto;}
 .nav-menu{flex-direction: row !important;}
@@ -129,8 +129,8 @@ form.login a:hover
 
 ul{list-style: none;}
 .bckg {
-    background-color: #414348;
-    box-shadow: -4px 0px 10px rgba(14, 14, 14, 0.48) inset;
+    background-color: rgba(6, 43, 125, 0.87); /* #414348 */
+    box-shadow: -4px 0px 10px rgba(37, 14, 0, 0.45) inset; /* rgba(14, 14, 14, 0.48) */
     width: 190px;
     height: 100%;
     position: fixed;
@@ -143,12 +143,13 @@ ul{list-style: none;}
     height: 100%;
     float: left;
     z-index: 99;
+    box-shadow: 3px 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .sidebarHeader  nav ul li {
-    border-bottom: 1px solid #42454D;
+    border-bottom: 1px solid #9c9eea; /* #42454D */
     padding-left: 48px;
     transition: all 0.6s;
-    border-top: 1px solid #2E3036;
+    border-top: 1px solid #adadad; /* #2E3036 */
 }
 .sidebarHeader nav ul {
     padding: 0;
@@ -157,7 +158,7 @@ ul{list-style: none;}
 .sidebarHeader nav ul li a {
     cursor: pointer !important;
     display: block !important;
-    color: #b3b3b3 !important;
+    color: rgba(241, 244, 244, 0.85) !important;
     text-decoration: none !important;
     line-height: 60px;
     font-size: 18px;
@@ -179,13 +180,13 @@ ul{list-style: none;}
 }
 
 .sidebarHeader nav ul li:hover {
-    background-color: #454952;
+    background-color: rgba(241, 244, 244, 0.85);
     transition: all 0.6s;
     border-bottom: 1px solid #797979;
 }
 
 .sidebarHeader nav ul li:hover a {
-    color: #fff !important;
+    color: rgb(6, 43, 125) !important;
     transition: all 0.6s;
 }
 
@@ -233,6 +234,7 @@ ul{list-style: none;}
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .title h2 {
@@ -240,7 +242,7 @@ ul{list-style: none;}
     text-transform: uppercase;
     margin: 0;
     letter-spacing: 3px;
-    color: #919191;
+    color: rgba(6, 43, 125, 0.87);
     font-weight: normal;
     padding-left: 40px;
     line-height: 60px;
@@ -253,11 +255,11 @@ ul{list-style: none;}
 
 .title h2:before {
     content: '';
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 43px;
     position: absolute;
-    left: -19px;
-    top: 12px;
+    left: -21px;
+    top: 9px;
     background-color: #34363A;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -285,5 +287,5 @@ ul{list-style: none;}
 
 #right-menu {
     color: #FFF;
-    background-color: #AAA;
+    background-color: rgba(6, 43, 125, 0.80);;
 }

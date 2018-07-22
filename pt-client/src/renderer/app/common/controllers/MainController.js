@@ -8,7 +8,7 @@ export default /*@ngInject*/ function MainController( localStorageService, $root
     vm.createAccount = createAccount;
     vm.updateAction = updateAction;
     vm.acceuil = acceuil;
-    vm.action;
+    vm.action = 'dashboard';
     isLogged();
 
     function isLogged() {
