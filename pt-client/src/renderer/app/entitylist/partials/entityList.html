@@ -5,18 +5,16 @@
         
             <!-- Left EntityList menu -->
             <div class="table-options col-sm-3">
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                      <input type="text" ng-model="searchBox" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat blue-custom-primary"><i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
+                <div class="input-group">
+                  <input type="text" ng-model="searchBox" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat blue-custom-primary"><i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
             </div>
             <div>
-                <button type="button" class="btn blue-custom-primary btn-flat">New</button>
+                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()">New</button>
             </div>
         </div>
     </div>

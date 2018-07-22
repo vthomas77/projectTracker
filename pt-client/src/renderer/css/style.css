@@ -1,7 +1,7 @@
 @import './main.css';
 @import 'adminLTE/AdminLTE.css';
-/*@import 'adminLTE/_all-skins.css';
+@import 'adminLTE/_all-skins.css';
 @import 'adminLTE/alt/AdminLTE-bootstrap-social.css';
 @import 'adminLTE/alt/AdminLTE-fullcalendar.css';
-@import 'adminLTE/alt/AdminLTE-select2.css';*/
+@import 'adminLTE/alt/AdminLTE-select2.css';
 @import '~font-awesome/css/font-awesome.css';

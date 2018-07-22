@@ -21,7 +21,8 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
         })
 
         .when("/entity/:entityType/:entityId", {
-            template: require('./app/common/partials/dashboard.html'),
-            controller: "EntityListController"
+            template: require('./app/entity/partials/entity.html'),
+            controller: 'EntityController',
+            controllerAs: 'EntityController'
         })
 };

@@ -1,5 +1,6 @@
 /** Reusable **/
 .pointer{cursor: pointer;}
+.no-pointer{cursor: default !important;}
 .blue-custom-primary{color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
 
 /** Fonts **/
@@ -24,6 +25,7 @@
     .search-animate.ng-enter.ng-enter-active {
         opacity: 1;
     }
+    
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {
         transition: 500ms linear all;
@@ -42,8 +44,8 @@
 
 
 /** Main (random css)**/
-html, #app, .fullscreen{height: 100vh; overflow: hidden;}
-#pickme {margin: 0 0 0 190px; height: 100%; background-color: rgba(241, 244, 244, 0.28);}
+html, #app, .fullscreen{height: 100vh;}
+#pickme {margin: 0 0 0 190px; background-color: rgba(241, 244, 244, 0.28);}
 .navbar-static-top{display: flex; align-items: center;}
 .navbar-custom-menu{margin-left: auto;}
 .nav-menu{flex-direction: row !important;}
@@ -53,6 +55,7 @@ html, #app, .fullscreen{height: 100vh; overflow: hidden;}
 .navbar-static-top{padding: 0 !important;}
 .nav-menu, .navbar-custom-menu, .nav-menu > li, .nav-menu > li > a{height: 50px;  display: flex; align-items: center;}
 .nav-menu > li > a {padding: 15px;}
+.table td, .table th{border-top: 1px solid #dee2e6 !important;}
 
 /** EntityList **/
 

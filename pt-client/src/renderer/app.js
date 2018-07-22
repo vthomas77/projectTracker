@@ -42,6 +42,7 @@ import common from './app/common/module';
 import identity from './app/identity/module';
 import alert from './app/alert/module';
 import entityList from './app/entitylist/module';
+import entity from './app/entity/module';
 
 import core from './app/core/module';
 
@@ -54,7 +55,8 @@ export default angular
     identity.name,
     alert.name,
     core.name,
-    entityList.name
+    entityList.name,
+    entity.name
 ])
 
 // Value set in settings.json -> check webpack.renderer.addition.js
