@@ -21,6 +21,11 @@ export default /*@ngInject*/ function MainController( localStorageService, $root
     }
     function updateAction( event ) {
         vm.action = event.target.id;
+        if( vm.action == 'Dashboard' ) {
+            $location.path('/');
+        } else {
+            $location.path('/entity/' + event.target.id);
+        }
     }
 
     function createAccount() {

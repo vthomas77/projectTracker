@@ -1,5 +1,6 @@
 /** Reusable **/
 .pointer{cursor: pointer;}
+.blue-custom-primary{color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
 
 /** Fonts **/
 
@@ -21,7 +22,13 @@ html, #app, .fullscreen{height: 100vh; overflow: hidden;}
 .nav-menu, .navbar-custom-menu, .nav-menu > li, .nav-menu > li > a{height: 50px;  display: flex; align-items: center;}
 .nav-menu > li > a {padding: 15px;}
 
+/** EntityList **/
+
+.entitylist-option-wrapper {border-bottom: solid 1px #dadada;}
+.entitylist-option {display: flex; padding: 10px 0 10px 0 !important; justify-content: space-between;}
+
 /** Login **/
+
 .login-background{background-image: url('../files/surf.jpg');}
 .fading{
     padding: 20px;
@@ -228,7 +235,7 @@ ul{list-style: none;}
 .title {
     background-color: #fff;
     border-bottom: 1px solid #C0C1C0;
-    height: 60px;
+    height: 63px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;

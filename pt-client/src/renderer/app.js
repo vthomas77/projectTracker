@@ -40,6 +40,7 @@ require('angular-messages');
 import common from './app/common/module';
 import identity from './app/identity/module';
 import alert from './app/alert/module';
+import entityList from './app/entitylist/module';
 
 import core from './app/core/module';
 
@@ -51,7 +52,8 @@ export default angular
     common.name,
     identity.name,
     alert.name,
-    core.name
+    core.name,
+    entityList.name
 ])
 
 // Value set in settings.json -> check webpack.renderer.addition.js
