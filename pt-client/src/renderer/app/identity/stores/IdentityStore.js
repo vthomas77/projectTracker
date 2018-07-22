@@ -1,7 +1,7 @@
 'use strict';
 
 IdentityStore.$inject = ['$q', 'IdentityResource', 'clientConfig', 'PostalService'];
-export default /*@ngInject*/ function IdentityStore($q, IdentityResource, clientConfig, PostalService) {
+export default /*@ngInject*/ function IdentityStore( $q, IdentityResource, clientConfig, PostalService ) {
 
 	var loginStore = {
 		login: login

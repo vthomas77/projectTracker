@@ -14,14 +14,13 @@ require('angular-gantt');
 require('angular-moment');
 require('angular-ui-bootstrap');
 require('angular-messages');
+require('angular-animate');
 
 // Close your eyes (>~v~<)
 // This is because electron-webpack actually harcode default loaded html
 // and this can't be overwriten/choose another html entry point without too much sacrifices
 // So here it goes ...
     $('body').attr('ng-app', 'myApp');
-    // Adminlte css
-    $('body').attr('class', 'skin-blue sidebar-mini');
     // MainController
     $('#app').attr('ng-controller', 'MainController as MainController');
     // Directive if not connected
@@ -29,7 +28,7 @@ require('angular-messages');
     $('#app').append(Loggin);
     // If connected -> entryPoint of the app with menu and sidebar
     var entryPoint = $(
-        "<div ng-if='MainController.connected'>" +
+        "<div ng-if='MainController.connected' class='fullscreen'>" +
         "<alert-directive></alert-directive>" + // Alert
         "<side-navigation></side-navigation>" + // Navbar menu
         "<top-navigation></top-navigation>" + //Top menu
@@ -42,6 +41,8 @@ require('angular-messages');
 import common from './app/common/module';
 import identity from './app/identity/module';
 import alert from './app/alert/module';
+import entityList from './app/entitylist/module';
+import entity from './app/entity/module';
 
 import core from './app/core/module';
 
@@ -49,11 +50,13 @@ import AppConfig from './AppConfig.js'
 import AppRun from './AppRun.js'
 
 export default angular
-.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages',
+.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages', 'ngAnimate',
     common.name,
     identity.name,
     alert.name,
-    core.name
+    core.name,
+    entityList.name,
+    entity.name
 ])
 
 // Value set in settings.json -> check webpack.renderer.addition.js

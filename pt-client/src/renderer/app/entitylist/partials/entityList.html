@@ -1,0 +1,45 @@
+<!-- EntityList menu -->
+    <div class="col col-lg-12 col-md-12 col-sm-12 content-actionbar entitylist-option-wrapper">
+        <!-- Right EntityList menu -->
+        <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option">
+        
+            <!-- Left EntityList menu -->
+            <div class="table-options col-sm-3">
+                <div class="input-group">
+                  <input type="text" ng-model="searchBox" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat blue-custom-primary"><i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()">New</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Table -->
+<section class="content">
+    <div class="col col-lg-12 col-md-12 col-sm-12">
+        <table class="table table-striped">
+            <thead>
+                <tr ng-if="EntityListController.entityType == 'project' ">
+                    <th scope="col">ID_Project</th>
+                    <th scope="col">Project name</th>
+                    <th scope="col">Starting date</th>
+                    <th scope="col">Client name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | filter:searchBox" class="search-animate">
+                    <th class="pointer"><a>{{ entity.id_project }}</a></th>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.starting_date }}</td>
+                    <td>{{ entity.client_name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+

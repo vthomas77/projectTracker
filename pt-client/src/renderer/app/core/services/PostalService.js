@@ -15,7 +15,7 @@ export default /*@ngInject*/ function PostalService() {
 		this.channel.publish(topic, event);
 	};
 
-	// Clean subscription when is teared down
+	// Clean subscription when scope is teared down
 	PostalService.prototype.registerSubscription = function($scope, subscription) {
 		$scope.$on("$destroy", function() { subscription.unsubscribe(); });
 	};
