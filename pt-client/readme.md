@@ -10,6 +10,13 @@ yarn dist
 yarn clean:install
 ```
 
+### Yarn and launch FE
+- [Install](https://yarnpkg.com/lang/en/docs/install/#debian-stable)
+- Go to pt-client/
+```bash
+yarn install or yarn clean:install
+yarn dev
+```
 
 ### Tech and Syntax 
 
@@ -49,12 +56,4 @@ yarn clean:install
     ├── AppRun.js
     ├── css
     └── files
-```
-
-### Yarn
-- [Install](https://yarnpkg.com/lang/en/docs/install/#debian-stable)
-- Go to pt-client/
-```bash
-yarn install or yarn clean:install
-yarn dev
 ```
