@@ -1,7 +1,7 @@
 'use strict';
 
-LoginController.$inject = ['$scope', '$rootScope', 'IdentityStore', '$window', 'events', 'LocalStorageService', 'PostalService'];
-export default /*@ngInject*/ function LoginController( $scope, $rootScope, IdentityStore, $window, events, LocalStorageService, PostalService ) {
+LoginController.$inject = ['$scope', '$rootScope', 'IdentityStore', 'events', 'LocalStorageService', 'PostalService'];
+export default /*@ngInject*/ function LoginController( $scope, $rootScope, IdentityStore, events, LocalStorageService, PostalService ) {
     var vm = this;
 
     vm.login = login;
@@ -14,7 +14,7 @@ export default /*@ngInject*/ function LoginController( $scope, $rootScope, Ident
         
         IdentityStore.login(loginRequest)
         .then(function(data){
-            $window.localStorage.token = data.token;
+            LocalStorageService.setToken(data.token);
             $rootScope.$emit(events.LOGIN_SUCESS);
         });
     };
