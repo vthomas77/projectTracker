@@ -40,7 +40,7 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     }
 
     function disconnect() {
-        LocalStorageService.logout();
+        LocalStorageService.deleteToken();
         $rootScope.$emit(events.LOGOUT);
         $location.path('/');
     }
