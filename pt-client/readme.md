@@ -5,7 +5,7 @@ yarn dist
 ```
 - And check it's valid before any pull request
 
-- After a PR was merged in develop, you'll probably have to run 
+- After a PR was merged in develop, you may have to run 
 ```bash
 yarn clean:install
 ```

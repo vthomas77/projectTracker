@@ -1,7 +1,7 @@
 'use strict';
 
-HttpInterceptor.$inject = ['$q', 'PostalService'];
-export default /*@ngInject*/ function HttpInterceptor( $q, PostalService ) {
+HttpInterceptor.$inject = ['$q', 'PostalService', 'LocalStorageService'];
+export default /*@ngInject*/ function HttpInterceptor( $q, PostalService, LocalStorageService ) {
 	var interceptor = {
 		request: request,
 		requestError: requestError,
@@ -12,6 +12,11 @@ export default /*@ngInject*/ function HttpInterceptor( $q, PostalService ) {
 
 	function request(config) {
 		console.log('Request')
+
+        var token = LocalStorageService.token();
+        config.headers = config.headers || {};
+        config.headers.Authorization = "Bearer " + token;
+
         return config;
     }
 

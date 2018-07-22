@@ -11,14 +11,7 @@ export default /*@ngInject*/ function EntityListStore( $q, EntityListResource ) 
     function getList( entityType ) {
         var data;
         var defer = $q.defer();
-        switch( entityType ) {
-            case 'project':
-                var call = EntityListResource.All.project().$promise;
-                break;
-            case 'ressource':
-                var call = EntityListResource.All.project().$promise;
-                break;
-        }
+        var call = EntityListResource.Entity.list({ entityType: entityType }).$promise;
         call.then(function(data){
             defer.resolve(data);
         })
