@@ -59,6 +59,18 @@ Response OK: {"token":"***"}
 ```
 ### Project
 ------
+#### List projects
+```
+Route : /api/project/list
+```
+```
+Methode : GET
+```
+```
+Parameter : None
+```
+
+
 #### Create project
 ```
 Route : /api/project/create
@@ -73,42 +85,6 @@ Parameter : name, ?startDate, ?clientName, ?allocatedBudget)
 Response OK: {status: 'OK'}
 ```
 
-#### List projects
-```
-Route : /api/project/getAll
-```
-```
-Methode : POST
-```
-```
-Parameter : None
-```
-```
-Response OK: {
-    "existingProjects": [
-        {
-            "_id": "5b508b4f9e788e15b1aacd45",
-            "name": "myp",
-            "starting_date": "2018-07-19 12-59-59",
-            "create_date": "2018-07-19 12-59-59",
-            "client_name": "",
-            "budget": 0,
-            "num_invoice": 0,
-            "__v": 0
-        },
-        {
-            "_id": "5b519842a924e21bd5071fdd",
-            "name": "p2",
-            "starting_date": "2018-07-18",
-            "create_date": "2018-07-20 08-07-30",
-            "client_name": "toto",
-            "budget": 50000,
-            "num_invoice": 0,
-            "__v": 0
-        }
-    ]
-}
-```
 
 #### Update project
 ```
