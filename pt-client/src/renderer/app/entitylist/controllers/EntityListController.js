@@ -8,20 +8,22 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
     vm.delete = deleteEntity;
 
     // Initialize value from arg in route
-    vm.entityType = RouteHelperService.get().entityType;
+    vm.entity = RouteHelperService.get().entityType;
 
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
     .then(function(data){
-        vm.entityList = data.existingProjects;
-        console.log(vm.entityList);
+        vm.entityList = data.entityTypeList;
     });
 
     function createEntity() {
         $location.path('/entity/' + vm.entityType + '/0');
     }
 
-    function deleteEntity() {
-
+    function deleteEntity( entity ){
+        EntityListStore.deleteEntity(entity._id, vm.entityType)
+        .then(function(data){
+            debugger;
+        });
     }
 };
