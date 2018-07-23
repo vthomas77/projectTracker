@@ -41,14 +41,14 @@ module.exports = function(app) {
   // Project
   // -------
 
+  // List project route
+  projectRoutes.get('/list', requireAuth, ProjectController.list);
+
   // Set project sub route group
   apiRoutes.use('/project', projectRoutes);
 
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
-
-  // List project route
-  projectRoutes.post('/getAll', requireAuth, ProjectController.listAll);
 
   // Update project route
   projectRoutes.post('/update', requireAuth, ProjectController.update);

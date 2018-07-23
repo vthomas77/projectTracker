@@ -1,5 +1,30 @@
 const moment = require('moment');
 const Project = require('../models/projectModel');
+const Project_User = require('../models/userProjectModel');
+
+// -------------
+// List Route
+// -------------
+
+// List projects for connected user
+exports.list = function(req, res) {
+
+  const userId = req.user._id;
+
+  Project_User.find({id_user:userId}, function(err, projectUsers) {
+
+      if (err) { return next(err); }
+      var projectIDs = projectUsers.map(function (project) { return project.id_project; });
+      Project.find({_id: {$in: projectIDs}}, function(err, existingProjects) {
+
+          if (err) { return next(err); }
+          return res.json({"entityTypeList":existingProjects});
+
+      });
+
+  });
+
+}
 
 // -------------
 // Create Route
@@ -61,20 +86,6 @@ exports.create = function(req, res) {
 
   });
 
-}
-
-// -------------
-// List Route
-// -------------
-
-exports.listAll = function(req, res) {
-
-  Project.find({}, function(err, existingProjects) {
-
-      if (err) { return next(err); }
-      return res.json({existingProjects});
-
-  });
 }
 
 // -------------
