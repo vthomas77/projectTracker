@@ -8,7 +8,7 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
     vm.delete = deleteEntity;
 
     // Initialize value from arg in route
-    vm.entity = RouteHelperService.get().entityType;
+    vm.entityType = RouteHelperService.get().entityType;
 
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
