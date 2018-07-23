@@ -29,6 +29,7 @@
                     <th scope="col">Project name</th>
                     <th scope="col">Starting date</th>
                     <th scope="col">Client name</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,8 @@
                     <td>{{ entity.name }}</td>
                     <td>{{ entity.starting_date }}</td>
                     <td>{{ entity.client_name }}</td>
+                    <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.delete(entity)"><i class="fa fa-times" aria-hidden="true"></i>
+</button></td>
                 </tr>
             </tbody>
         </table>

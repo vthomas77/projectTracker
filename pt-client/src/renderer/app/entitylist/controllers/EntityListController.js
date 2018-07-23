@@ -5,6 +5,7 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
     var vm = this;
 
     vm.createEntity = createEntity;
+    vm.delete = deleteEntity;
 
     // Initialize value from arg in route
     vm.entityType = RouteHelperService.get().entityType;
@@ -18,5 +19,9 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
 
     function createEntity() {
         $location.path('/entity/' + vm.entityType + '/0');
+    }
+
+    function deleteEntity() {
+
     }
 };
