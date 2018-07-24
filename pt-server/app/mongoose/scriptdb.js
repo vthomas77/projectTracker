@@ -269,7 +269,7 @@ db.once('open', function() {
 
     var Project_User_1_data = new Project_User_model(
         {
-            id_project: Project_1_data._id, id_user: User_data._id
+            id_project: 1, id_user: 1
         }
     );
 
@@ -281,7 +281,7 @@ db.once('open', function() {
 
     var Project_User_2_data = new Project_User_model(
         {
-            id_project: Project_2_data._id, id_user: User_data._id
+            id_project: 2, id_user: 1
         }
     );
 

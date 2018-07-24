@@ -62,14 +62,14 @@ module.exports = function(app) {
   // Task-Group
   // ----------
 
+  // List task group route
+  taskgroupRoutes.get('/list', requireAuth, TaskGroupController.list);
+
   // Set task group sub route group
-  apiRoutes.use('/task-group', taskgroupRoutes);
+  apiRoutes.use('/taskgroup', taskgroupRoutes);
 
   // Create task group route
   taskgroupRoutes.post('/create', requireAuth, TaskGroupController.create);
-
-  // List task group route
-  taskgroupRoutes.post('/listAll', requireAuth, TaskGroupController.listAll);
 
   // Update task group route
   taskgroupRoutes.post('/update', requireAuth, TaskGroupController.update);
