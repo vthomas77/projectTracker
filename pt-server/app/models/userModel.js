@@ -20,15 +20,8 @@ const UserSchema = new Schema({
     type : Number
   },
   level: {
-    type: String,
-    enum: ['Admin', 'ProjectManager', 'Developper'],
-    default: 'Developper'
-  },
-  resetPasswordToken: { type: String },
-  resetPasswordExpires: { type: Date }
-},
-{
-  timestamps: true
+    type: Number,
+  }
 });
 
 // Pre-save of user to database, hash password if password is modified or new

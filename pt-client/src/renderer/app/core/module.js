@@ -3,10 +3,14 @@ require('angular');
 
 import LocalStorageService from './services/LocalStorageService';
 import PostalService from './services/PostalService';
-import httpInterceptor from './stores/HttpInterceptor';
+import RouteHelperService from './services/RouteHelperService';
+
+import HttpInterceptor from './stores/HttpInterceptor';
 
 export default angular.module('core', [])
-    .service('localStorageService', LocalStorageService)
+    .service('LocalStorageService', LocalStorageService)
     .service('PostalService', PostalService)
-    .factory('HttpInterceptor', httpInterceptor)
+    .service('RouteHelperService', RouteHelperService)
+
+    .factory('HttpInterceptor', HttpInterceptor)
 ;

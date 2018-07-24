@@ -24,7 +24,12 @@ module.exports = {
     plugins: [
         definePluginInstance
     ],
-    devServer: {
-        contentBase: path.join(__dirname, "/src/renderer/"),
+    module: {
+        rules: [
+            {
+                test: /\.(html)$/,
+                use: 'html-loader'
+            }
+        ]
     }
 }

@@ -1,28 +1,26 @@
-<div class="container login-background" ng-controller="LoginController as LoginController">
+<div class="login-background" ng-controller="LoginController as LoginController">
     <div class="row">
-        <div class="col-md-12 fading">
+        <div class="col-md-12 fading login">
             <div class="wrap">
+                <div uib-alert ng-show="LoginController.error" style="background-color:#c0392b;color:white">Login failed : {{ LoginController.error }}</div>
                 <p class="form-title">
                     PROJECT-TRACKER</p>
-                <form class="login" ng-submit="LoginController.login(user)">
-                <input type="text" placeholder="Username" ng-model="user.username" autocomplete="off" required/>
-                <input type="password" placeholder="Password" ng-model="user.password" autocomplete="off" required/>
-                <input type="submit" value="Sign In" class="btn bg-purple btn-sm" />
-                <div class="remember-forgot">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" />
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 forgot-pass-content">
-                            <a class="forgot-pass">Forgot Password</a>
-                        </div>
+                <form name="loginForm" class="login" ng-submit="LoginController.login(user)">
+                    <div class="form-group" ng-class="has-error">
+                        <input type="text" name="email" placeholder="Email" ng-model="user.email" autocomplete="off" required/>
                     </div>
-                </div>
+                    <!-- Error message -->
+                    <div ng-messages="loginForm.email.$error" ng-if="loginForm.email.$touched" style="color:maroon" role="alert">
+                        <p ng-message="required">Email is required</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
+                        <input name="password" type="password" placeholder="Password" ng-model="user.password" autocomplete="off" required/>
+                    </div>
+                    <!-- Error message -->
+                    <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched" style="color:maroon" role="alert">
+                        <p ng-message="required">Password is required</p>
+                    </div>
+                    <input type="submit" value="Sign In" class="btn btn-sm btn-login" />
                 </form>
             </div>
         </div>

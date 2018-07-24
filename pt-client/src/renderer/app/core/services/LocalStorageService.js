@@ -10,11 +10,15 @@ export default /*@ngInject*/ function LocalStorageService( $window ) {
 		return this.localStorage.token;
 	};
 
+	LocalStorageService.prototype.setToken = function( token ) {
+		this.localStorage.token = token;
+	};
+
 	LocalStorageService.prototype.userId = function() {
 		return this.localStorage.userId;
 	};
 
-	LocalStorageService.prototype.logout = function() {
+	LocalStorageService.prototype.deleteToken = function() {
 		this.localStorage.token = "";
 		this.localStorage.userId = "";
 	};

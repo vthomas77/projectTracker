@@ -1,7 +1,7 @@
 'use strict';
 
-HttpInterceptor.$inject = ['$q'];
-export default /*@ngInject*/ function HttpInterceptor( $q ) {
+HttpInterceptor.$inject = ['$q', 'PostalService', 'LocalStorageService'];
+export default /*@ngInject*/ function HttpInterceptor( $q, PostalService, LocalStorageService ) {
 	var interceptor = {
 		request: request,
 		requestError: requestError,
@@ -12,21 +12,29 @@ export default /*@ngInject*/ function HttpInterceptor( $q ) {
 
 	function request(config) {
 		console.log('Request')
-      return config;
+
+        var token = LocalStorageService.token();
+        config.headers = config.headers || {};
+        config.headers.Authorization = "Bearer " + token;
+
+        return config;
     }
 
     function requestError(config) {
-    	console.log('Config');
-      return config;
+    	console.log('Error requestError');
+        return config;
     }
 
     function response(res) {
     	console.log('Response');
-      return res;
+        return res;
     }
 
     function responseError(rejection) {
     	console.log('Error responseError');
+        if(rejection.statusText.length > 0) {
+            PostalService.publish('alert', rejection.statusText);
+        }
      	return $q.reject(rejection);
     }	
 };

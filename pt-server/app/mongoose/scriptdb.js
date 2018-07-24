@@ -44,7 +44,7 @@ db.once('open', function() {
 
     var Project_User = new Schema(
         {
-            id_project: Number, id_user: Number
+            id_project: String, id_user: String
         }
     );
 
@@ -124,7 +124,7 @@ db.once('open', function() {
 
     var Project_User_init = new Project_User_model(
         {
-            id_project: 0, id_user: 0
+            id_project: Project_init._id , id_user: User_init._id
         }
     );
 
@@ -269,7 +269,7 @@ db.once('open', function() {
 
     var Project_User_1_data = new Project_User_model(
         {
-            id_project: 1, id_user: 1
+            id_project: Project_1_data._id, id_user: User_data._id
         }
     );
 
@@ -281,7 +281,7 @@ db.once('open', function() {
 
     var Project_User_2_data = new Project_User_model(
         {
-            id_project: 2, id_user: 1
+            id_project: Project_2_data._id, id_user: User_data._id
         }
     );
 

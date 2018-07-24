@@ -39,7 +39,7 @@ exports.login = function(req, res, next) {
 exports.register = function(req, res, next) {
 
   // Check if user has admin role
-  if (req.user.level == 'Admin')
+  if (req.user.level == 1)
   {
 
     // Check for registration errors
@@ -77,7 +77,7 @@ exports.register = function(req, res, next) {
           email: email,
           password: password,
           cost: 750,
-          level: "ProjectManager"
+          level: 2
         });
 
         user.save(function(err, user) {
