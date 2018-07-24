@@ -56,6 +56,7 @@ html, #app, .fullscreen{height: 100vh;}
 .nav-menu, .navbar-custom-menu, .nav-menu > li, .nav-menu > li > a{height: 50px;  display: flex; align-items: center;}
 .nav-menu > li > a {padding: 15px;}
 .table td, .table th{border-top: 1px solid #dee2e6 !important;}
+.view-entity {color : rgba(6, 43, 125, 0.80) !important;}
 
 /** EntityList **/
 
