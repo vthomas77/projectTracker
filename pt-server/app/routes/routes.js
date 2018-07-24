@@ -5,6 +5,7 @@ const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
 const TaskGroupController = require('../controllers/taskgroup');
+const RessourceController = require('../controllers/ressource');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -19,6 +20,7 @@ module.exports = function(app) {
   const authRoutes = express.Router();
   const projectRoutes = express.Router();
   const taskgroupRoutes = express.Router();
+  const ressourceRoutes = express.Router();
 
   // Set api route group
   app.use('/api', apiRoutes);
@@ -41,14 +43,14 @@ module.exports = function(app) {
   // Project
   // -------
 
+  // List project route
+  projectRoutes.get('/list', requireAuth, ProjectController.list);
+
   // Set project sub route group
   apiRoutes.use('/project', projectRoutes);
 
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
-
-  // List project route
-  projectRoutes.post('/listAll', requireAuth, ProjectController.listAll);
 
   // Update project route
   projectRoutes.post('/update', requireAuth, ProjectController.update);
@@ -74,5 +76,31 @@ module.exports = function(app) {
 
   // Delete task group route
   taskgroupRoutes.post('/delete', requireAuth, TaskGroupController.delete);
+
+  // ---------
+  // Ressource
+  // ---------
+
+  // Set ressource sub route group
+  apiRoutes.use('/ressource', ressourceRoutes);
+
+  // Create ressource route
+  ressourceRoutes.post('/create', requireAuth, RessourceController.create);
+
+  // List ressource route
+  // All ressources
+  ressourceRoutes.post('/getAll', requireAuth, RessourceController.listAll);
+  // All ressources for a given project
+  ressourceRoutes.post('/getAllProject', requireAuth, RessourceController.listAllProject);
+
+  // Delete ressource route
+  ressourceRoutes.post('/delete', requireAuth, RessourceController.delete);
+
+  // Update ressource route
+  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+
+  // Add ressource Route
+  // Add a ressource to a project
+  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
 };

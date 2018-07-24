@@ -1,7 +1,7 @@
 'use strict';
 
-IdentityStore.$inject = ['$q', 'IdentityResource', 'clientConfig'];
-export default /*@ngInject*/ function IdentityStore($q, IdentityResource, clientConfig) {
+IdentityStore.$inject = ['$q', 'IdentityResource', 'clientConfig', 'PostalService'];
+export default /*@ngInject*/ function IdentityStore( $q, IdentityResource, clientConfig, PostalService ) {
 
 	var loginStore = {
 		login: login
@@ -15,7 +15,9 @@ export default /*@ngInject*/ function IdentityStore($q, IdentityResource, client
 		call.then(function(data){
 			defer.resolve(data);
 		})
-		.catch()
+		.catch(function(error){
+			PostalService.publish('login_failed', error);
+		})
 		return defer.promise;
 	};
 
