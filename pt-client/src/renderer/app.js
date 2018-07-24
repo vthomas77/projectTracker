@@ -5,7 +5,9 @@ const css = require('./css/style.css').toString();
 require('bootstrap');
 require('bootstrap/dist/css/bootstrap.min.css');
 
+
 global.$ = global.jQuery = require('jquery');
+require('./adminLTE/index.js');
 global.postal = require('postal');
 require('angular'); 
 require('angular-route');
