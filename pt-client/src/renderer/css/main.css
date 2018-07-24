@@ -25,7 +25,7 @@
     .search-animate.ng-enter.ng-enter-active {
         opacity: 1;
     }
-    
+
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {
         transition: 500ms linear all;
@@ -63,12 +63,15 @@ html, #app, .fullscreen{height: 100vh;}
 .entitylist-option {display: flex; padding: 10px 0 10px 0 !important; justify-content: space-between;}
 
 /** Login **/
-
 .login-background{background-image: url('../files/surf.jpg');}
+
 .fading{
     padding: 20px;
     background-color:rgba(10, 0, 0, 0.3);
 }
+
+/** Register **/
+.register-background{background-image: url('../files/skate.jpg');}
 
 .pointer
 {
@@ -85,7 +88,23 @@ html, #app, .fullscreen{height: 100vh;}
   justify-content: center;
 }
 
+.register-background
+{
+  width: 100% !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn-login
+{
+    background-color: #20c997;
+    color: #FFF;
+}
+
+.btn-register
 {
     background-color: #20c997;
     color: #FFF;
@@ -103,6 +122,10 @@ p.form-title
     letter-spacing: 4px;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #FFFFFF;
+    opacity: 1; /* Firefox */
+}
 
 form.login input[type="text"], form.login input[type="password"]
 {
@@ -140,11 +163,6 @@ form.login input[type="submit"]:hover
     transition: background-color 0.5s ease;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #FFFFFF;
-    opacity: 1; /* Firefox */
-}
-
 form.login .remember-forgot .forgot-pass-content
 {
     margin: 10px 0 0 0;
@@ -163,6 +181,67 @@ form.login a
 }
 
 form.login a:hover
+{
+    color: #2ecc71;
+}
+
+
+
+
+form.register input[type="text"], form.register input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    background: 0;
+    border: 0;
+    border-bottom: 1px solid #FFFFFF;
+    outline: 0;
+    font-style: italic;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    outline: 0;
+}
+
+form.register input[type="submit"]
+{
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 16px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+form.register input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+
+form.register .remember-forgot .forgot-pass-content
+{
+    margin: 10px 0 0 0;
+}
+
+form.register label, form.register a
+{
+    font-size: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+form.register a
+{
+    transition: color 0.5s ease;
+}
+
+form.register a:hover
 {
     color: #2ecc71;
 }
