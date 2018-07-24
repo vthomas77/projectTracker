@@ -25,16 +25,38 @@
         <table class="table table-striped">
             <thead>
                 <tr ng-if="EntityListController.entityType == 'project' ">
-                    <th>ID_Project</th>
+                    <th>ID Project</th>
                     <th>Project name</th>
                     <th>Starting date</th>
                     <th>Client name</th>
                     <th></th>
                 </tr>
+                <tr ng-if="EntityListController.entityType == 'taskgroup' ">
+                    <th>ID Taskgroup</th>
+                    <th>Taskgroup name</th>
+                    <th>Starting date</th>
+                    <th>Finishing date</th>
+                    <th></th>
+                </tr>
+                <tr ng-if="EntityListController.entityType == 'task' ">
+                    <th>ID Task</th>
+                    <th>Task name</th>
+                    <th>Starting date</th>
+                    <th>Finishing date</th>
+                    <th></th>
+                </tr>
+
+                    <tr ng-if="EntityListController.entityType == 'ressource' ">
+                    <th>ID Ressource</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | filter:searchBox" class="search-animate">
-                    <th class="pointer"><a>{{ entity.id_project }}</a></th>
+                    <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_project }}</a></th>
                     <td>{{ entity.name }}</td>
                     <td>{{ entity.starting_date }}</td>
                     <td>{{ entity.client_name }}</td>
