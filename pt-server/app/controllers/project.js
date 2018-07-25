@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Project = require('../models/projectModel');
 const Project_User = require('../models/userProjectModel');
+const User = require('../models/userModel');
 
 // -------------
 // List Route
@@ -14,11 +15,34 @@ exports.list = function(req, res) {
   Project_User.find({id_user:userId}, function(err, projectUsers) {
 
       if (err) { return next(err); }
-      var projectIDs = projectUsers.map(function (project) { return project.id_project; });
+      const projectIDs = projectUsers.map(function (project) { return project.id_project; });
       Project.find({_id: {$in: projectIDs}}, function(err, existingProjects) {
 
           if (err) { return next(err); }
           return res.json({"entityTypeList":existingProjects});
+
+      });
+
+  });
+
+}
+
+// Show relationship for a given Project
+exports.listOne = function(req, res) {
+
+  const projectId = req.params.id;
+
+  Project.find({_id:projectId}, function(err, project) {
+
+      if (err) { return next(err); }
+      Project_User.find({id_project:projectId}, function(err, projectUsers) {
+        if (err) { return next(err); }
+        const userID = projectUsers.map(function (user) { return user.id_user; });
+        User.find({_id:userID}, function(err, users) {
+
+          if (err) { return next(err); }
+          return res.json({"entity":project,"entityChild": users});
+        });
 
       });
 
@@ -31,6 +55,8 @@ exports.list = function(req, res) {
 // -------------
 
 exports.create = function(req, res) {
+
+  const userId = req.user._id;
 
   const name = req.body.name;
   var startDate = req.body.startDate;
@@ -79,11 +105,22 @@ exports.create = function(req, res) {
       });
 
       // Insert project into database
-      project.save(function(err, user) {
+      project.save(function(err, project) {
         if (err) { return next(err); }
-        res.json({status: 'OK'});
+        // Associate project to user
+        let userProject = new Project_User({
+          id_project: project._id,
+          id_user: userId
+        })
+        userProject.save(function(err, userProject) {
+          if (err) { return next(err); }
+          // Return project created
+          Project.find({_id: userProject.id_project}, function(err, project) {
+              if (err) { return next(err); }
+              return res.json({"entity":project});
+          });
+        });
       });
-
   });
 
 }
@@ -94,11 +131,11 @@ exports.create = function(req, res) {
 
 exports.update = function(req, res) {
 
-  const projectID = req.body.id;
-  const name = req.body.name;
-  const startDate = req.body.startDate;
-  const clientName = req.body.clientName;
-  const allocatedBudget = req.body.allocatedBudget;
+  const projectID = req.params.id;
+  const name = req.params.name;
+  const startDate = req.params.startDate;
+  const clientName = req.params.clientName;
+  const allocatedBudget = req.params.allocatedBudget;
 
   Project.findById(projectID, function (err, existingProject) {
     if (err) { return next(err); }
@@ -106,7 +143,7 @@ exports.update = function(req, res) {
     existingProject.set({ name: name, starting_date: startDate, client_name: clientName, budget: allocatedBudget});
     existingProject.save(function (err, updatedProject) {
      if (err) { return next(err); }
-     res.json({status: 'OK'});
+     res.json({status: updatedProject});
     });
  });
 
@@ -118,11 +155,19 @@ exports.update = function(req, res) {
 
  exports.delete = function(req, res) {
 
-   const projectID = req.body.id;
+   const projectID = req.params.id;
 
-   Project.deleteOne({ _id: projectID }, function (err) {
-     if (err) { return next(err); }
-     res.json({status: 'OK'});
-  });
-
+   // Return project to be deleted
+   Project.find({_id: projectID}, function(err, projectResult) {
+       if (err) { return next(err); }
+       // Delete Project
+       Project.deleteOne({ _id: projectID }, function (err, project) {
+         if (err) { return next(err); }
+         // Cascade delete
+         Project_User.deleteMany({ id_project: projectID }, function (err, project) {
+           if (err) { return next(err); }
+           res.json({"Entity": projectResult });
+         });
+      });
+   });
 }
