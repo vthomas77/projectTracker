@@ -7,7 +7,7 @@ export default /*@ngInject*/ function paginationDirective() {
 			number: '='
 		},
 		template: require('../partials/pagination.html'),
-	    link: function( scope, element, attrs ) {
+	    link: function( scope, element, attrs, $scope ) {
 	    	var heightSize = $('#pickme').height();
 	    	scope.$watch('number', function(newValue, oldValue) {
 	    		// We check if ith the number of row the content will overflow our page, so we can call for pagination

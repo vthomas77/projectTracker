@@ -14,7 +14,6 @@ export default /*@ngInject*/ function EntityListController( $scope, RouteHelperS
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
     .then(function(data){
-        vm.entityCount = data.entityTypeList.length;
         vm.entityList = data.entityTypeList;
     });
 
