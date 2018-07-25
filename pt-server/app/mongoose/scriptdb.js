@@ -84,6 +84,8 @@ db.once('open', function() {
         resolve(User_init.save());
     });
 
+
+
     var Project_init = new Project_model(
         {
             id_project: 0, name: "init", starting_date: 0, create_date: 0, client_name: "init", budget: 0, num_invoice: 0
@@ -93,6 +95,8 @@ db.once('open', function() {
     var projectPromiss_init = new Promise(function(resolve, reject) {
         resolve(Project_init.save());
     });
+
+
 
     var Task_init = new Task_model(
         {
@@ -104,6 +108,8 @@ db.once('open', function() {
         resolve(Task_init.save());
     });
 
+
+
     var User_Task_init = new User_Task_model(
         {
             id_user: 0, id_task: 0, pourcentage: 0
@@ -113,6 +119,8 @@ db.once('open', function() {
     var usertaskPromiss_init = new Promise(function(resolve, reject) {
         resolve(User_Task_init.save());
     });
+
+
 
     var Project_User_init = new Project_User_model(
         {
@@ -124,6 +132,8 @@ db.once('open', function() {
         resolve(Project_User_init.save());
     });
 
+
+
     var Task_Group_init = new Task_Group_model(
         {
             id_task_group: 0, id_project: 0, name_task_group: "init", starting_date: 0, end_date: 0
@@ -133,6 +143,8 @@ db.once('open', function() {
     var taskgroupPromiss_init = new Promise(function(resolve, reject) {
         resolve(Task_Group_init.save());
     });
+
+
 
     var promisses_init = [];
 
@@ -157,6 +169,8 @@ db.once('open', function() {
         resolve(User_data.save());
     });
 
+
+
     var Project_1_data = new Project_model(
         {
             id_project: 1, name: "Example 1", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 1", budget: 0, num_invoice: 1
@@ -166,6 +180,8 @@ db.once('open', function() {
     var project_1_Promiss = new Promise(function(resolve, reject) {
         resolve(Project_1_data.save());
     });
+
+
 
     var Project_2_data = new Project_model(
         {
@@ -177,85 +193,7 @@ db.once('open', function() {
         resolve(Project_2_data.save());
     });
 
-    var Project_3_data = new Project_model(
-        {
-            id_project: 3, name: "Example 3", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
 
-    var project_3_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_3_data.save());
-    });
-
-    var Project_4_data = new Project_model(
-        {
-            id_project: 4, name: "Example 4", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_4_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_4_data.save());
-    });
-
-    var Project_5_data = new Project_model(
-        {
-            id_project: 5, name: "Example 5", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_5_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_5_data.save());
-    });
-
-    var Project_6_data = new Project_model(
-        {
-            id_project: 6, name: "Example 6", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_6_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_6_data.save());
-    });
-
-    var Project_7_data = new Project_model(
-        {
-            id_project: 7, name: "Example 7", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_7_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_7_data.save());
-    });
-
-    var Project_8_data = new Project_model(
-        {
-            id_project: 8, name: "Example 8", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_8_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_8_data.save());
-    });
-
-    var Project_9_data = new Project_model(
-        {
-            id_project: 9, name: "Example 9", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_9_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_9_data.save());
-    });
-
-    var Project_10_data = new Project_model(
-        {
-            id_project: 10, name: "Example 10", starting_date: "2018-07-20 12:00:02", create_date: "2018-07-20 12:00:00", client_name: "Client 2", budget: 0, num_invoice: 2
-        }
-    );
-
-    var project_10_Promiss = new Promise(function(resolve, reject) {
-        resolve(Project_10_data.save());
-    });
 
     var Task_1_data = new Task_model(
         {
@@ -267,6 +205,8 @@ db.once('open', function() {
         resolve(Task_1_data.save());
     });
 
+
+
     var Task_2_data = new Task_model(
         {
             id_task: 2, num_task: 2, name_task: "Task Example 2", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", predecessor: [1], id_task_group: 1
@@ -276,6 +216,8 @@ db.once('open', function() {
     var task_2_Promiss = new Promise(function(resolve, reject) {
         resolve(Task_2_data.save());
     });
+
+
 
     var Task_3_data = new Task_model(
         {
@@ -287,6 +229,8 @@ db.once('open', function() {
         resolve(Task_3_data.save());
     });
 
+
+
     var User_Task_1_data = new User_Task_model(
         {
             id_user: 1, id_task: 1, pourcentage: 100
@@ -296,6 +240,8 @@ db.once('open', function() {
     var usertask_1_Promiss = new Promise(function(resolve, reject) {
         resolve(User_Task_1_data.save());
     });
+
+
 
     var User_Task_2_data = new User_Task_model(
         {
@@ -307,6 +253,8 @@ db.once('open', function() {
         resolve(User_Task_2_data.save());
     });
 
+
+
     var User_Task_3_data = new User_Task_model(
         {
             id_user: 1, id_task: 3, pourcentage: 75
@@ -317,9 +265,11 @@ db.once('open', function() {
         resolve(User_Task_3_data.save());
     });
 
+
+
     var Project_User_1_data = new Project_User_model(
         {
-            id_project: 1, id_user: 1
+            id_project: Project_1_data._id, id_user: User_data._id
         }
     );
 
@@ -331,7 +281,7 @@ db.once('open', function() {
 
     var Project_User_2_data = new Project_User_model(
         {
-            id_project: 2, id_user: 1
+            id_project: Project_2_data._id, id_user: User_data._id
         }
     );
 
@@ -375,9 +325,11 @@ db.once('open', function() {
         resolve(Task_Group_3_data.save());
     });
 
+
+
     var promisses = [];
 
-    promisses.push(userPromiss_data, project_1_Promiss, project_2_Promiss, project_3_Promiss, project_4_Promiss, project_5_Promiss, project_6_Promiss, project_7_Promiss, project_8_Promiss, project_9_Promiss, project_10_Promiss, task_1_Promiss, task_2_Promiss, task_3_Promiss, usertask_1_Promiss, usertask_2_Promiss, usertask_3_Promiss, projectuser_1_Promiss, projectuser_2_Promiss, taskgroup_1_Promiss, taskgroup_2_Promiss, taskgroup_3_Promiss);
+    promisses.push(userPromiss_data, project_1_Promiss, project_2_Promiss, task_1_Promiss, task_2_Promiss, task_3_Promiss, usertask_1_Promiss, usertask_2_Promiss, usertask_3_Promiss, projectuser_1_Promiss, projectuser_2_Promiss, taskgroup_1_Promiss, taskgroup_2_Promiss, taskgroup_3_Promiss);
 
     Promise.all(promisses).then(function(res) {
         console.log('res', res);

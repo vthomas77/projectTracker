@@ -15,7 +15,7 @@ exports.list = function(req, res) {
 
       if (err) { return next(err); }
       var projectIDs = projectUsers.map(function (project) { return project.id_project; });
-      Project.find({id_project: {$in: projectIDs}}, function(err, existingProjects) {
+      Project.find({_id: {$in: projectIDs}}, function(err, existingProjects) {
 
           if (err) { return next(err); }
           return res.json({"entityTypeList":existingProjects});
