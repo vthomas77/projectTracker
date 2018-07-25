@@ -23,6 +23,8 @@ require('angular-animate');
 // and this can't be overwriten/choose another html entry point without too much sacrifices
 // So here it goes ...
     $('body').attr('ng-app', 'myApp');
+    // Admin LTE css
+    $('body').attr('class', 'skin-blue sidebar-mini');
     // MainController
     $('#app').attr('ng-controller', 'MainController as MainController');
     // Directive if not connected
@@ -30,10 +32,10 @@ require('angular-animate');
     $('#app').append(Loggin);
     // If connected -> entryPoint of the app with menu and sidebar
     var entryPoint = $(
-        "<div ng-if='MainController.connected' class='fullscreen'>" +
+        "<div ng-if='MainController.connected'>" +
         "<alert-directive></alert-directive>" + // Alert
-        "<side-navigation></side-navigation>" + // Navbar menu
         "<top-navigation></top-navigation>" + //Top menu
+        "<side-navigation></side-navigation>" + // Navbar menu
         "<div id='pickme' ng-view></div>" +
         "</div>");
     $('#app').append(entryPoint);
