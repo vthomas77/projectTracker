@@ -120,9 +120,9 @@ exports.update = function(req, res) {
 
    const projectID = req.body.id;
 
-   Project.deleteOne({ _id: projectID }, function (err) {
+   Project.deleteOne({ _id: projectID }, function (err, project) {
      if (err) { return next(err); }
-     res.json({status: 'OK'});
+     res.json({"status": 'OK', "project": project });
   });
 
 }

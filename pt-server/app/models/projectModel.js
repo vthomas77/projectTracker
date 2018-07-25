@@ -19,7 +19,8 @@ const ProjectSchema = new Schema({
   },
   num_invoice: {
     type: Number
-  }
-});
+  }},
+  { collection : 'projects' }
+);
 
 module.exports = mongoose.model('Project', ProjectSchema);
