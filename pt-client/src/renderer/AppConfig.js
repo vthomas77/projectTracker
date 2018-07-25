@@ -25,4 +25,8 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
             controller: 'EntityController',
             controllerAs: 'EntityController'
         })
+
+        .otherwise({
+            redirectTo: '/dashboard'
+        });
 };
