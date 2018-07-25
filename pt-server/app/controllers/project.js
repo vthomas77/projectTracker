@@ -32,6 +32,8 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
 
+  const userId = req.user._id;
+
   const name = req.body.name;
   var startDate = req.body.startDate;
   var clientName = req.body.clientName;
@@ -70,6 +72,7 @@ exports.create = function(req, res) {
 
       // Create project instance
       let project = new Project({
+        id_project: 3,
         name: name,
         starting_date: startDate,
         create_date: createDate,
@@ -79,11 +82,22 @@ exports.create = function(req, res) {
       });
 
       // Insert project into database
-      project.save(function(err, user) {
+      project.save(function(err, project) {
         if (err) { return next(err); }
-        res.json({status: 'OK'});
+        // Associate project to user
+        let userProject = new Project_User({
+          id_project: project._id,
+          id_user: userId
+        })
+        userProject.save(function(err, userProject) {
+          if (err) { return next(err); }
+          // Return project created
+          Project.find({_id: userProject.id_project}, function(err, project) {
+              if (err) { return next(err); }
+              return res.json({"entity":project});
+          });
+        });
       });
-
   });
 
 }
@@ -94,11 +108,11 @@ exports.create = function(req, res) {
 
 exports.update = function(req, res) {
 
-  const projectID = req.body.id;
-  const name = req.body.name;
-  const startDate = req.body.startDate;
-  const clientName = req.body.clientName;
-  const allocatedBudget = req.body.allocatedBudget;
+  const projectID = req.params.id;
+  const name = req.params.name;
+  const startDate = req.params.startDate;
+  const clientName = req.params.clientName;
+  const allocatedBudget = req.params.allocatedBudget;
 
   Project.findById(projectID, function (err, existingProject) {
     if (err) { return next(err); }
@@ -118,11 +132,19 @@ exports.update = function(req, res) {
 
  exports.delete = function(req, res) {
 
-   const projectID = req.body.id;
+   const projectID = req.params.id;
 
-   Project.deleteOne({ _id: projectID }, function (err, project) {
-     if (err) { return next(err); }
-     res.json({"status": 'OK', "project": project });
-  });
-
+   // Return project to be deleted
+   Project.find({_id: projectID}, function(err, projectResult) {
+       if (err) { return next(err); }
+       // Delete Project
+       Project.deleteOne({ _id: projectID }, function (err, project) {
+         if (err) { return next(err); }
+         // Cascade delete
+         Project_User.deleteMany({ id_project: projectID }, function (err, project) {
+           if (err) { return next(err); }
+           res.json({"Entity": projectResult });
+         });
+      });
+   });
 }

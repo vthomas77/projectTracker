@@ -4,7 +4,6 @@ const passportLocalService = require('../config/passportLocal');
 const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
-const TaskGroupController = require('../controllers/taskgroup');
 const RessourceController = require('../controllers/ressource');
 
 // Authenticate with JSON Web Token
@@ -19,7 +18,6 @@ module.exports = function(app) {
   const apiRoutes = express.Router();
   const authRoutes = express.Router();
   const projectRoutes = express.Router();
-  const taskgroupRoutes = express.Router();
   const ressourceRoutes = express.Router();
 
   // Set api route group
@@ -43,39 +41,20 @@ module.exports = function(app) {
   // Project
   // -------
 
-  // List project route
-  projectRoutes.get('/list', requireAuth, ProjectController.list);
-
   // Set project sub route group
   apiRoutes.use('/project', projectRoutes);
+
+  // List project route
+  projectRoutes.get('/list', requireAuth, ProjectController.list);
 
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // Update project route
-  projectRoutes.post('/update', requireAuth, ProjectController.update);
+  projectRoutes.put('/:id/:name/:startDate/:clientName/:allocatedBudget', requireAuth, ProjectController.update);
 
   // Delete project route
-  projectRoutes.post('/delete', requireAuth, ProjectController.delete);
-
-  // ----------
-  // Task-Group
-  // ----------
-
-  // List task group route
-  taskgroupRoutes.get('/list', requireAuth, TaskGroupController.list);
-
-  // Set task group sub route group
-  apiRoutes.use('/taskgroup', taskgroupRoutes);
-
-  // Create task group route
-  taskgroupRoutes.post('/create', requireAuth, TaskGroupController.create);
-
-  // Update task group route
-  taskgroupRoutes.post('/update', requireAuth, TaskGroupController.update);
-
-  // Delete task group route
-  taskgroupRoutes.post('/delete', requireAuth, TaskGroupController.delete);
+  projectRoutes.delete('/:id', requireAuth, ProjectController.delete);
 
   // ---------
   // Ressource
