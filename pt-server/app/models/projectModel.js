@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const autoIncrement = require('mongoose-auto-increment');
 
 const ProjectSchema = new Schema(
   {
@@ -15,3 +16,5 @@ const ProjectSchema = new Schema(
 );
 
 module.exports = mongoose.model('Project', ProjectSchema);
+autoIncrement.initialize(mongoose.connection);
+ProjectSchema.plugin(autoIncrement.plugin, { model: 'Project', field: 'id_project' });

@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Project = require('../models/projectModel');
 const Project_User = require('../models/userProjectModel');
+const User = require('../models/userModel');
 
 // -------------
 // List Route
@@ -14,11 +15,34 @@ exports.list = function(req, res) {
   Project_User.find({id_user:userId}, function(err, projectUsers) {
 
       if (err) { return next(err); }
-      var projectIDs = projectUsers.map(function (project) { return project.id_project; });
+      const projectIDs = projectUsers.map(function (project) { return project.id_project; });
       Project.find({_id: {$in: projectIDs}}, function(err, existingProjects) {
 
           if (err) { return next(err); }
           return res.json({"entityTypeList":existingProjects});
+
+      });
+
+  });
+
+}
+
+// Show relationship for a given Project
+exports.listOne = function(req, res) {
+
+  const projectId = req.params.id;
+
+  Project.find({_id:projectId}, function(err, project) {
+
+      if (err) { return next(err); }
+      Project_User.find({id_project:projectId}, function(err, projectUsers) {
+        if (err) { return next(err); }
+        const userID = projectUsers.map(function (user) { return user.id_user; });
+        User.find({_id:userID}, function(err, users) {
+
+          if (err) { return next(err); }
+          return res.json({"entity":project,"entityChild": users});
+        });
 
       });
 
@@ -72,7 +96,6 @@ exports.create = function(req, res) {
 
       // Create project instance
       let project = new Project({
-        id_project: 3,
         name: name,
         starting_date: startDate,
         create_date: createDate,
@@ -120,7 +143,7 @@ exports.update = function(req, res) {
     existingProject.set({ name: name, starting_date: startDate, client_name: clientName, budget: allocatedBudget});
     existingProject.save(function (err, updatedProject) {
      if (err) { return next(err); }
-     res.json({status: 'OK'});
+     res.json({status: updatedProject});
     });
  });
 

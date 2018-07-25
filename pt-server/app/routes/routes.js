@@ -46,6 +46,7 @@ module.exports = function(app) {
 
   // List project route
   projectRoutes.get('/list', requireAuth, ProjectController.list);
+  projectRoutes.get('/:id', requireAuth, ProjectController.listOne);
 
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
