@@ -1,7 +1,7 @@
 'use strict';
 
-EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location'];
-export default /*@ngInject*/ function EntityListController( RouteHelperService, EntityListStore, $location ) {
+EntityListController.$inject = ['$scope', 'RouteHelperService', 'EntityListStore', '$location'];
+export default /*@ngInject*/ function EntityListController( $scope, RouteHelperService, EntityListStore, $location ) {
     var vm = this;
 
     vm.createEntity = createEntity;
@@ -14,6 +14,7 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
     .then(function(data){
+        vm.entityCount = data.entityTypeList.length;
         vm.entityList = data.entityTypeList;
     });
 
