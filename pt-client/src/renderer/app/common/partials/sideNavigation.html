@@ -1,13 +1,28 @@
-<span class="bckg"></span>
-<section class="sidebarHeader">
-    <h1 class="pointer" ng-click="MainController.acceuil(); MainController.updateAction($event)" id="dashboard">Project-Track</h1>
-    <nav class="sidebar-treeMenu">
-        <ul>
-            <li><a ng-click="MainController.updateAction($event)" id="project">Project</a></li>
-            <li><a ng-click="MainController.updateAction($event)" id="taskGroup">TaskGroup</a></li>
-            <li><a ng-click="MainController.updateAction($event)" id="task">Task</a></li>
-            <li><a ng-click="MainController.updateAction($event)" id="ressource">Ressource</a></li>
-            <li><a ng-click="MainController.updateAction($event)" id="gantt">Gantt</a></li>
-        </ul>
-    </nav>
-</section>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- User logo -->
+    <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../../files/user_logo.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Blip Blop</p>
+        </div>
+    </div>
+
+    <!-- MENU -->
+    <ul class="sidebar-menu tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active pointer"><a ng-click="MainController.updateAction('project')"><i class="fa fa-archive" aria-hidden="true"></i> <span>Project</span></a></li>
+        <li class="active pointer active-1"><a ng-click="MainController.updateAction('taskgroup')"><i class="fa fa-indent" aria-hidden="true"></i> <span>TaskGroup</span></a></li>
+        <li class="active pointer active-2"><a ng-click="MainController.updateAction('task')"><i class="fa fa-book"></i> <span>Task</span></a></li>
+        <li class="active pointer active-3"><a ng-click="MainController.updateAction('ressource')"><i class="fa fa-users" aria-hidden="true"></i> <span>Ressource</span></a></li>
+        <li class="active pointer active-4"><a ng-click="MainController.updateAction('gantt')"><i class="fa fa-align-center" aria-hidden="true"></i> <span>Gantt</span></a></li>
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>
