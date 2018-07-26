@@ -2,6 +2,7 @@ const moment = require('moment');
 const Project = require('../models/projectModel');
 const Project_User = require('../models/userProjectModel');
 const User = require('../models/userModel');
+const Taskgroup = require('../models/taskgroupModel');
 
 // -------------
 // List Route
@@ -37,11 +38,16 @@ exports.listOne = function(req, res) {
       if (err) { return next(err); }
       Project_User.find({id_project:projectId}, function(err, projectUsers) {
         if (err) { return next(err); }
-        const userID = projectUsers.map(function (user) { return user.id_user; });
-        User.find({_id:userID}, function(err, users) {
-
+        const userIDs = projectUsers.map(function (user) { return user.id_user; });
+        User.find({_id:{$in: userIDs}}, function(err, users) {
           if (err) { return next(err); }
-          return res.json({"entity":project,"entityChild": users});
+          Taskgroup.find({id_project:projectId}, function(err, taskGroups) {
+            if (err) { return next(err); }
+            return res.json({
+              "entity":project,
+              "entityChild": { "users" : users, "taskgroups" : taskGroups}
+            });
+          });
         });
 
       });
@@ -58,10 +64,11 @@ exports.create = function(req, res) {
 
   const userId = req.user._id;
 
-  const name = req.body.name;
-  var startDate = req.body.startDate;
-  var clientName = req.body.clientName;
-  var allocatedBudget = req.body.allocatedBudget;
+  const data = req.body.data;
+  const name = data.name;
+  var startDate = data.startDate;
+  var clientName = data.clientName;
+  var allocatedBudget = data.allocatedBudget;
 
   // Validate parameters
 
@@ -114,10 +121,21 @@ exports.create = function(req, res) {
         })
         userProject.save(function(err, userProject) {
           if (err) { return next(err); }
-          // Return project created
-          Project.find({_id: userProject.id_project}, function(err, project) {
-              if (err) { return next(err); }
-              return res.json({"entity":project});
+          // Create base task group
+          let baseTaskGroup = new Taskgroup({
+            id_project: project._id,
+            name_task_group: 'Base' + '_' + name,
+            starting_date: startDate,
+            end_date: startDate,
+            position:0
+          })
+          baseTaskGroup.save(function(err, project) {
+            if (err) { return next(err); }
+            // Return project created
+            Project.find({_id: userProject.id_project}, function(err, project) {
+                if (err) { return next(err); }
+                return res.json({"entity":project});
+              });
           });
         });
       });

@@ -77,9 +77,6 @@ Route : /api/project/:id
 ```
 Methode : GET
 ```
-```
-Parameter : id
-```
 
 
 #### Create project
@@ -113,9 +110,6 @@ Route : /api/project/:id
 ```
 ```
 Methode : DELETE
-```
-```
-Parameter : id
 ```
 
 
