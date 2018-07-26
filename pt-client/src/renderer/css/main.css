@@ -49,6 +49,8 @@
 
 html, body, body > div, body > div > div{min-height: 100vh !important;}
 #pickme, #pickme > section{min-height: calc(100vh - 50px) !important;}
+.content-wrapper {display: flex; flex-direction: column;}
+
 /*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/
 
 /** Alert **/
@@ -72,8 +74,8 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 .list-ul {flex-direction: row !important;}
 .list-ul > li > a {display: flex; align-items: center; padding: 10px;}
 .list-ul, .list-ul > li, .list-ul > li > a {height: 100%;}
-.sidebar-toggle {padding: 12px 15px !important;}
 .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a, .skin-blue .sidebar-menu > li.menu-open > a {background: inherit !important;}
+#top-action {padding: 15px;}
 
 /** EntityList **/
 

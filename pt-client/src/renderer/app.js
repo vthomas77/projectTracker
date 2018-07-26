@@ -1,11 +1,6 @@
 'use strict';
 
 // Vendor.js - Couldn't be done in one of the entry point to export as global variables (for angular/jquery)
-const css = require('./css/style.css').toString();
-require('bootstrap');
-require('bootstrap/dist/css/bootstrap.min.css');
-
-
 global.$ = global.jQuery = require('jquery');
 require('./adminLTE/index.js');
 global.postal = require('postal');
@@ -17,6 +12,10 @@ require('angular-moment');
 require('angular-ui-bootstrap');
 require('angular-messages');
 require('angular-animate');
+
+const css = require('./css/style.css').toString();
+require('bootstrap');
+require('bootstrap/dist/css/bootstrap.min.css');
 
 // Close your eyes (>~v~<)
 // This is because electron-webpack actually harcode default loaded html
