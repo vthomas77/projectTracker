@@ -1,12 +1,15 @@
 'use strict';
 
-EntityListController.$inject = ['$scope', 'RouteHelperService', 'EntityListStore', '$location'];
-export default /*@ngInject*/ function EntityListController( $scope, RouteHelperService, EntityListStore, $location ) {
+EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter'];
+export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter ) {
     var vm = this;
-
+    // look : https://www.youtube.com/watch?v=3GXspIuEDb0
     vm.createEntity = createEntity;
     vm.delete = deleteEntity;
+    vm.updateSearchBox = updateSearchBox;
     vm.openEntity = openEntity;
+
+    var heightSize = $('#pickme').height();
 
     // Initialize value from arg in route
     vm.entityType = RouteHelperService.get().entityType;
@@ -15,7 +18,24 @@ export default /*@ngInject*/ function EntityListController( $scope, RouteHelperS
     EntityListStore.getList(vm.entityType)
     .then(function(data){
         vm.entityList = data.entityTypeList;
+        vm.filteredLength = vm.entityList.length;
+        addRemovePagination();
     });
+
+    function addRemovePagination () {
+        if ( vm.filteredLength != undefined && (heightSize / vm.filteredLength) < 70 ) {
+            vm.pagination = true;
+            vm.maxPerPage = heightSize / 70;
+            vm.currentPage = 1;
+        } else {
+            vm.pagination = false;
+        }
+    }
+
+    function updateSearchBox( value ) {
+        vm.filteredLength = filterFilter(vm.entityList, vm.searchBox).length;
+        addRemovePagination();
+    }
 
     function createEntity() {
         $location.path('/entity/' + vm.entityType + '/0');

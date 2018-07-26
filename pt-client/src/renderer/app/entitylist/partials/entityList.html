@@ -7,7 +7,7 @@
             <!-- Left EntityList menu -->
             <div class="table-options col-sm-3">
                 <div class="input-group">
-                  <input type="text" ng-model="searchBox" class="form-control" placeholder="Search...">
+                  <input type="text" ng-model="EntityListController.searchBox" ng-change="EntityListController.updateSearchBox(EntityListController.searchBox)" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
                         <button type="submit" name="search" id="search-btn" class="btn btn-flat blue-custom-primary"><i class="fa fa-search"></i>
                         </button>
@@ -19,9 +19,7 @@
             </div>
         </div>
     </div>
-
     <!-- Table -->
-    <section class="content">
         <div class="col col-lg-12 col-md-12 col-sm-12">
             <table class="table table-striped">
                 <thead>
@@ -56,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | filter:searchBox" class="search-animate">
+                    <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" class="search-animate">
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_project }}</a></th>
                         <td>{{ entity.name }}</td>
                         <td>{{ entity.starting_date }}</td>
@@ -66,7 +64,13 @@
                 </tbody>
             </table>
         </div>
-        <pagination-directive number="(EntityListController.entityList | filter:searchBox).length"></pagination-directive>
-    </section>
+        <div ng-if="EntityListController.pagination" class="fixed-bottom">
+            <ul uib-pagination 
+                total-items="EntityListController.filteredLength" 
+                ng-model="EntityListController.currentPage" 
+                items-per-page="EntityListController.maxPerPage">
+            </ul>
+        </div>
+
 </section>
 
