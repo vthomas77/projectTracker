@@ -31,7 +31,6 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         } else {
             vm.pagination = false;
         }
-        console.log(vm.pagination);
     }
 
     function pageChanged() {
