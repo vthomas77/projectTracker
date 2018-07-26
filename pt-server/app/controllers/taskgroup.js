@@ -1,6 +1,5 @@
 const moment = require('moment');
 const Taskgroup = require('../models/taskgroupModel');
-const Project = require('../models/projectModel');
 const Project_User = require('../models/userProjectModel');
 
 // -------------
@@ -13,22 +12,18 @@ exports.list = function(req, res) {
     const userId = req.user._id;
 
     Project_User.find({id_user:userId}, function(err, projectUsers) {
-
         if (err) {
             return next(err);
         }
 
-        var projectIDs = projectUsers.map(function (project) {
-            return project.id_project;
-        });
+        var projectIDs = projectUsers.map(function (project) { return project.id_project; });
 
         Taskgroup.find({id_project: {$in: projectIDs}}, function(err, existingTaskgroups) {
-
             if (err) {
                 return next(err);
             }
 
-            return res.json({"entityTypeList":existingTaskgroups});
+            return res.json({"entityTypeList": existingTaskgroups});
         });
     });
 }
