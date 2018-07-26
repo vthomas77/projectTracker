@@ -6,7 +6,7 @@ const TaskGroupSchema = new Schema({
         type: Number
     },
     id_project: {
-        type: Number
+        type: String
     },
     name_task_group: {
         type: String
@@ -16,6 +16,9 @@ const TaskGroupSchema = new Schema({
     },
     end_date: {
         type: String
+    },
+    position: {
+        type: Number
     }
 });
 
