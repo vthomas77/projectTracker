@@ -64,10 +64,11 @@ exports.create = function(req, res) {
 
   const userId = req.user._id;
 
-  const name = req.body.name;
-  var startDate = req.body.startDate;
-  var clientName = req.body.clientName;
-  var allocatedBudget = req.body.allocatedBudget;
+  const data = req.body.data;
+  const name = data.name;
+  var startDate = data.startDate;
+  var clientName = data.clientName;
+  var allocatedBudget = data.allocatedBudget;
 
   // Validate parameters
 

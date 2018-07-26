@@ -47,6 +47,8 @@ exports.create = function(req, res) {
   const userId = req.user._id;
 
   const name = req.body.name;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
   var predecessor = req.body.predecessor;
   var taskGroupId = req.body.taskGroupId;
 
@@ -66,44 +68,20 @@ exports.create = function(req, res) {
     taskGroupId = "";
   }
 
-  createDate = moment().format("YYYY-MM-DD HH-mm-ss");
+  // Create task instance
+  let task = new Task({
+    name_task: name,
+    starting_date: startDate,
+    end_date: endDate,
+    predecessor: predecessor,
+    id_task_group: taskGroupId,
+  });
 
-  Project.findOne({ name: name }, function(err, existingProject) {
-
-      if (err) { return next(err); }
-
-      // Check if project is unique
-      if (existingProject) {
-        return res.status(422).send({ error: 'A project named ' + existingProject.name + ' already exist.' });
-      }
-
-      // Create project instance
-      let project = new Project({
-        name: name,
-        starting_date: startDate,
-        create_date: createDate,
-        client_name: clientName,
-        budget: allocatedBudget,
-        num_invoice: 0
-      });
-
-      // Insert project into database
-      project.save(function(err, project) {
-        if (err) { return next(err); }
-        // Associate project to user
-        let userProject = new Project_User({
-          id_project: project._id,
-          id_user: userId
-        })
-        userProject.save(function(err, userProject) {
-          if (err) { return next(err); }
-          // Return project created
-          Project.find({_id: userProject.id_project}, function(err, project) {
-              if (err) { return next(err); }
-              return res.json({"entity":project});
-          });
-        });
-      });
+  // Insert project into database
+  Task.save(function(err, task) {
+    if (err) { return next(err); }
+    // Return project created
+    return res.json({"entity":task});
   });
 
 }
