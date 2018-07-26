@@ -59,7 +59,7 @@ Response OK: {"token":"***"}
 ```
 ### Project
 ------
-#### List projects
+#### List all projects
 ```
 Route : /api/project/list
 ```
@@ -68,6 +68,17 @@ Methode : GET
 ```
 ```
 Parameter : None
+```
+
+#### List one project and childs
+```
+Route : /api/project/:id
+```
+```
+Methode : GET
+```
+```
+Parameter : id
 ```
 
 
@@ -81,38 +92,33 @@ Methode : POST
 ```
 Parameter : name, ?startDate, ?clientName, ?allocatedBudget)
 ```
-```
-Response OK: {status: 'OK'}
-```
+
 
 
 #### Update project
 ```
-Route : /api/project/update
+Route : /api/project/:id/:name/:startDate/:clientName/:allocatedBudget
 ```
 ```
-Methode : POST
+Methode : PUT
 ```
 ```
 Parameter : id, name, startDate, clientName, allocatedBudget
 ```
-```
-Response OK: {status: 'OK'}
-```
+
 
 #### Delete project
 ```
-Route : /api/project/delete
+Route : /api/project/:id
 ```
 ```
-Methode : POST
+Methode : DELETE
 ```
 ```
 Parameter : id
 ```
-```
-Response OK: {status: 'OK'}
-```
+
+
 ### Ressource
 ------
 #### Get all ressources

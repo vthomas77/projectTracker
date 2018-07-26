@@ -89,7 +89,7 @@ exports.register = function(req, res, next) {
 
           res.status(201).json({
             token: generateToken(userInfo),
-            //user: userInfo
+            user: user
           });
         });
     });
