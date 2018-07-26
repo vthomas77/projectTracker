@@ -5,6 +5,8 @@ const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
 const RessourceController = require('../controllers/ressource');
+const TaskGroupController = require('../controllers/taskgroup');
+const TaskController = require('../controllers/task');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -19,6 +21,8 @@ module.exports = function(app) {
   const authRoutes = express.Router();
   const projectRoutes = express.Router();
   const ressourceRoutes = express.Router();
+  const taskGroupRoutes = express.Router();
+  const taskRoutes = express.Router();
 
   // Set api route group
   app.use('/api', apiRoutes);
@@ -79,5 +83,29 @@ module.exports = function(app) {
 
   // Delete ressource route
   ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);
+
+  // -----------
+  // Task Group
+  // ----------
+
+  // Set task group sub route group
+  apiRoutes.use('/taskGroup', taskGroupRoutes);
+
+  // List task group route
+  taskGroupRoutes.get('/list', requireAuth, TaskGroupController.list);
+
+  // Create task group route
+  taskGroupRoutes.post('/create', requireAuth, TaskGroupController.create);
+
+  // -----
+  // Task
+  // -----
+
+  // Set task sub route group
+  apiRoutes.use('/task', taskRoutes);
+
+  // List project route
+  taskRoutes.get('/list', requireAuth, TaskController.list);
+
 
 };
