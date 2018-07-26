@@ -107,5 +107,7 @@ module.exports = function(app) {
   // List project route
   taskRoutes.get('/list', requireAuth, TaskController.list);
 
+  // Create ressource route
+  taskRoutes.post('/create', requireAuth, TaskController.create);
 
 };
