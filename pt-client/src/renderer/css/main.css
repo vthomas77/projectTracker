@@ -44,11 +44,18 @@
         transform: translateY(0);
     }
 
+/** Pagination **/
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    align-self: center;
+}
 
 /** Main (random css)**/
 
 html, body, body > div, body > div > div{min-height: 100vh !important;}
-#pickme, #pickme > section{min-height: calc(100vh - 50px) !important;}
+#pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
 .content-wrapper {display: flex; flex-direction: column;}
 
 /*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/

@@ -19,9 +19,7 @@
             </div>
         </div>
     </div>
-
     <!-- Table -->
-
         <div class="col col-lg-12 col-md-12 col-sm-12">
             <table class="table table-striped">
                 <thead>
@@ -56,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | startFromFilter:EntityListController.entityList:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" class="search-animate">
+                    <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" class="search-animate">
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_project }}</a></th>
                         <td>{{ entity.name }}</td>
                         <td>{{ entity.starting_date }}</td>
@@ -66,13 +64,10 @@
                 </tbody>
             </table>
         </div>
-                <p>{{ number }}</p>
-        <p> {{ currentPage }} </p>
-        <div ng-if="EntityListController.pagination">
+        <div ng-if="EntityListController.pagination" class="fixed-bottom">
             <ul uib-pagination 
                 total-items="EntityListController.filteredLength" 
                 ng-model="EntityListController.currentPage" 
-                ng-change="EntityListController.pageChanged()"
                 items-per-page="EntityListController.maxPerPage">
             </ul>
         </div>

@@ -8,7 +8,6 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     vm.delete = deleteEntity;
     vm.updateSearchBox = updateSearchBox;
     vm.openEntity = openEntity;
-    vm.pageChanged = pageChanged;
 
     var heightSize = $('#pickme').height();
 
@@ -31,10 +30,6 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         } else {
             vm.pagination = false;
         }
-    }
-
-    function pageChanged() {
-        console.log('CC');
     }
 
     function updateSearchBox( value ) {
