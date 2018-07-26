@@ -1,7 +1,7 @@
 'use strict';
 
-EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location'];
-export default /*@ngInject*/ function EntityListController( RouteHelperService, EntityListStore, $location ) {
+EntityListController.$inject = ['$scope', 'RouteHelperService', 'EntityListStore', '$location'];
+export default /*@ngInject*/ function EntityListController( $scope, RouteHelperService, EntityListStore, $location ) {
     var vm = this;
 
     vm.createEntity = createEntity;
@@ -28,7 +28,11 @@ export default /*@ngInject*/ function EntityListController( RouteHelperService, 
     function deleteEntity( entity ){
         EntityListStore.deleteEntity(entity._id, vm.entityType)
         .then(function(data){
-            debugger;
+            angular.forEach( vm.entityList, function(value, key) {
+                if( value._id == data.Entity[0]._id ) {
+                    vm.entityList.splice(key, 1);
+                }
+            });
         });
     }
 };
