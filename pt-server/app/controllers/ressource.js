@@ -1,5 +1,46 @@
 const User = require('../models/userModel');
-const UserProject = require('../models/userProjectModel');
+const Project_User = require('../models/userProjectModel');
+const Project = require('../models/projectModel');
+
+// -------------
+// List Route
+// -------------
+
+// List developpers
+exports.list = function(req, res) {
+
+  User.find({level:3}, function(err, existingUsers) {
+
+      if (err) { return next(err); }
+      return res.json({existingUsers});
+
+  });
+}
+
+// Show relationship for a given users
+exports.listOne = function(req, res) {
+
+  const userId = req.params.id;
+
+  User.find({_id:userId}, function(err, user) {
+
+      if (err) { return next(err); }
+      //return res.json({"entity":user});
+
+      Project_User.find({id_user:userId}, function(err, projectUsers) {
+        if (err) { return next(err); }
+        const projectID = projectUsers.map(function (project) { return project.id_project; });
+        Project.find({_id:projectID}, function(err, projects) {
+
+          if (err) { return next(err); }
+          return res.json({"entity":user,"entityChild": projects});
+        });
+
+      });
+
+  });
+
+}
 
 // ------------------
 // Create Route
@@ -53,9 +94,7 @@ exports.create = function(req, res, next) {
         user.save(function(err, user) {
           if (err) { return next(err); }
 
-          res.json({
-            status: 'OK'
-          });
+          res.json({"entity": user});
         });
     });
   } else {
@@ -64,50 +103,24 @@ exports.create = function(req, res, next) {
 }
 
 // -------------
-// List Route
+// Add Route
 // -------------
 
-exports.listAll = function(req, res) {
+  // Add a ressource to a project
+exports.add = function(req, res) {
 
-  User.find({}, function(err, existingUsers) {
-
-      if (err) { return next(err); }
-      return res.json({existingUsers});
-
-  });
-}
-
-exports.listAllProject = function(req, res) {
-
+  const userID = req.body.UserId;
   const projectID = req.body.ProjectId;
 
-  UserProject.find({id_project:projectID}, function(err, projectUsers) {
-
-      if (err) { return next(err); }
-      var userIDs = projectUsers.map(function (user) { return user.id_user; });
-      User.find({_id: {$in: userIDs}}, function(err, existingUsers) {
-
-          if (err) { return next(err); }
-          var usernames = existingUsers.map(function (user) { return user.username; });
-          return res.json({usernames});
-
-      });
-
+  let userproject = new UserProject({
+    id_project: projectID,
+    id_user: userID
   });
-}
 
-// -------------
-// Delete Route
-// -------------
-
-exports.delete = function(req, res) {
-
-  const userID = req.body.id;
-
-  User.deleteOne({ _id: userID }, function (err) {
+  userproject.save(function(err, user) {
     if (err) { return next(err); }
     res.json({status: 'OK'});
- });
+  });
 
 }
 
@@ -136,22 +149,25 @@ exports.update = function(req, res) {
 }
 
 // -------------
-// Add Route
+// Delete Route
 // -------------
 
-exports.add = function(req, res) {
+exports.delete = function(req, res) {
 
-  const userID = req.body.UserId;
-  const projectID = req.body.ProjectId;
+  const userID = req.params.id;
 
-  let userproject = new UserProject({
-    id_project: projectID,
-    id_user: userID
-  });
-
-  userproject.save(function(err, user) {
-    if (err) { return next(err); }
-    res.json({status: 'OK'});
-  });
+  // Return user to be deleted
+  User.find({_id: userID}, function(err, userResult) {
+      if (err) { return next(err); }
+      // Delete User
+      User.deleteOne({ _id: userID }, function (err) {
+        if (err) { return next(err); }
+        // Cascade delete
+        Project_User.deleteMany({ id_user: userID }, function (err, user) {
+          if (err) { return next(err); }
+          res.json({"Entity": userResult });
+        });
+     });
+ });
 
 }
