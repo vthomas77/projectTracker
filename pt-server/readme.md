@@ -97,7 +97,7 @@ Parameter : name, ?startDate, ?clientName, ?allocatedBudget)
 
 #### Update project
 ```
-Route : /api/:id/:name/:startDate/:clientName/:allocatedBudget
+Route : /api/project/:id/:name/:startDate/:clientName/:allocatedBudget
 ```
 ```
 Methode : PUT
@@ -109,7 +109,7 @@ Parameter : id, name, startDate, clientName, allocatedBudget
 
 #### Delete project
 ```
-Route : /api/:id
+Route : /api/project/:id
 ```
 ```
 Methode : DELETE

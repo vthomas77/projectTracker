@@ -64,23 +64,20 @@ module.exports = function(app) {
   // Set ressource sub route group
   apiRoutes.use('/ressource', ressourceRoutes);
 
+  // List ressource route
+  ressourceRoutes.get('/list', requireAuth, RessourceController.list);
+  ressourceRoutes.get('/:id', requireAuth, RessourceController.listOne);
+
   // Create ressource route
   ressourceRoutes.post('/create', requireAuth, RessourceController.create);
 
-  // List ressource route
-  // All ressources
-  ressourceRoutes.post('/getAll', requireAuth, RessourceController.listAll);
-  // All ressources for a given project
-  ressourceRoutes.post('/getAllProject', requireAuth, RessourceController.listAllProject);
-
-  // Delete ressource route
-  ressourceRoutes.post('/delete', requireAuth, RessourceController.delete);
+  // Add ressource Route
+  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
   ressourceRoutes.post('/update', requireAuth, RessourceController.update);
 
-  // Add ressource Route
-  // Add a ressource to a project
-  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
+  // Delete ressource route
+  ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);
 
 };
