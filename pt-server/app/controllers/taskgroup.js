@@ -25,6 +25,7 @@ exports.list = function(req, res) {
 
             return res.json({"entityTypeList": existingTaskgroups});
         });
+
     });
 }
 
@@ -35,8 +36,8 @@ exports.list = function(req, res) {
 exports.create = function(req, res) {
 
     const name = req.body.name;
-    var startDate = req.body.startDate;
-    var endDate = req.body.endDate;
+    const projectId = req.body.projectId;
+    const position = req.body.position;
 
     // Validate parameters
 
@@ -46,45 +47,56 @@ exports.create = function(req, res) {
         });
     }
 
+    if (!projectId) {
+        return res.send({
+            error: 'You must associate your task group to a project.'
+        });
+    }
+
     // Default value
+    // Add taskgroup at the last position
 
-    if (!startDate) {
-        startDate = moment().format("YYYY-MM-DD HH-mm-ss");
-    }
-
-    if (!endDate) {
-        endDate = moment().format("YYYY-MM-DD HH-mm-ss");
-    }
-
-    Taskgroup.findOne({ name_task_group: name }, function(err, existingTaskgroup) {
+    Taskgroup.findOne().sort('-position').exec(function(err, existingTaskgroup) {
 
         if (err) {
             return next(err);
         }
+        const maxPosition = existingTaskgroup.position + 1;
 
-        // Check if taskgroup is unique
-        if (existingTaskgroup) {
-            return res.status(422).send({
-                error: 'A task group named ' + existingTaskgroup.name + ' already exist.'
-            });
-        }
+        Taskgroup.findOne({ name_task_group: name }, function(err, existingTaskgroup) {
 
-        // Create taskgroup instance
-        let taskgroup = new Taskgroup({
-            name_task_group: name,
-            starting_date: startDate,
-            end_date: endDate
-        });
-
-        // Insert taskgroup into database
-        taskgroup.save(function(err, user) {
             if (err) {
                 return next(err);
             }
 
-            return res.send('OK');
+            // Check if taskgroup is unique
+            if (existingTaskgroup) {
+                return res.status(422).send({
+                    error: 'A task group named ' + existingTaskgroup.name + ' already exist.'
+                });
+            }
+
+            // Create taskgroup instance
+            let taskgroup = new Taskgroup({
+                name_task_group: name,
+                id_project: projectId,
+                starting_date: "",
+                end_date: "",
+                position : maxPosition
+            });
+
+            // Insert taskgroup into database
+            taskgroup.save(function(err, tg) {
+                if (err) {
+                    return next(err);
+                }
+
+                return res.send(tg);
+            });
         });
+
     });
+
 }
 
 // -------------

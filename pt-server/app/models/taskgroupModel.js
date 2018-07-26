@@ -20,6 +20,6 @@ const TaskGroupSchema = new Schema({
     position: {
         type: Number
     }
-});
+}, { collection : 'task_groups' });
 
 module.exports = mongoose.model('Taskgroup', TaskGroupSchema);
