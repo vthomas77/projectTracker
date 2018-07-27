@@ -3,7 +3,7 @@
 EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal'];
 export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal ) {
     var vm = this;
-    // look : https://www.youtube.com/watch?v=3GXspIuEDb0
+
     vm.createEntity = createEntity;
     vm.deleteEntity = deleteEntity;
     vm.deleteThis = deleteThis;
@@ -52,7 +52,7 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                template: require('../../modal/partials/deleteEntity.html'),
+                template: require('../../modal/partials/modalDeleteEntity.html'),
                 controller: 'ModalController',
                 controllerAs: 'ModalController'
             });
