@@ -56,7 +56,7 @@ module.exports = function(app) {
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // Update project route
-  projectRoutes.put('/:id/:name/:startDate/:clientName/:allocatedBudget', requireAuth, ProjectController.update);
+  projectRoutes.put('/:id', requireAuth, ProjectController.update);
 
   // Delete project route
   projectRoutes.delete('/:id', requireAuth, ProjectController.delete);
@@ -79,7 +79,7 @@ module.exports = function(app) {
   ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
-  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+  ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
 
   // Delete ressource route
   ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);
