@@ -1,11 +1,12 @@
 'use strict';
 
-EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter'];
-export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter ) {
+EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal'];
+export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal ) {
     var vm = this;
     // look : https://www.youtube.com/watch?v=3GXspIuEDb0
     vm.createEntity = createEntity;
-    vm.delete = deleteEntity;
+    vm.deleteEntity = deleteEntity;
+    vm.deleteThis = deleteThis;
     vm.updateSearchBox = updateSearchBox;
     vm.openEntity = openEntity;
 
@@ -46,6 +47,25 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     }
 
     function deleteEntity( entity ){
+        if( vm.entityType != 'task') {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                template: require('../../modal/partials/deleteEntity.html'),
+                controller: 'ModalController',
+                controllerAs: 'ModalController'
+            });
+
+            modalInstance.result.then(function () {
+                deleteThis(entity);
+            }, function () {});
+        } else {
+            deleteThis(entity);
+        }
+    }
+
+    function deleteThis( entity ) {
         EntityListStore.deleteEntity(entity._id, vm.entityType)
         .then(function(data){
             angular.forEach( vm.entityList, function(value, key) {

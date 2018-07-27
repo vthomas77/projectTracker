@@ -16,11 +16,10 @@
     <!-- MENU -->
     <ul class="sidebar-menu tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active pointer"><a ng-click="MainController.updateAction('project')"><i class="fa fa-archive" aria-hidden="true"></i> <span>Project</span></a></li>
-        <li class="active pointer active-1"><a ng-click="MainController.updateAction('taskgroup')"><i class="fa fa-indent" aria-hidden="true"></i> <span>TaskGroup</span></a></li>
-        <li class="active pointer active-2"><a ng-click="MainController.updateAction('task')"><i class="fa fa-book"></i> <span>Task</span></a></li>
-        <li class="active pointer active-3"><a ng-click="MainController.updateAction('ressource')"><i class="fa fa-users" aria-hidden="true"></i> <span>Ressource</span></a></li>
-        <li class="active pointer active-4"><a ng-click="MainController.updateAction('gantt')"><i class="fa fa-align-center" aria-hidden="true"></i> <span>Gantt</span></a></li>
+        <li class="active pointer"><a ng-click="MainController.updateAction('project')" ng-class="MainController.isSelected('project') ? 'selected' : 'unselected' "><i class="fa fa-archive" aria-hidden="true"></i> <span>Project</span></a></li>
+        <li class="active pointer active-1"><a ng-click="MainController.updateAction('taskgroup')" ng-class="MainController.isSelected('taskgroup') ? 'selected' : 'unselected' "><i class="fa fa-indent" aria-hidden="true"></i> <span>TaskGroup</span></a></li>
+        <li class="active pointer active-2"><a ng-click="MainController.updateAction('task')" ng-class="MainController.isSelected('task') ? 'selected' : 'unselected' "><i class="fa fa-book"></i> <span>Task</span></a></li>
+        <li class="active pointer active-3"><a ng-click="MainController.updateAction('ressource')" ng-class="MainController.isSelected('ressource') ? 'selected' : 'unselected' "><i class="fa fa-users" aria-hidden="true"></i> <span>Ressource</span></a></li>
     </ul>
     <!-- /.sidebar-menu -->
   </section>
