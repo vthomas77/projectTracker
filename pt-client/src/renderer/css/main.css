@@ -4,8 +4,17 @@
 .blue-custom-primary {color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
 .capitalize { text-transform: capitalize; }
 .no-margin { margin: none !important; }
+.pt-10 {padding-top: 10px;}
 
-/** Fonts **/
+/** DatePicker **/
+
+.date-wrapper {position: absolute; padding-top: 10px; z-index: 999; top: 10px;}
+
+/** Entity **/
+
+.content {margin: 0 !important;}
+
+/** Font **/
 
 @font-face {
   font-family: "Muli";
