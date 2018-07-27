@@ -15,8 +15,8 @@
 /** Animate **/
 
     /* Search */
-    .search-animate.ng-enter, .search-animate.ng-leave {
-        transition: 300ms linear all;
+/*    .search-animate.ng-enter, .search-animate.ng-leave {
+        transition: 150ms linear all;
     }
     .search-animate.ng-leave.ng-leave-active {
         opacity: 0;
@@ -26,7 +26,7 @@
     }
     .search-animate.ng-enter.ng-enter-active {
         opacity: 1;
-    }
+    }*/
     
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {
@@ -49,7 +49,7 @@
 .fixed-bottom {
     position: fixed;
     bottom: 0;
-    align-self: center;
+    left: 50%;
 }
 
 /** Main (random css)**/
@@ -57,6 +57,7 @@
 html, body, body > div, body > div > div{min-height: 100vh !important;}
 #pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
 .content-wrapper {display: flex; flex-direction: column;}
+.btn.focus, .btn:focus, .btn:hover {color: #FFF !important;}
 
 /*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/
 
@@ -74,6 +75,8 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 
 .sidebar-menu {padding-top: 20px !important;}
 .sidebar-menu > li:hover {background-color: #1e282c;}
+.unselected {border-left-color: #1e282c !important;}
+.selected {border-left-color: #3c8dbc !important;}
 
 /** Top-nav **/
 
