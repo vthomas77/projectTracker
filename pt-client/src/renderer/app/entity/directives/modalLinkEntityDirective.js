@@ -15,27 +15,24 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                 EntityListStore.getList(attrs.entityLinked)
                 .then(function(data){
                     scope.data = data.entityTypeList;
-                });
-
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    ariaLabelledBy: 'modal-title',
-                    ariaDescribedBy: 'modal-body',
-                    template: require('../../modal/partials/modalListEntity.html'),
-                    controller: 'ModalController',
-                    controllerAs: 'ModalController',
-                    resolve: {
-                        entities: function () {
-                            return scope.data;
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        ariaLabelledBy: 'modal-title',
+                        ariaDescribedBy: 'modal-body',
+                        template: require('../../modal/partials/modalListEntity.html'),
+                        controller: 'ModalController',
+                        controllerAs: 'ModalController',
+                        resolve: {
+                            data: function () {
+                                return scope.data;
+                            }
                         }
-                    }
+                    });
+                    modalInstance.result.then(function () {
+                        console.log('ok');
+                    }, function () {});
                 });
-
-                modalInstance.result.then(function () {
-                    console.log('ok');
-                }, function () {});
             }
-
         }
     };
 };

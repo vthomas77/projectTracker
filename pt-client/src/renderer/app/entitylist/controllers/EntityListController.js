@@ -54,7 +54,10 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
                 ariaDescribedBy: 'modal-body',
                 template: require('../../modal/partials/modalDeleteEntity.html'),
                 controller: 'ModalController',
-                controllerAs: 'ModalController'
+                controllerAs: 'ModalController',
+                resolve: {
+                    data: function () {}
+                }
             });
 
             modalInstance.result.then(function () {
