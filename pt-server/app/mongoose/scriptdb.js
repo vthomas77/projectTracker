@@ -30,13 +30,13 @@ db.once('open', function() {
 
     var Project = new Schema(
         {
-            id_project: Number, name: String, starting_date: String, create_date: String, client_name: String, budget: Number, num_invoice: Number
+            id_project: Number, name: String, starting_date: Date, create_date: Date, client_name: String, budget: Number, num_invoice: Number
         }
     );
 
     var Task = new Schema(
         {
-            id_task: Number, num_task: Number, name_task: String, starting_date: String, end_date: String, predecessor: [Number], id_task_group: String
+            id_task: Number, num_task: Number, name_task: String, starting_date: Date, end_date: Date, predecessor: [Number], id_task_group: String
         }
     );
 
@@ -54,7 +54,7 @@ db.once('open', function() {
 
     var Task_Group = new Schema(
         {
-            id_task_group: Number, id_project: String, name_task_group: String, starting_date: String, end_date: String, position: Number
+            id_task_group: Number, id_project: String, name_task_group: String, starting_date: Date, end_date: Date, position: Number
         }
     );
 
@@ -272,7 +272,7 @@ db.once('open', function() {
         resolve(Project_10_data.save());
     });
 
-  
+
     var Task_Group_1_data = new Task_Group_model(
         {
             id_project: Project_1_data._id, name_task_group: "Task Group Example 1", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", position: 1
@@ -306,7 +306,7 @@ db.once('open', function() {
         resolve(Task_Group_3_data.save());
     });
 
-  
+
     var Task_1_data = new Task_model(
         {
             num_task: 1, name_task: "Task Example 1", starting_date: "2018-07-20 12:00:00", end_date: "2018-07-20 12:00:05", predecessor: [0], id_task_group: Task_Group_1_data._id
