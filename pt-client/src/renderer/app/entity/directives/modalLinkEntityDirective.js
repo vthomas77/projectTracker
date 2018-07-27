@@ -7,31 +7,35 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
         template: require('../partials/linkEntity.html'),
         scope: {
         	entityLinked: '@',
-        	title: '@'
+        	title: '@',
+            display: '@',
+            maxRelation: '='
         },
         link: function( scope, element, attrs, $scope ) {
-
             scope.showLinkModal = function() {
-                EntityListStore.getList(attrs.entityLinked)
-                .then(function(data){
-                    scope.data = data.entityTypeList;
-                    var modalInstance = $uibModal.open({
-                        animation: true,
-                        ariaLabelledBy: 'modal-title',
-                        ariaDescribedBy: 'modal-body',
-                        template: require('../../modal/partials/modalListEntity.html'),
-                        controller: 'ModalController',
-                        controllerAs: 'ModalController',
-                        resolve: {
-                            data: function () {
-                                return scope.data;
-                            }
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    template: require('../../modal/partials/entityListLinkModal.html'),
+                    controller: 'EntityListModalController',
+                    controllerAs: 'EntityListModalController',
+                    resolve: {
+                        modal: function () {
+                            return attrs.entityLinked;
+                        },
+                        maxRelation: function() {
+                            return attrs.maxRelation;
                         }
-                    });
-                    modalInstance.result.then(function () {
-                        console.log('ok');
-                    }, function () {});
+                    }
                 });
+                modalInstance.result.then(function(entityList) {
+                    scope.entityList = entityList;
+                }, function () {});
+            }
+
+            scope.ok = function() {
+                console.log('cc');
             }
         }
     };

@@ -53,12 +53,30 @@
         transform: translateY(0);
     }
 
+/** Modal **/
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+
 /** Pagination **/
 
-.fixed-bottom {
+#pagination-list {
     position: fixed;
     bottom: 0;
     left: 50%;
+}
+
+.fixed-bottom {
+    display: flex;
+    justify-content: center;
 }
 
 /** Main (random css)**/
@@ -67,6 +85,13 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 #pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
 .content-wrapper {display: flex; flex-direction: column;}
 .btn.focus, .btn:focus, .btn:hover {color: #FFF !important;}
+
+/** Link Directive **/
+
+.link-selected {}
+.plus {position: absolute; top: 6px; right: 15px; color: grey;}
+.entityList:hover {background-color: rgba(0, 0, 0, 0.2) !important;}
+.entityList-background {background-color: rgba(0, 0, 0, 0.2) !important;}
 
 /*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/
 

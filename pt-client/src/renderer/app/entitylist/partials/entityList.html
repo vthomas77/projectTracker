@@ -65,14 +65,14 @@
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_task_group }}</a></th>
                         <td>{{ entity.name_task_group }}</td>
                         <td>{{ entity.starting_date | dateFilter }}</td>
-                        <td>{{ entity.end_date }}</td>
+                        <td>{{ entity.end_date | dateFilter }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'task' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_task }}</a></th>
                         <td>{{ entity.name_task }}</td>
                         <td>{{ entity.starting_date | dateFilter }}</td>
-                        <td>{{ entity.end_date }}</td>
+                        <td>{{ entity.end_date | dateFilter }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'ressource' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
@@ -85,7 +85,7 @@
                 </tbody>
             </table>
         </div>
-        <div ng-if="EntityListController.pagination" class="fixed-bottom">
+        <div ng-if="EntityListController.pagination" id="pagination-list">
             <ul uib-pagination 
                 total-items="EntityListController.filteredLength" 
                 ng-model="EntityListController.currentPage" 

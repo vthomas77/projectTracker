@@ -41,30 +41,6 @@
                     <!-- /.box-body -->
                   </div>
             </div>
-
-            <!-- Right View -->
-            <div class="col cold-lg-6 col-md-6 col-sm-6">
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                      <h3 class="box-title"> TaskGroup : </h3>
-                    </div>
-                    <div class="box-body">
-                      <div class="row">
-                      </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                      <h3 class="box-title"> Ressource : </h3>
-                    </div>
-                    <div class="box-body">
-                      <div class="row">
-                      </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
         </div>
 
         <!-- Taskgroup -->
@@ -108,16 +84,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                      </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                      <h3 class="box-title"> Task : </h3>
-                    </div>
-                    <div class="box-body">
-                      <div class="row">
+                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -140,7 +107,6 @@
                             <label>Name :</label>
                             <input class="form-control" type="text" ng-model="EntityController.data.name_task">
                         </div>
-                        <modal-link-entity-directive title="Predecessor" entity-linked="task"></modal-link-entity-directive>
                       </div>
                       <div class="row pt-10">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
@@ -159,20 +125,22 @@
             <div class="col cold-lg-6 col-md-6 col-sm-6">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                      <h3 class="box-title"> Task Group : </h3>
+                      <h3 class="box-title"> Task Predecessor : </h3>
                     </div>
                     <div class="box-body">
                       <div class="row">
+                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
                 <div class="box box-default">
                     <div class="box-header with-border">
-                      <h3 class="box-title"> Ressource : </h3>
+                      <h3 class="box-title"> Task Group : </h3>
                     </div>
                     <div class="box-body">
                       <div class="row">
+                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
