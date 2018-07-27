@@ -144,10 +144,9 @@ Methode : GET
 ```
 
 
-
 #### Create task
 ```
-Route : /api/taskGroup/create
+Route : /api/task/create
 ```
 ```
 Methode : POST
@@ -156,6 +155,23 @@ Methode : POST
 Parameter : data / name, startDate, endDate, predecessor, taskGroupId
 ```
 
+#### Update task
+```
+Route : /api/task/:id
+```
+```
+Methode : PUT
+```
+```
+Parameter : data / name, startDate, endDate, predecessor, taskGroupId
+```
+#### Delete task
+```
+Route : /api/task/:id
+```
+```
+Methode : DELETE
+```
 
 ### Ressource
 ------
@@ -176,4 +192,21 @@ Methode : POST
 ```
 ```
 Parameter : data / email, username, password, cost
+```
+#### Update ressource
+```
+Route : /api/ressource/:id
+```
+```
+Methode : PUT
+```
+```
+Parameter : data / email, username, password, cost
+```
+#### Delete ressource
+```
+Route : /api/ressource/:id
+```
+```
+Methode : DELETE
 ```

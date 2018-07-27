@@ -132,19 +132,24 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
 
-  const userID = req.body.id;
-  const email = req.body.email;
-  const username = req.body.username;
-  const password = req.body.password;
-  const cost = req.body.cost;
+  const userID = req.params.id;
 
-  Project.findById(userID, function (err, existingRessource) {
+  const data = req.body.data;
+
+  const email = data.email;
+  const username = data.username;
+  const password = data.password;
+  const cost = data.cost;
+
+
+  User.findById(userID, function (err, existingRessource) {
     if (err) { return next(err); }
 
     existingRessource.set({ email: email, username: username, password: password, cost: cost});
     existingRessource.save(function (err, updatedRessource) {
      if (err) { return next(err); }
-     res.json({status: 'OK'});
+     res.json({entity: existingRessource});
+
     });
  });
 

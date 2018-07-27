@@ -79,7 +79,7 @@ module.exports = function(app) {
   ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
-  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+  ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
 
   // Delete ressource route
   ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);

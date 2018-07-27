@@ -96,21 +96,25 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
 
   const taskID = req.params.id;
-  const name = req.body.name;
-  const startDate = req.body.startDate;
-  const endDate = req.body.endDate;
-  const predecessor = req.body.predecessor;
-  const taskGroupId = req.body.taskGroupId;
+
+  const data = req.body.data;
+
+  const name = data.name;
+  const startDate = data.startDate;
+  const endDate = data.endDate;
+  const predecessor = data.predecessor;
+  const taskGroupId = data.taskGroupId;
 
   Task.findById(taskID, function (err, existingTask) {
     if (err) { return next(err); }
-    existingTask.set({ name_task: name, starting_date: startDate, end_date: endDate, predecessor: predecessor,id_task_group:taskGroupId});
+    existingTask.set({ num_task: 0, name_task: name, starting_date: startDate, end_date: endDate, predecessor: predecessor,id_task_group:taskGroupId});
     existingTask.save(function (err, updatedTask) {
      if (err) { return next(err); }
      res.json({entity: updatedTask});
     });
  });
 
+ /*
  // Recalculate date of task group
  Task.findOne({id_task_group: taskGroupId}).sort('starting_date').exec(function(err, firstTask) {
    if (err) {
@@ -132,6 +136,7 @@ exports.update = function(req, res) {
    });
 
    });
+   */
 }
 
 // -------------

@@ -163,7 +163,7 @@ exports.update = function(req, res) {
     existingProject.set({ name: name, starting_date: startDate, client_name: clientName, budget: allocatedBudget});
     existingProject.save(function (err, updatedProject) {
      if (err) { return next(err); }
-     res.json({status: updatedProject});
+     res.json({entity: updatedProject});
     });
  });
 
@@ -173,6 +173,27 @@ exports.update = function(req, res) {
  // Delete Route
  // -------------
 
+
+ exports.delete = function(req, res) {
+
+   const projectID = req.params.id;
+
+   // Return project to be deleted
+   Project.find({_id: projectID}, function(err, projectResult) {
+       if (err) { return next(err); }
+       // Delete Project
+       Project.deleteOne({ _id: projectID }, function (err, project) {
+         if (err) { return next(err); }
+         // Cascade delete
+         Project_User.deleteMany({ id_project: projectID }, function (err, project) {
+           if (err) { return next(err); }
+           res.json({"Entity": projectResult });
+         });
+      });
+   });
+}
+
+/*
  exports.delete = function(req, res) {
 
    const projectID = req.params.id;
@@ -202,3 +223,4 @@ exports.update = function(req, res) {
       });
    });
 }
+*/
