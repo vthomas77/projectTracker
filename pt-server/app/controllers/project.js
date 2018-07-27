@@ -3,6 +3,7 @@ const Project = require('../models/projectModel');
 const Project_User = require('../models/userProjectModel');
 const User = require('../models/userModel');
 const Taskgroup = require('../models/taskgroupModel');
+const Task = require('../models/taskModel');
 
 // -------------
 // List Route
@@ -148,10 +149,13 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
 
   const projectID = req.params.id;
-  const name = req.params.name;
-  const startDate = req.params.startDate;
-  const clientName = req.params.clientName;
-  const allocatedBudget = req.params.allocatedBudget;
+
+  const data = req.body.data;
+
+  const name = data.name;
+  const startDate = data.startDate;
+  const clientName = data.clientName;
+  const allocatedBudget = data.allocatedBudget;
 
   Project.findById(projectID, function (err, existingProject) {
     if (err) { return next(err); }
@@ -182,7 +186,18 @@ exports.update = function(req, res) {
          // Cascade delete
          Project_User.deleteMany({ id_project: projectID }, function (err, project) {
            if (err) { return next(err); }
-           res.json({"Entity": projectResult });
+           Taskgroup.find({ id_task_group: projectID }, function(err, taskGroupResult) {
+             if (err) { return next(err); }
+             const taskGroupIDs = taskGroupResult.map(function (tg) { return tg._id; });
+             Taskgroup.deleteMany({ id_task_group: projectID }, function (err, deletedTaskGroup) {
+               if (err) { return next(err) };
+               Task.deleteMany({id_task_group: {$in: taskGroupIDs}}, function (err, deletedTask) {
+                 if (err) { return next(err); }
+                 res.json({"entity": projectResult });
+                 });
+               });
+           });
+
          });
       });
    });

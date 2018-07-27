@@ -90,13 +90,13 @@ Parameter : data / name, startDate, clientName, allocatedBudget
 
 #### Update project
 ```
-Route : /api/project/:id/:name/:startDate/:clientName/:allocatedBudget
+Route : /api/project/:id
 ```
 ```
 Methode : PUT
 ```
 ```
-Parameter : id, name, startDate, clientName, allocatedBudget
+Parameter : data / name, startDate, clientName, allocatedBudget
 ```
 
 

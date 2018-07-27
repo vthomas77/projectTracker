@@ -56,7 +56,7 @@ module.exports = function(app) {
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // Update project route
-  projectRoutes.put('/:id/:name/:startDate/:clientName/:allocatedBudget', requireAuth, ProjectController.update);
+  projectRoutes.put('/:id', requireAuth, ProjectController.update);
 
   // Delete project route
   projectRoutes.delete('/:id', requireAuth, ProjectController.delete);
