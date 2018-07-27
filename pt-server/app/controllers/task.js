@@ -1,6 +1,7 @@
 const Taskgroup = require('../models/taskgroupModel');
 const Project_User = require('../models/userProjectModel');
 const Task = require('../models/taskModel');
+const moment = require('moment');
 
 // -------------
 // List Route
@@ -58,14 +59,14 @@ exports.create = function(req, res) {
     return res.send({ error: 'You must enter a task name.'});
   }
 
+  if(!taskGroupId) {
+    return res.send({ error: 'You must enter a task group.'});
+  }
+
   // Default value
 
   if (!predecessor) {
     predecessor = [0];
-  }
-
-  if(!taskGroupId) {
-    taskGroupId = "";
   }
 
   // Create task instance
@@ -78,10 +79,74 @@ exports.create = function(req, res) {
   });
 
   // Insert project into database
-  Task.save(function(err, task) {
+  task.save(function(err, task) {
     if (err) { return next(err); }
     // Return project created
     return res.json({"entity":task});
   });
 
+}
+
+// -------------
+// Update Route
+// -------------
+
+exports.update = function(req, res) {
+
+  const taskID = req.params.id;
+  const name = req.body.name;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+  const predecessor = req.body.predecessor;
+  const taskGroupId = req.body.taskGroupId;
+
+  Task.findById(taskID, function (err, existingTask) {
+    if (err) { return next(err); }
+    existingTask.set({ name_task: name, starting_date: startDate, end_date: endDate, predecessor: predecessor,id_task_group:taskGroupId});
+    existingTask.save(function (err, updatedTask) {
+     if (err) { return next(err); }
+     res.json({entity: updatedTask});
+    });
+ });
+
+ // Recalculate date of task group
+ Task.findOne({id_task_group: taskGroupId}).sort('starting_date').exec(function(err, firstTask) {
+   if (err) {
+       return next(err);
+   }
+   const minDate = moment(firstTask.starting_date).format("YYYY-MM-DD HH-mm-ss").toString();
+   Task.findOne({id_task_group: taskGroupId}).sort('-end_date').exec(function(err, lastTask) {
+     if (err) {
+         return next(err);
+     }
+     const maxDate = moment(lastTask.end_date).format("YYYY-MM-DD HH-mm-ss").toString();
+     Taskgroup.findById(taskGroupId, function (err, existingTaskGroup) {
+       if (err) { return next(err); }
+       existingTaskGroup.set({ starting_date: minDate, end_date: maxDate});
+       existingTaskGroup.save(function (err, updatedTaskGroup) {
+        if (err) { return next(err); }
+       });
+    });
+   });
+
+   });
+}
+
+// -------------
+// Delete Route
+// -------------
+
+exports.delete = function(req, res) {
+
+  const taskID = req.params.id;
+
+  // Return project to be deleted
+  Task.find({_id: taskID}, function(err, task) {
+      if (err) { return next(err); }
+      // Delete Project
+      Task.deleteOne({ _id: taskID }, function (err, result) {
+        if (err) { return next(err); }
+        res.json({"entity": task });
+     });
+  });
 }

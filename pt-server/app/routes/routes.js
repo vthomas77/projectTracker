@@ -104,10 +104,16 @@ module.exports = function(app) {
   // Set task sub route group
   apiRoutes.use('/task', taskRoutes);
 
-  // List project route
+  // List task route
   taskRoutes.get('/list', requireAuth, TaskController.list);
 
-  // Create ressource route
+  // Create task route
   taskRoutes.post('/create', requireAuth, TaskController.create);
+
+  // Update task route
+  taskRoutes.put('/:id', requireAuth, TaskController.update);
+
+  // Delete task route
+  taskRoutes.delete('/:id', requireAuth, TaskController.delete);
 
 };
