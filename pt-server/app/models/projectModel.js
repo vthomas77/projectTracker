@@ -6,8 +6,8 @@ const ProjectSchema = new Schema(
   {
     id_project: Number,
     name: String,
-    starting_date: String,
-    create_date: String,
+    starting_date: Date,
+    create_date: Date,
     client_name: String,
     budget: Number,
     num_invoice: Number
@@ -16,5 +16,4 @@ const ProjectSchema = new Schema(
 );
 
 module.exports = mongoose.model('Project', ProjectSchema);
-autoIncrement.initialize(mongoose.connection);
 ProjectSchema.plugin(autoIncrement.plugin, { model: 'Project', field: 'id_project' });

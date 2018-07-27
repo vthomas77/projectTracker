@@ -47,11 +47,13 @@ exports.create = function(req, res) {
 
   const userId = req.user._id;
 
-  const name = req.body.name;
-  const startDate = req.body.startDate;
-  const endDate = req.body.endDate;
-  var predecessor = req.body.predecessor;
-  var taskGroupId = req.body.taskGroupId;
+  const data = req.body.data;
+
+  const name = data.name;
+  const startDate = data.startDate;
+  const endDate = data.endDate;
+  var predecessor = data.predecessor;
+  var taskGroupId = data.taskGroupId;
 
   // Validate parameters
 

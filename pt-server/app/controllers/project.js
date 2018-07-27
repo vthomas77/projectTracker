@@ -65,32 +65,27 @@ exports.create = function(req, res) {
   const userId = req.user._id;
 
   const data = req.body.data;
+
   const name = data.name;
   var startDate = data.startDate;
-  var clientName = data.clientName;
-  var allocatedBudget = data.allocatedBudget;
+  const clientName = data.clientName;
+  const allocatedBudget = data.allocatedBudget;
 
   // Validate parameters
 
   if (!name) {
-    return res.send({ error: 'You must enter a project name.'});
+    //return res.send({ error: 'You must enter a project name.'});
+    return res.send(typeof(data));
   }
 
   // Default value
 
+  //createDate = moment().format("YYYY-MM-DD HH-mm-ss");
+  createDate = moment();
+
   if (!startDate) {
-    startDate = moment().format("YYYY-MM-DD HH-mm-ss");
+    startDate = createDate;
   }
-
-  if(!clientName) {
-    clientName = "";
-  }
-
-  if(!allocatedBudget) {
-    allocatedBudget = 0;
-  }
-
-  createDate = moment().format("YYYY-MM-DD HH-mm-ss");
 
   Project.findOne({ name: name }, function(err, existingProject) {
 
@@ -121,6 +116,8 @@ exports.create = function(req, res) {
         })
         userProject.save(function(err, userProject) {
           if (err) { return next(err); }
+          return res.json({"entity":project});
+          /*
           // Create base task group
           let baseTaskGroup = new Taskgroup({
             id_project: project._id,
@@ -137,6 +134,7 @@ exports.create = function(req, res) {
                 return res.json({"entity":project});
               });
           });
+          */
         });
       });
   });

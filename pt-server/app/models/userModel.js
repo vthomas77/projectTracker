@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const autoIncrement = require('mongoose-auto-increment');
 const bcrypt = require('bcrypt-nodejs');
 
 const UserSchema = new Schema({
@@ -52,3 +53,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 }
 
 module.exports = mongoose.model('User', UserSchema);
+autoIncrement.initialize(mongoose.connection);
