@@ -7,8 +7,8 @@ const TaskSchema = new Schema(
         id_task: Number,
         num_task: Number,
         name_task: String,
-        starting_date: String,
-        end_date: String,
+        starting_date: Date,
+        end_date: Date,
         predecessor: [Number],
         id_task_group: String
     },

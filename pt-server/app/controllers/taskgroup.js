@@ -6,7 +6,7 @@ const Project_User = require('../models/userProjectModel');
 // List Route
 // -------------
 
-// List taskgroups for connected user
+// List taskgroups for all project of connected user
 exports.list = function(req, res) {
 
     const userId = req.user._id;
@@ -35,9 +35,11 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
 
-    const name = req.body.name;
-    const projectId = req.body.projectId;
-    const position = req.body.position;
+    const data = req.body.data;
+
+    const name = data.name;
+    const projectId = data.projectId;
+    const position = data.position;
 
     // Validate parameters
 
@@ -77,13 +79,23 @@ exports.create = function(req, res) {
             }
 
             // Create taskgroup instance
-            let taskgroup = new Taskgroup({
-                name_task_group: name,
-                id_project: projectId,
-                starting_date: "",
-                end_date: "",
-                position : maxPosition
-            });
+            if (!position) {
+              var taskgroup = new Taskgroup({
+                  name_task_group: name,
+                  id_project: projectId,
+                  starting_date: "",
+                  end_date: "",
+                  position : maxPosition
+              });
+            } else {
+              var taskgroup = new Taskgroup({
+                  name_task_group: name,
+                  id_project: projectId,
+                  starting_date: "",
+                  end_date: "",
+                  position : position
+                });
+            }
 
             // Insert taskgroup into database
             taskgroup.save(function(err, tg) {
@@ -91,14 +103,13 @@ exports.create = function(req, res) {
                     return next(err);
                 }
 
-                return res.send(tg);
+                return res.send({"entity":tg});
             });
         });
-
     });
-
 }
 
+/*
 // -------------
 // Update Route
 // -------------
@@ -140,3 +151,4 @@ exports.delete = function(req, res) {
         res.json({status: 'OK'});
     });
 }
+*/

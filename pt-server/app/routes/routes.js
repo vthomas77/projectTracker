@@ -56,7 +56,7 @@ module.exports = function(app) {
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
   // Update project route
-  projectRoutes.put('/:id/:name/:startDate/:clientName/:allocatedBudget', requireAuth, ProjectController.update);
+  projectRoutes.put('/:id', requireAuth, ProjectController.update);
 
   // Delete project route
   projectRoutes.delete('/:id', requireAuth, ProjectController.delete);
@@ -79,7 +79,7 @@ module.exports = function(app) {
   ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
-  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+  ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
 
   // Delete ressource route
   ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);
@@ -104,10 +104,16 @@ module.exports = function(app) {
   // Set task sub route group
   apiRoutes.use('/task', taskRoutes);
 
-  // List project route
+  // List task route
   taskRoutes.get('/list', requireAuth, TaskController.list);
 
-  // Create ressource route
+  // Create task route
   taskRoutes.post('/create', requireAuth, TaskController.create);
+
+  // Update task route
+  taskRoutes.put('/:id', requireAuth, TaskController.update);
+
+  // Delete task route
+  taskRoutes.delete('/:id', requireAuth, TaskController.delete);
 
 };

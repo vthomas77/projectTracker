@@ -12,7 +12,7 @@ exports.list = function(req, res) {
   User.find({level:3}, function(err, existingUsers) {
 
       if (err) { return next(err); }
-      return res.json({existingUsers});
+      return res.json({"entityTypeList":existingUsers});
 
   });
 }
@@ -49,28 +49,30 @@ exports.listOne = function(req, res) {
 exports.create = function(req, res, next) {
 
   // Check if user has project manager role
-  if (req.user.level == 2)
+  if (req.user.level == 1)
   {
 
+    const data = req.body.data;
+
     // Check for registration errors
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
-    const cost = req.body.cost;
+    const email = data.email;
+    const username = data.username;
+    const password = data.password;
+    const cost = data.cost;
 
     // Return error if no email provided
     if (!email) {
-      return res.status(422).send({ error: 'You must enter an email address.'});
+      return res.send({ error: 'You must enter an email address.'});
     }
 
     // Return error if full name not provided
     if (!username) {
-      return res.status(422).send({ error: 'You must enter your username.'});
+      return res.send({ error: 'You must enter your username.'});
     }
 
     // Return error if no password provided
     if (!password) {
-      return res.status(422).send({ error: 'You must enter a password.' });
+      return res.send({ error: 'You must enter a password.' });
     }
 
     User.findOne({ email: email }, function(err, existingUser) {
@@ -79,7 +81,7 @@ exports.create = function(req, res, next) {
 
         // If user is not unique, return error
         if (existingUser) {
-          return res.status(422).send({ error: 'That email address is already in use.' });
+          return res.send({ error: 'That email address is already in use.' });
         }
 
         // If email is unique and password was provided, create account
@@ -130,19 +132,24 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
 
-  const userID = req.body.id;
-  const email = req.body.email;
-  const username = req.body.username;
-  const password = req.body.password;
-  const cost = req.body.cost;
+  const userID = req.params.id;
 
-  Project.findById(userID, function (err, existingRessource) {
+  const data = req.body.data;
+
+  const email = data.email;
+  const username = data.username;
+  const password = data.password;
+  const cost = data.cost;
+
+
+  User.findById(userID, function (err, existingRessource) {
     if (err) { return next(err); }
 
     existingRessource.set({ email: email, username: username, password: password, cost: cost});
     existingRessource.save(function (err, updatedRessource) {
      if (err) { return next(err); }
-     res.json({status: 'OK'});
+     res.json({entity: existingRessource});
+
     });
  });
 
