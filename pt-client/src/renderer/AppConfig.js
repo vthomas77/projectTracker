@@ -7,9 +7,9 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
 
     $routeProvider
         .when('/register', {
-            template: require('./app/identity/partials/login.html')
+            template: require('./app/identity/partials/register.html')
         })
-        
+
         .when('/dashboard', {
             template: require('./app/common/partials/dashboard.html')
         })

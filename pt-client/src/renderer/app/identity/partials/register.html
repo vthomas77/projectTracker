@@ -1,0 +1,48 @@
+<div class="register-background" ng-controller="RegisterController as RegisterController">
+    <div class="row">
+        <div class="col-md-12 fading register">
+            <div class="wrap">
+
+                <!-- Message d'erreur -->
+                <div uib-alert ng-show="RegisterController.error" style="background-color:#c0392b;color:white">register failed : {{ RegisterController.error }}</div>
+                <!-- Message réussite -->
+                <div uib-alert ng-show="RegisterController.success" style="background-color:#009933;color:white">Utilisateur ajouté</div>
+
+                <p class="form-title">
+                    Create <br> account
+                </p>
+                <form name="registerForm" class="register" ng-submit="RegisterController.register(user)">
+
+                    <!-- Username -->
+                    <div class="form-group" ng-class="has-error">
+                        <input type="text" name="username" placeholder="Username" ng-model="user.username" autocomplete="off" required/>
+                    </div>
+                    <!-- Error message -->
+                    <div ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched" style="color:maroon" role="alert">
+                        <p ng-message="required">Pseudonyme is required</p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group" ng-class="has-error">
+                        <input type="text" name="email" placeholder="Email" ng-model="user.email" autocomplete="off" required/>
+                    </div>
+                    <!-- Error message -->
+                    <div ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched" style="color:maroon" role="alert">
+                        <p ng-message="required">Email is required</p>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group" ng-class="{ 'has-error': registerForm.password.$touched && registerForm.password.$invalid }">
+                        <input name="password" type="password" placeholder="Password" ng-model="user.password" autocomplete="off" required/>
+                    </div>
+                    <!-- Error message -->
+                    <div ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched" style="color:maroon" role="alert">
+                        <p ng-message="required">Password is required</p>
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-sm btn-register" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
