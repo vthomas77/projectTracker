@@ -4,8 +4,17 @@
 .blue-custom-primary {color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
 .capitalize { text-transform: capitalize; }
 .no-margin { margin: none !important; }
+.pt-10 {padding-top: 10px;}
 
-/** Fonts **/
+/** DatePicker **/
+
+.date-wrapper {position: absolute; padding-top: 10px; z-index: 999; top: 10px;}
+
+/** Entity **/
+
+.content {margin: 0 !important;}
+
+/** Font **/
 
 @font-face {
   font-family: "Muli";
@@ -44,12 +53,30 @@
         transform: translateY(0);
     }
 
+/** Modal **/
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+
 /** Pagination **/
 
-.fixed-bottom {
+#pagination-list {
     position: fixed;
     bottom: 0;
     left: 50%;
+}
+
+.fixed-bottom {
+    display: flex;
+    justify-content: center;
 }
 
 /** Main (random css)**/
@@ -59,12 +86,20 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 .content-wrapper {display: flex; flex-direction: column;}
 .btn.focus, .btn:focus, .btn:hover {color: #FFF !important;}
 
+/** Link Directive **/
+
+.link-selected {}
+.plus {position: absolute; top: 6px; right: 15px; color: grey;}
+.entityList:hover {background-color: rgba(0, 0, 0, 0.2) !important;}
+.entityList-background {background-color: rgba(0, 0, 0, 0.2) !important;}
+
 /*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/
 
 /** Alert **/
 
 .alert-wrapper{position: fixed;z-index: 9999; width: 100%;}
 .alerts{z-index: 9999; opacity: 0.8;margin-bottom: 1px !important; text-align: center;}
+.alert-sucess{background-color: rgba(0, 128, 0, 0.5); color: #FFF}
 
 /** Table **/
 
@@ -91,6 +126,8 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 
 .entitylist-option-wrapper {border-bottom: solid 1px #dadada;}
 .entitylist-option {display: flex; padding: 10px 0 10px 0 !important; justify-content: space-between;}
+.entitylist-option2 {display: flex; padding: 10px 0 10px 0 !important;}
+.entitylist-option2 > button {margin: 0 10px 0 10px !important;}
 
 /** Login **/
 

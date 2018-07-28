@@ -3,7 +3,7 @@
 EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal'];
 export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal ) {
     var vm = this;
-    // look : https://www.youtube.com/watch?v=3GXspIuEDb0
+
     vm.createEntity = createEntity;
     vm.deleteEntity = deleteEntity;
     vm.deleteThis = deleteThis;
@@ -11,8 +11,11 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     vm.openEntity = openEntity;
 
     var heightSize = $('#pickme').height();
+    // vm.size = modal != undefined ? 130 : 70;
+    vm.size = 70;
 
     // Initialize value from arg in route
+    // vm.entityType = modal != undefined ? modal : RouteHelperService.get().entityType;
     vm.entityType = RouteHelperService.get().entityType;
 
     // Not in a function for asynchronous
@@ -24,9 +27,9 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     });
 
     function addRemovePagination () {
-        if ( vm.filteredLength != undefined && (heightSize / vm.filteredLength) < 70 ) {
+        if ( vm.filteredLength != undefined && (heightSize / vm.filteredLength) < vm.size ) {
             vm.pagination = true;
-            vm.maxPerPage = heightSize / 70;
+            vm.maxPerPage = heightSize / vm.size;
             vm.currentPage = 1;
         } else {
             vm.pagination = false;
@@ -52,9 +55,9 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                template: require('../../modal/partials/deleteEntity.html'),
-                controller: 'ModalController',
-                controllerAs: 'ModalController'
+                template: require('../../modal/partials/entityDeleteModal.html'),
+                controller: 'EntityDeleteModalController',
+                controllerAs: 'EntityDeleteModalController',
             });
 
             modalInstance.result.then(function () {

@@ -1,9 +1,9 @@
 'use strict';
 
-ModalController.$inject = ['$uibModalInstance'];
-export default /*@ngInject*/ function ModalController( $uibModalInstance ) {
+EntityDeleteModalController.$inject = ['$uibModalInstance'];
+export default /*@ngInject*/ function EntityDeleteModalController( $uibModalInstance ) {
     var vm = this;
-
+    
     vm.ok = ok;
     vm.cancel = cancel;
 

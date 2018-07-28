@@ -1,8 +1,10 @@
 'use strict';
 require('angular');
 
-import ModalController from './controllers/ModalController';
+import EntityDeleteModalController from './controllers/EntityDeleteModalController';
+import EntityListModalController from './controllers/EntityListModalController';
 
 export default angular.module('modal', [])
-  .controller('ModalController', ModalController)
+  .controller('EntityDeleteModalController', EntityDeleteModalController)
+  .controller('EntityListModalController', EntityListModalController)
 ;
