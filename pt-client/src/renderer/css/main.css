@@ -1,9 +1,20 @@
 /** Reusable **/
-.pointer{cursor: pointer;}
-.no-pointer{cursor: default !important;}
-.blue-custom-primary{color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
+.pointer {cursor: pointer;}
+.no-pointer {cursor: default !important;}
+.blue-custom-primary {color: #FFF; background-color: rgba(6, 43, 125, 0.80); border-color: rgb(6, 43, 125) }
+.capitalize { text-transform: capitalize; }
+.no-margin { margin: none !important; }
+.pt-10 {padding-top: 10px;}
 
-/** Fonts **/
+/** DatePicker **/
+
+.date-wrapper {position: absolute; padding-top: 10px; z-index: 999; top: 10px;}
+
+/** Entity **/
+
+.content {margin: 0 !important;}
+
+/** Font **/
 
 @font-face {
   font-family: "Muli";
@@ -13,8 +24,8 @@
 /** Animate **/
 
     /* Search */
-    .search-animate.ng-enter, .search-animate.ng-leave {
-        transition: 300ms linear all;
+/*    .search-animate.ng-enter, .search-animate.ng-leave {
+        transition: 150ms linear all;
     }
     .search-animate.ng-leave.ng-leave-active {
         opacity: 0;
@@ -24,8 +35,8 @@
     }
     .search-animate.ng-enter.ng-enter-active {
         opacity: 1;
-    }
-
+    }*/
+    
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {
         transition: 500ms linear all;
@@ -42,25 +53,82 @@
         transform: translateY(0);
     }
 
+/** Modal **/
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/** Pagination **/
+
+#pagination-list {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+}
+
+.fixed-bottom {
+    display: flex;
+    justify-content: center;
+}
 
 /** Main (random css)**/
-html, #app, .fullscreen{height: 100vh;}
-#pickme {margin: 0 0 0 190px; background-color: rgba(241, 244, 244, 0.28);}
-.navbar-static-top{display: flex; align-items: center;}
-.navbar-custom-menu{margin-left: auto;}
-.nav-menu{flex-direction: row !important;}
-.nav-menu li{margin-left: 10px;}
+
+body {overflow: hidden;}
+html, body, body > div, body > div > div{min-height: 100vh !important;}
+#pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
+.content-wrapper {display: flex; flex-direction: column;}
+.btn.focus, .btn:focus, .btn:hover {color: #FFF !important;}
+
+/** Link Directive **/
+
+.link-selected {}
+.plus {position: absolute; top: 6px; right: 15px; color: grey;}
+.entityList:hover {background-color: rgba(0, 0, 0, 0.2) !important;}
+.entityList-background {background-color: rgba(0, 0, 0, 0.2) !important;}
+
+/*html, body, #app, #pickme, .content-wrapper{min-height: 100% !important; height: -webkit-fill-available !important;}*/
+
+/** Alert **/
+
 .alert-wrapper{position: fixed;z-index: 9999; width: 100%;}
 .alerts{z-index: 9999; opacity: 0.8;margin-bottom: 1px !important; text-align: center;}
-.navbar-static-top{padding: 0 !important;}
-.nav-menu, .navbar-custom-menu, .nav-menu > li, .nav-menu > li > a{height: 50px;  display: flex; align-items: center;}
-.nav-menu > li > a {padding: 15px;}
+.alert-sucess{background-color: rgba(0, 128, 0, 0.5); color: #FFF}
+
+/** Table **/
+
+.view-entity {color : rgba(6, 43, 125, 0.80) !important;}
 .table td, .table th{border-top: 1px solid #dee2e6 !important;}
+
+/** Sidebar **/
+
+.sidebar-menu {padding-top: 20px !important;}
+.sidebar-menu > li:hover {background-color: #1e282c;}
+.unselected {border-left-color: #1e282c !important;}
+.selected {border-left-color: #3c8dbc !important;}
+
+/** Top-nav **/
+
+.navbar-static-top{padding: 0 !important;}
+.list-ul {flex-direction: row !important;}
+.list-ul > li > a {display: flex; align-items: center; padding: 10px;}
+.list-ul, .list-ul > li, .list-ul > li > a {height: 100%;}
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a, .skin-blue .sidebar-menu > li.menu-open > a {background: inherit !important;}
+#top-action {padding: 15px;}
 
 /** EntityList **/
 
 .entitylist-option-wrapper {border-bottom: solid 1px #dadada;}
 .entitylist-option {display: flex; padding: 10px 0 10px 0 !important; justify-content: space-between;}
+.entitylist-option2 {display: flex; padding: 10px 0 10px 0 !important;}
+.entitylist-option2 > button {margin: 0 10px 0 10px !important;}
 
 /** Login **/
 .login-background{background-image: url('../files/surf.jpg');}

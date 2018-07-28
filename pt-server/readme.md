@@ -54,11 +54,27 @@ Methode : POST
 ```
 Parameter : username, email, password
 ```
-```
-Response OK: {"token":"***"}
-```
+
 ### Project
 ------
+#### List all projects for connected user
+```
+Route : /api/project/list
+```
+```
+Methode : GET
+```
+
+
+#### List one project and childs
+```
+Route : /api/project/:id
+```
+```
+Methode : GET
+```
+
+
 #### Create project
 ```
 Route : /api/project/create
@@ -67,101 +83,130 @@ Route : /api/project/create
 Methode : POST
 ```
 ```
-Parameter : name, ?startDate, ?clientName, ?allocatedBudget)
-```
-```
-Response OK: {status: 'OK'}
+Parameter : data / name, startDate, clientName, allocatedBudget
 ```
 
-#### List projects
-```
-Route : /api/project/getAll
-```
-```
-Methode : POST
-```
-```
-Parameter : None
-```
-```
-Response OK: {
-    "existingProjects": [
-        {
-            "_id": "5b508b4f9e788e15b1aacd45",
-            "name": "myp",
-            "starting_date": "2018-07-19 12-59-59",
-            "create_date": "2018-07-19 12-59-59",
-            "client_name": "",
-            "budget": 0,
-            "num_invoice": 0,
-            "__v": 0
-        },
-        {
-            "_id": "5b519842a924e21bd5071fdd",
-            "name": "p2",
-            "starting_date": "2018-07-18",
-            "create_date": "2018-07-20 08-07-30",
-            "client_name": "toto",
-            "budget": 50000,
-            "num_invoice": 0,
-            "__v": 0
-        }
-    ]
-}
-```
+
 
 #### Update project
 ```
-Route : /api/project/update
+Route : /api/project/:id
 ```
 ```
-Methode : POST
+Methode : PUT
 ```
 ```
-Parameter : id, name, startDate, clientName, allocatedBudget
+Parameter : data / name, startDate, clientName, allocatedBudget
 ```
-```
-Response OK: {status: 'OK'}
-```
+
 
 #### Delete project
 ```
-Route : /api/project/delete
+Route : /api/project/:id
+```
+```
+Methode : DELETE
+```
+
+
+### Task group
+------
+#### List taskgroups for all project of connected user
+```
+Route : /api/taskGroup/list
+```
+```
+Methode : GET
+```
+
+
+
+#### Create task group
+```
+Route : /api/taskGroup/create
 ```
 ```
 Methode : POST
 ```
 ```
-Parameter : id
+Parameter : data / name, projectId, position
+```
+
+
+### Task
+------
+#### List tasks for all project of connected user
+```
+Route : /api/task/list
 ```
 ```
-Response OK: {status: 'OK'}
+Methode : GET
 ```
+
+
+#### Create task
+```
+Route : /api/task/create
+```
+```
+Methode : POST
+```
+```
+Parameter : data / name, startDate, endDate, predecessor, taskGroupId
+```
+
+#### Update task
+```
+Route : /api/task/:id
+```
+```
+Methode : PUT
+```
+```
+Parameter : data / name, startDate, endDate, predecessor, taskGroupId
+```
+#### Delete task
+```
+Route : /api/task/:id
+```
+```
+Methode : DELETE
+```
+
 ### Ressource
 ------
-#### Get all ressources
+#### List developpers
 ```
-Route : api/ressource/getAll
+Route : api/ressource/list
+```
+```
+Methode : GET
+```
+
+#### Create ressource
+```
+Route : /api/ressource/create
 ```
 ```
 Methode : POST
 ```
 ```
-Parameter : None
+Parameter : data / email, username, password, cost
+```
+#### Update ressource
+```
+Route : /api/ressource/:id
 ```
 ```
-Response OK: {"existingUsers": [
-        {
-            "_id": "5b51b931407d961df534c407",
-            "id_user": 0,
-            "username": "init",
-            "email": "init",
-            "password": "init",
-            "cost": 0,
-            "level": 0,
-            "weekly_hour": 0,
-            "__v": 0
-        }
-    ]
-}
+Methode : PUT
+```
+```
+Parameter : data / email, username, password, cost
+```
+#### Delete ressource
+```
+Route : /api/ressource/:id
+```
+```
+Methode : DELETE
 ```

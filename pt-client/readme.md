@@ -29,7 +29,7 @@ yarn dev
 
 - One file per Controller/Directive ... 
 - Modules are at most as possible self sufficient (core is Intra-App features)
-- Html files are included inside module for better workflow (And works well with Controller As syntax)
+- Html files are included inside module for better workflow (And works well with Controller As syntax) -> Downside is that we need to add function in controller with only purpose to update path
 
 ```bash
 .

@@ -17,7 +17,10 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
         .when("/entity/:entityType", {
             template: require('./app/entitylist/partials/entityList.html'),
             controller: 'EntityListController',
-            controllerAs: 'EntityListController'
+            controllerAs: 'EntityListController',
+            resolve: {
+                modal: function () {}
+            }
         })
 
         .when("/entity/:entityType/:entityId", {
@@ -25,4 +28,8 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
             controller: 'EntityController',
             controllerAs: 'EntityController'
         })
+
+        .otherwise({
+            redirectTo: '/dashboard'
+        });
 };

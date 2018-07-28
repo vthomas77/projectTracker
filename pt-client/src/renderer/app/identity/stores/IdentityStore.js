@@ -35,5 +35,4 @@ export default /*@ngInject*/ function IdentityStore( $q, IdentityResource, clien
 		})
 		return defer.promise;
 	};
-
 };

@@ -5,6 +5,8 @@ const passportJWTService = require('../config/passportJWT');
 const AuthenticationController = require('../controllers/authentication');
 const ProjectController = require('../controllers/project');
 const RessourceController = require('../controllers/ressource');
+const TaskGroupController = require('../controllers/taskgroup');
+const TaskController = require('../controllers/task');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -19,6 +21,8 @@ module.exports = function(app) {
   const authRoutes = express.Router();
   const projectRoutes = express.Router();
   const ressourceRoutes = express.Router();
+  const taskGroupRoutes = express.Router();
+  const taskRoutes = express.Router();
 
   // Set api route group
   app.use('/api', apiRoutes);
@@ -44,17 +48,18 @@ module.exports = function(app) {
   // Set project sub route group
   apiRoutes.use('/project', projectRoutes);
 
+  // List project route
+  projectRoutes.get('/list', requireAuth, ProjectController.list);
+  projectRoutes.get('/:id', requireAuth, ProjectController.listOne);
+
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
-  // List project route
-  projectRoutes.post('/getAll', requireAuth, ProjectController.listAll);
-
   // Update project route
-  projectRoutes.post('/update', requireAuth, ProjectController.update);
+  projectRoutes.put('/:id', requireAuth, ProjectController.update);
 
   // Delete project route
-  projectRoutes.post('/delete', requireAuth, ProjectController.delete);
+  projectRoutes.delete('/:id', requireAuth, ProjectController.delete);
 
   // ---------
   // Ressource
@@ -63,23 +68,52 @@ module.exports = function(app) {
   // Set ressource sub route group
   apiRoutes.use('/ressource', ressourceRoutes);
 
+  // List ressource route
+  ressourceRoutes.get('/list', requireAuth, RessourceController.list);
+  ressourceRoutes.get('/:id', requireAuth, RessourceController.listOne);
+
   // Create ressource route
   ressourceRoutes.post('/create', requireAuth, RessourceController.create);
 
-  // List ressource route
-  // All ressources
-  ressourceRoutes.post('/getAll', requireAuth, RessourceController.listAll);
-  // All ressources for a given project
-  ressourceRoutes.post('/getAllProject', requireAuth, RessourceController.listAllProject);
-
-  // Delete ressource route
-  ressourceRoutes.post('/delete', requireAuth, RessourceController.delete);
+  // Add ressource Route
+  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
-  ressourceRoutes.post('/update', requireAuth, RessourceController.update);
+  ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
 
-  // Add ressource Route
-  // Add a ressource to a project
-  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
+  // Delete ressource route
+  ressourceRoutes.delete('/:id', requireAuth, RessourceController.delete);
+
+  // -----------
+  // Task Group
+  // ----------
+
+  // Set task group sub route group
+  apiRoutes.use('/taskGroup', taskGroupRoutes);
+
+  // List task group route
+  taskGroupRoutes.get('/list', requireAuth, TaskGroupController.list);
+
+  // Create task group route
+  taskGroupRoutes.post('/create', requireAuth, TaskGroupController.create);
+
+  // -----
+  // Task
+  // -----
+
+  // Set task sub route group
+  apiRoutes.use('/task', taskRoutes);
+
+  // List task route
+  taskRoutes.get('/list', requireAuth, TaskController.list);
+
+  // Create task route
+  taskRoutes.post('/create', requireAuth, TaskController.create);
+
+  // Update task route
+  taskRoutes.put('/:id', requireAuth, TaskController.update);
+
+  // Delete task route
+  taskRoutes.delete('/:id', requireAuth, TaskController.delete);
 
 };

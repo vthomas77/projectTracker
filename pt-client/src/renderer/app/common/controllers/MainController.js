@@ -7,9 +7,9 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     vm.disconnect = disconnect;
     vm.createAccount = createAccount;
     vm.updateAction = updateAction;
-    vm.acceuil = acceuil;
+    vm.isSelected = isSelected;
 
-    vm.action = 'Dashboard';
+    vm.action = 'dashboard';
 
     isLogged();
 
@@ -22,8 +22,9 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
         }
     }
     
-    function updateAction( event ) {
-        vm.action = event.target.id;
+    function updateAction( entityType ) {
+        vm.selected = entityType;
+        vm.action = entityType;
         if( vm.action == 'dashboard' ) {
             $location.path('/' + vm.action);
         } else {
@@ -31,12 +32,12 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
         }
     }
 
-    function createAccount() {
-        $location.path('/register');
+    function isSelected( entityType ) {
+        return vm.selected == entityType;
     }
 
-    function acceuil() {
-        $location.path('/');
+    function createAccount() {
+        $location.path('/register');
     }
 
     function disconnect() {

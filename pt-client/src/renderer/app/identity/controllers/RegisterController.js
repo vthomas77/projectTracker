@@ -15,12 +15,11 @@ export default /*@ngInject*/ function RegisterController( $scope, $rootScope, Id
 
         IdentityStore.register(registerRequest)
         .then(function(data){
-            vm.success = true;
-            $rootScope.$emit(events.register_SUCESS);
+            if( data.hasOwnProperty('error') ) {
+                PostalService.publish('alert', data.error);
+            } else {
+                PostalService.publish('sucess', 'User was correctly created');
+            }
         });
     };
-
-    PostalService.subscribe($scope, 'register_failed', function( error ) {
-        vm.error = error.data;
-    });
 };

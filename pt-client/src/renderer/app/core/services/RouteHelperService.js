@@ -3,11 +3,15 @@
 RouteHelperService.$inject = [];
 export default /*@ngInject*/ function RouteHelperService() {
     function RouteHelperService() {
-        this.infoRoute = {};
+        this.infoRoute = {
+            entityType : null,
+            entityId: null
+        };
     };
 
     RouteHelperService.prototype.push = function( info ) {
-        this.infoRoute = info;
+        this.infoRoute.entityType = info.entityType;
+        this.infoRoute.entityId = info.entityId;
     };
 
     RouteHelperService.prototype.get = function() {

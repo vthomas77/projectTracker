@@ -1,7 +1,29 @@
-<div class="title">
-    <h2>{{ MainController.action }}</h2>
-    <a class="pointer" ng-click="MainController.disconnect()">Hello Bob</a>
-    <div id="right-menu">
-        <a class="pointer" ng-click="MainController.createAccount()">Create account</a>
-    </div>
+ <div class="wrapper" style="height: auto; min-height: 100%;">
+  <header class="main-header">
+
+      <!-- Logo -->
+      <a class="logo pointer">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini" ng-click="MainController.updateAction('dashboard')"><b>P-</b>T</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg" ng-click="MainController.updateAction('dashboard')"><b>Projet-</b>Tracker</span>
+      </a>
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation">
+          <a class="sidebar-toggle pointer" data-toggle="push-menu" role="button">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </a>
+          <div class="pull-left" id="top-action">
+            <p class="capitalize no-margin" style="color: #FFF">{{ MainController.action }}</p>
+          </div>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav list-ul">
+                <li><a class="pointer" ng-click="MainController.createAccount()" style="background-color: #357ea9;">Create account</a></li>
+                <li><a class="pointer" ng-click="MainController.disconnect()">Disconnect</a></li>
+              </ul>
+          </div>
+      </nav>
+  </header>
 </div>

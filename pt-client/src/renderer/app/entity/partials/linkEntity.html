@@ -1,0 +1,39 @@
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-if="display == 'input' ">
+    <label>{{ title }} :</label>
+    <input class="form-control" ng-click="showLinkModal()" type="text" ng-model="EntityController.data.name_task">
+</div>
+<div ng-if="display == 'plus'">
+    <span class="plus pointer" ng-click="showLinkModal()"><i class="fa fa-plus" aria-hidden="true"></i></span>
+    <div class="col col-lg-12 col-md-12 col-sm-12">
+        <table class="table table-striped">
+            <thead></thead>
+            <tbody>
+                <tr ng-if="entityLinked == 'project' " ng-repeat="entity in entityList" >
+                        <th>{{ entity.id_project }}</th>
+                        <td>{{ entity.name }}</td>
+                        <td>{{ entity.starting_date | dateFilter }}</td>
+                        <td>{{ entity.client_name }}</td>
+                    </tr>
+                    <tr ng-if="entityLinked == 'taskgroup' " ng-repeat="entity in entityList" >
+                        <th>{{ entity.id_task_group }}</th>
+                        <td>{{ entity.name_task_group }}</td>
+                        <td>{{ entity.starting_date | dateFilter }}</td>
+                        <td>{{ entity.end_date | dateFilter }}</td>
+                    </tr>
+                    <tr ng-if="entityLinked == 'task' " ng-repeat="entity in entityList" >
+                        <th>{{ entity.id_task }}</th>
+                        <td>{{ entity.name_task }}</td>
+                        <td>{{ entity.starting_date | dateFilter }}</td>
+                        <td>{{ entity.end_date | dateFilter }}</td>
+                    </tr>
+                    <tr ng-if="entityLinked == 'ressource' " ng-repeat="entity in entityList" >
+                        <th>{{ entity.id_user }}</th>
+                        <td>{{ entity.username }}</td>
+                        <td>{{ entity.email }}</td>
+                        <td></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="form-group">
+    <label> {{ title }} </label>
+	<div class="input-group date">
+		<div class="input-group-addon">
+			<i class="fa fa-calendar"></i>
+		</div>
+		<input class="form-control pull-right" id="datepicker" ng-click="showDatePicker()" type="text" ng-model="date" uib-datepicker-popup="{{format}}">
+	</div>
+	<div ng-hide="hideDate" class="date-wrapper">
+		<button type="button" class="btn btn-block btn-success" ng-click="closeDatePicker()">Close</button>
+		<div uib-datepicker ng-model="date" class="well well-sm datepicker" datepicker-options="options" formatDay="dd" formatMonth="MMM" formatYear="yyyy"></div>
+	</div>
+</div>

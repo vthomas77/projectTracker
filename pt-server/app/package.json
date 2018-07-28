@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon -L index.js",
     "create:db": "node ./mongoose/scriptdb.js",
-    "del:db": "mongo ProjectTrackerDB  --eval 'db.dropDatabase()'",
+    "clean:db": "mongo ProjectTrackerDB  --eval 'db.dropDatabase()'",
     "clean:install": "rm -rf node_modules && npm install && npm run create:db"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "mongoose": "^5.2.4",
+    "mongoose-auto-increment": "^5.0.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
