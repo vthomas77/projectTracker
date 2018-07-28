@@ -99,6 +99,7 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 
 .alert-wrapper{position: fixed;z-index: 9999; width: 100%;}
 .alerts{z-index: 9999; opacity: 0.8;margin-bottom: 1px !important; text-align: center;}
+.alert-sucess{background-color: rgba(0, 128, 0, 0.5); color: #FFF}
 
 /** Table **/
 
@@ -125,6 +126,8 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 
 .entitylist-option-wrapper {border-bottom: solid 1px #dadada;}
 .entitylist-option {display: flex; padding: 10px 0 10px 0 !important; justify-content: space-between;}
+.entitylist-option2 {display: flex; padding: 10px 0 10px 0 !important;}
+.entitylist-option2 > button {margin: 0 10px 0 10px !important;}
 
 /** Login **/
 

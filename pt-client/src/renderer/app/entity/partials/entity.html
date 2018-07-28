@@ -1,8 +1,9 @@
 <section class="content-wrapper">
 
     <div class="col col-lg-12 col-md-12 col-sm-12 content-actionbar entitylist-option-wrapper">
-        <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option">
-            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save()" ng-if="EntityController.edit">Save</button>
+        <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option2">
+            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(false)" ng-if="EntityController.edit">Save</button>
+            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(true)" ng-if="EntityController.edit">Save and Add</button>
             <button type="button" class="btn blue-custom-primary btn-flat" ng-click="" ng-if="!EntityController.edit">Edit</button>
         </div>
     </div>
@@ -84,7 +85,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1" id="EntityController.data.id_project"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -129,7 +130,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none" id="EntityController.data.predecessor"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -140,7 +141,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1" id="EntityController.data.id_task_group"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->

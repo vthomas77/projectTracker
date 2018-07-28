@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()">New</button>
+                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()" ng-if="EntityListController.entityType != 'ressource'">New</button>
             </div>
         </div>
     </div>

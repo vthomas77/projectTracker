@@ -14,6 +14,13 @@ export default /*@ngInject*/ function AlertController( $scope, PostalService ) {
         });
     });
 
+    PostalService.subscribe($scope, 'sucess', function( alert ) {
+        vm.alerts.push({
+            type: 'sucess', 
+            msg: alert
+        });
+    });
+
     function closeAlert( index ) {
         vm.alerts.splice(index, 1);
     };
