@@ -3,11 +3,11 @@
     <div class="col col-lg-12 col-md-12 col-sm-12 content-actionbar entitylist-option-wrapper">
         <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option2">
             <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(false)" ng-if="EntityController.edit">Save</button>
-            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(true)" ng-if="EntityController.edit">Save and Add</button>
-            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="" ng-if="!EntityController.edit">Edit</button>
+            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(true)" ng-if="EntityController.edit && EntityController.entityActual.entityId == 0">Save and Add</button>
+            <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.switchEdit()" ng-if="!EntityController.edit">Edit</button>
         </div>
     </div>
-
+    <!-- If entity creation -->
     <section class="content" ng-if="EntityController.entityActual.entityId == 0">
         <!-- Project -->
         <div class="row" ng-if="EntityController.entityActual.entityType == 'project'">
@@ -35,7 +35,7 @@
                             <input class="form-control" type="number" min="0" ng-model="EntityController.data.budget">
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
-                            <date-directive date="EntityController.data.starting_date" title="Starting date :"></date-directive>
+                            <date-directive date="EntityController.data.starting_date" title="Starting date :" disabled="EntityController.edit"></date-directive>
                         </div>
                       </div>
                     </div>
@@ -57,7 +57,7 @@
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Name :</label>
-                            <input class="form-control" type="text" ng-model="EntityController.data.name_task_group">
+                            <input class="form-control" type="text" ng-model="EntityController.data.name">
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Position :</label>
@@ -66,10 +66,10 @@
                       </div>
                       <div class="row pt-10">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
-                            <date-directive date="EntityController.data.starting_date" title="Starting date :"></date-directive>
+                            <date-directive date="EntityController.data.startDate" title="Starting date :" disabled="EntityController.edit"></date-directive>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
-                            <date-directive date="EntityController.data.end_date" title="End date :"></date-directive>
+                            <date-directive date="EntityController.data.endDate" title="End date :" disabled="EntityController.edit"></date-directive>
                         </div>
                       </div>
                     </div>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1" id="EntityController.data.id_project"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1" id="EntityController.data.projectId" entity-list=""></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -106,15 +106,15 @@
                       <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <label>Name :</label>
-                            <input class="form-control" type="text" ng-model="EntityController.data.name_task">
+                            <input class="form-control" type="text" ng-model="EntityController.data.name">
                         </div>
                       </div>
                       <div class="row pt-10">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
-                            <date-directive date="EntityController.data.starting_date" title="Starting date :"></date-directive>
+                            <date-directive date="EntityController.data.startDate" title="Starting date :" disabled="EntityController.edit"></date-directive>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
-                            <date-directive date="EntityController.data.end_date" title="End date :"></date-directive>
+                            <date-directive date="EntityController.data.endDate" title="End date :" disabled="EntityController.edit"></date-directive>
                         </div>
                       </div>
                     </div>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none" id="EntityController.data.predecessor"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none" id="EntityController.data.predecessor" entity-list=""></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -141,7 +141,73 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1" id="EntityController.data.id_task_group"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1" id="EntityController.data.taskGroupId" entity-list=""></modal-link-entity-directive>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- If entity update -->
+    <section class="content" ng-if="EntityController.entityActual.entityId != 0">
+        <div class="row" ng-if="EntityController.entityActual.entityType == 'project'">
+            <!-- Left view -->
+            <div class="col cold-lg-6 col-md-6 col-sm-6">
+                <!-- Actual entity -->
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Project :</h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Name :</label>
+                            <input class="form-control" type="text" ng-model="EntityController.data.name" ng-disabled="!EntityController.edit">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Client :</label>
+                            <input class="form-control" type="text" ng-model="EntityController.data.clientName" ng-disabled="!EntityController.edit">
+                        </div>
+                      </div>
+                      <div class="row pt-10">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
+                            <label>Allocated budget :</label>
+                            <input class="form-control" type="number" min="0" ng-model="EntityController.data.allocatedBudget" ng-disabled="!EntityController.edit">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">    
+                            <date-directive date="EntityController.data.startDate" title="Starting date :" disabled="EntityController.edit"></date-directive>
+                        </div>
+                      </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+                            <a class="pointer" ng-click="EntityController.viewGantt()">See associated Gantt</a>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+
+            <!-- Right View -->
+            <div class="col cold-lg-6 col-md-6 col-sm-6">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                      <h3 class="box-title"> Taskgroup : </h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <modal-link-entity-directive entity-linked="taskgroup" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.taskgroups"></modal-link-entity-directive>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                      <h3 class="box-title"> Users : </h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <modal-link-entity-directive entity-linked="ressource" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.users"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->

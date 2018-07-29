@@ -50,22 +50,22 @@
             </thead>
             <tbody>
                 <tr ng-if="EntityListModalController.entityType == 'project' " ng-repeat="entity in EntityListModalController.entityList | startFromFilter:(EntityListModalController.currentPage - 1) * EntityListModalController.maxPerPage | filter: EntityListModalController.searchBox | limitTo: EntityListModalController.maxPerPage" class="pointer entityList" ng-click="EntityListModalController.selected(entity)" ng-class="EntityListModalController.isSelected(entity)">
-                    <th>{{ entity.id_project }}</th>
+                    <th>{{ entity.projectId }}</th>
                     <td>{{ entity.name }}</td>
-                    <td>{{ entity.starting_date | dateFilter }}</td>
-                    <td>{{ entity.client_name }}</td>
+                    <td>{{ entity.startDate | dateFilter }}</td>
+                    <td>{{ entity.clientName }}</td>
                 </tr>
                 <tr ng-if="EntityListModalController.entityType == 'taskgroup' " ng-repeat="entity in EntityListModalController.entityList | startFromFilter:(EntityListModalController.currentPage - 1) * EntityListModalController.maxPerPage | filter: EntityListModalController.searchBox | limitTo: EntityListModalController.maxPerPage" class="pointer entityList" ng-click="EntityListModalController.selected(entity)" ng-class="EntityListModalController.isSelected(entity)">
-                    <th>{{ entity.id_task_group }}</th>
-                    <td>{{ entity.name_task_group }}</td>
-                    <td>{{ entity.starting_date | dateFilter }}</td>
-                    <td>{{ entity.end_date | dateFilter }}</td>
+                    <th>{{ entity.taskGroupId }}</th>
+                    <td>{{ entity.nameTaskGroup }}</td>
+                    <td>{{ entity.startDate | dateFilter }}</td>
+                    <td>{{ entity.endDate | dateFilter }}</td>
                 </tr>
                 <tr ng-if="EntityListModalController.entityType == 'task' " ng-repeat="entity in EntityListModalController.entityList | startFromFilter:(EntityListModalController.currentPage - 1) * EntityListModalController.maxPerPage | filter: EntityListModalController.searchBox | limitTo: EntityListModalController.maxPerPage" class="pointer entityList" ng-click="EntityListModalController.selected(entity)" ng-class="EntityListModalController.isSelected(entity)">
-                    <th>{{ entity.id_task }}</th>
-                    <td>{{ entity.name_task }}</td>
-                    <td>{{ entity.starting_date | dateFilter }}</td>
-                    <td>{{ entity.end_date | dateFilter }}</td>
+                    <th>{{ entity.taskId }}</th>
+                    <td>{{ entity.nameTask }}</td>
+                    <td>{{ entity.startDate | dateFilter }}</td>
+                    <td>{{ entity.endDate | dateFilter }}</td>
                 </tr>
                 <tr ng-if="EntityListModalController.entityType == 'ressource' " ng-repeat="entity in EntityListModalController.entityList | startFromFilter:(EntityListModalController.currentPage - 1) * EntityListModalController.maxPerPage | filter: EntityListModalController.searchBox | limitTo: EntityListModalController.maxPerPage" class="pointer entityList" ng-click="EntityListModalController.selected(entity)" ng-class="EntityListModalController.isSelected(entity)">
                     <th>{{ entity.id_user }}</th>

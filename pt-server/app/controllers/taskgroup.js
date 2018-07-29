@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Taskgroup = require('../models/taskgroupModel');
 const Project_User = require('../models/userProjectModel');
+const MapHelper = require('../helper/MapHelper');
 
 // -------------
 // List Route
@@ -22,7 +23,7 @@ exports.list = function(req, res) {
             if (err) {
                 return next(err);
             }
-
+            existingTaskgroups = MapHelper.taskGroupHelper(existingTaskgroups);
             return res.json({"entityTypeList": existingTaskgroups});
         });
 

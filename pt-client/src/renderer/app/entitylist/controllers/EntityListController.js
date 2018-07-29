@@ -21,7 +21,6 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
     .then(function(data){
-        console.log(data);
         vm.entityList = data.entityTypeList;
         vm.filteredLength = vm.entityList.length;
         addRemovePagination();

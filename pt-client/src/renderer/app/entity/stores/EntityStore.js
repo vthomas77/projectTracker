@@ -5,14 +5,15 @@ export default /*@ngInject*/ function EntityStore( $q, EntityResource ) {
 
     var entityStore = {
         createEntity : createEntity,
-        getEntity : getEntity
+        getEntity : getEntity,
+        updateEntity: updateEntity
     };
     return entityStore;
 
     function createEntity( entity, entityType ) {
     	var data;
 		var defer = $q.defer();
-		var call = EntityResource.Entity.create({ entityType: entityType, data:  entity}).$promise; 
+		var call = EntityResource.Entity.create({ entityType: entityType, data: entity}).$promise; 
 		call.then(function(data){
 			defer.resolve(data);
 		})
@@ -26,6 +27,19 @@ export default /*@ngInject*/ function EntityStore( $q, EntityResource ) {
         var data;
         var defer = $q.defer();
         var call = EntityResource.Entity.get({ entityType: entityType, entityId:  entityId}).$promise; 
+        call.then(function(data){
+            defer.resolve(data);
+        })
+        .catch(function(error){
+            // Do nothing
+        })
+        return defer.promise;
+    }
+
+    function updateEntity(entityType, entityId, entity) {
+        var data;
+        var defer = $q.defer();
+        var call = EntityResource.Entity.update({ entityType: entityType, entityId: entityId, data:  entity}).$promise; 
         call.then(function(data){
             defer.resolve(data);
         })

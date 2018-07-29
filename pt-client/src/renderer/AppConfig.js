@@ -17,16 +17,19 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
         .when("/entity/:entityType", {
             template: require('./app/entitylist/partials/entityList.html'),
             controller: 'EntityListController',
-            controllerAs: 'EntityListController',
-            resolve: {
-                modal: function () {}
-            }
+            controllerAs: 'EntityListController'
         })
 
         .when("/entity/:entityType/:entityId", {
             template: require('./app/entity/partials/entity.html'),
             controller: 'EntityController',
             controllerAs: 'EntityController'
+        })
+
+        .when("/gantt/:entityId", {
+            template: require('./app/gantt/partials/gantt.html'),
+            controller: 'GanttController',
+            controllerAs: 'GanttController'
         })
 
         .otherwise({

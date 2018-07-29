@@ -47,6 +47,7 @@ import alert from './app/alert/module';
 import entityList from './app/entitylist/module';
 import entity from './app/entity/module';
 import modal from './app/modal/module';
+import gantt from './app/gantt/module';
 
 import core from './app/core/module';
 
@@ -61,7 +62,8 @@ export default angular
     core.name,
     entityList.name,
     entity.name,
-    modal.name
+    modal.name,
+    gantt.name
 ])
 
 // Value set in settings.json -> check webpack.renderer.addition.js

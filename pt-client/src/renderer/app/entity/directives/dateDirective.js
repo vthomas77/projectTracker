@@ -6,7 +6,8 @@ export default /*@ngInject*/ function dateDirective() {
         template: require('../partials/datePicker.html'),
         scope: {
         	date: '=',
-        	title: '@'
+        	title: '@',
+            disabled: '='
         },
         link: function( scope, element, attrs ) {
         	scope.title = attrs.title;
