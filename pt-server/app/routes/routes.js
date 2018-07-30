@@ -97,6 +97,12 @@ module.exports = function(app) {
   // Create task group route
   taskGroupRoutes.post('/create', requireAuth, TaskGroupController.create);
 
+  // Update task group route
+  taskGroupRoutes.put('/:id', requireAuth, TaskGroupController.update);
+
+  // Delete task group route
+  taskGroupRoutes.delete('/:id', requireAuth, TaskGroupController.delete);
+
   // -----
   // Task
   // -----

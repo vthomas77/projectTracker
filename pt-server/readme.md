@@ -120,7 +120,6 @@ Methode : GET
 ```
 
 
-
 #### Create task group
 ```
 Route : /api/taskGroup/create
@@ -132,6 +131,16 @@ Methode : POST
 Parameter : data / name, projectId, position
 ```
 
+#### Update task group
+```
+Route : /api/taskGroup/:id
+```
+```
+Methode : PUT
+```
+```
+Parameter : data / name, position
+```
 
 ### Task
 ------
