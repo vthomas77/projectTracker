@@ -127,8 +127,8 @@ exports.update = function(req, res) {
         if (err) {
             return next(err);
         }
-          if (position < existingTaskgroup.position)
-          {
+          //if (position < existingTaskgroup.position)
+          //{
           // Update task group
           existingTaskgroup.set({ name_task_group: name, position : position });
           existingTaskgroup.save(function (err, updatedTaskgroup) {
@@ -138,15 +138,15 @@ exports.update = function(req, res) {
               //res.json({entity: existingTaskgroup});
               // Update other task group of same project
               //, _id : {$ne : existingTaskgroup._id}
-              /*
-              Taskgroup.find({id_project: existingTaskgroup.id_project}, function (err, taskgroupofsameproject) {
+
+              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}}, function (err, taskgroupofsameproject) {
                   var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return tg; });
                   res.json({entity: taskGroupPosition});
               });
-              */
+
           });
 
-        }
+        //}
     });
 }
 
