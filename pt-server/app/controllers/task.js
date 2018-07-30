@@ -40,6 +40,32 @@ exports.list = function(req, res) {
     });
 }
 
+// Show relationship for a given Task
+exports.listOne = function(req, res) {
+
+  const taskId = req.params.id;
+
+  Task.findById(taskId, function(err, task) {
+
+      if (err) { return next(err); }
+      Taskgroup.findById(task.id_task_group, function(err, taskgroup) {
+        if (err) { return next(err); }
+
+            //project = MapHelper.projectHelper(project);
+            //taskGroups = MapHelper.taskGroupHelper(taskGroups);
+
+            if (err) { return next(err); }
+            return res.json({
+              "entity":task,
+              "entityChild": { "taskgroups" : taskgroup }
+            });
+
+      });
+
+  });
+
+}
+
 // -------------
 // Create Route
 // -------------

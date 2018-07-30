@@ -113,6 +113,7 @@ module.exports = function(app) {
 
   // List task route
   taskRoutes.get('/list', requireAuth, TaskController.list);
+  taskRoutes.get('/:id', requireAuth, TaskController.listOne);
 
   // Create task route
   taskRoutes.post('/create', requireAuth, TaskController.create);
