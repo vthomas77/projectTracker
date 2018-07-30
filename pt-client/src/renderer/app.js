@@ -55,7 +55,7 @@ import AppConfig from './AppConfig.js'
 import AppRun from './AppRun.js'
 
 export default angular
-.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'ui.bootstrap', 'ngMessages', 'ngAnimate',
+.module('myApp', [ 'ngRoute', 'ngResource', 'angularMoment', 'gantt', 'gantt.table', 'ui.bootstrap', 'ngMessages', 'ngAnimate',
     common.name,
     identity.name,
     alert.name,
