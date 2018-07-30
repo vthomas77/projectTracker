@@ -12,7 +12,8 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
             maxRelation: '=',
             id: '=',
             clickable: '@',
-            entityList: '='
+            entityList: '=',
+            edit: '='
         },
         link: function( scope, element, attrs ) {
 
@@ -38,16 +39,16 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                     for( var i = 0; i < entityList.length; i++ ) {
                         switch( attrs.entityLinked ) {
                             case 'project':
-                                scope.id = entityList[0]._id;
+                                scope.id = entityList[i]._id;
                                 break;
                             case 'taskgroup':
-                                scope.id = entityList[0]._id;
+                                scope.id = entityList[i]._id;
                                 break;
                             case 'task':
-                                scope.id.push(entityList[0]._id);
+                                scope.id.push(entityList[i].taskId);
                                 break;
                             case 'ressource':
-                                scope.id = entityList[0]._id;
+                                scope.id = entityList[i]._id;
                                 break;
                         }
                     }

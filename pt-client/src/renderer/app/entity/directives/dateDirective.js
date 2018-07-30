@@ -12,7 +12,7 @@ export default /*@ngInject*/ function dateDirective() {
         link: function( scope, element, attrs ) {
         	scope.title = attrs.title;
         	scope.hideDate = true;
-        	
+        	console.log(typeof scope.date);
         	scope.showDatePicker = function() {
         		scope.hideDate = false;
         	}
