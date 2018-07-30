@@ -114,7 +114,7 @@ exports.add = function(req, res) {
   const userID = req.body.UserId;
   const projectID = req.body.ProjectId;
 
-  let userproject = new UserProject({
+  let userproject = new Project_User({
     id_project: projectID,
     id_user: userID
   });
@@ -141,6 +141,8 @@ exports.update = function(req, res) {
   const password = data.password;
   const cost = data.cost;
 
+  const ressourceID = data.ressourceID;
+  const projectID = data.ProjectId;
 
   User.findById(userID, function (err, existingRessource) {
     if (err) { return next(err); }
@@ -148,8 +150,15 @@ exports.update = function(req, res) {
     existingRessource.set({ email: email, username: username, password: password, cost: cost});
     existingRessource.save(function (err, updatedRessource) {
      if (err) { return next(err); }
-     res.json({entity: existingRessource});
+     let userproject = new Project_User({
+       id_project: projectID,
+       id_user: ressourceID
+     });
 
+     userproject.save(function(err, user) {
+       if (err) { return next(err); }
+       res.json({entity: existingRessource});
+     });
     });
  });
 
