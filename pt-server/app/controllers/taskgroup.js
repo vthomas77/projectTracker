@@ -110,30 +110,43 @@ exports.create = function(req, res) {
     });
 }
 
-/*
+
 // -------------
 // Update Route
 // -------------
 
 exports.update = function(req, res) {
+    const TaskgroupID = req.params.id;
 
-    const TaskgroupID = req.body.id;
-    const name = req.body.name;
-    const startDate = req.body.startDate;
-    const endDate = req.body.endDate;
+    const data = req.body.data;
+
+    const name = data.name;
+    const position = data.position;
 
     Taskgroup.findById(TaskgroupID, function (err, existingTaskgroup) {
         if (err) {
             return next(err);
         }
+          if (position < existingTaskgroup.position)
+          {
+          // Update task group
+          existingTaskgroup.set({ name_task_group: name, position : position });
+          existingTaskgroup.save(function (err, updatedTaskgroup) {
+              if (err) {
+                  return next(err);
+              }
+              //res.json({entity: existingTaskgroup});
+              // Update other task group of same project
+              //, _id : {$ne : existingTaskgroup._id}
+              /*
+              Taskgroup.find({id_project: existingTaskgroup.id_project}, function (err, taskgroupofsameproject) {
+                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return tg; });
+                  res.json({entity: taskGroupPosition});
+              });
+              */
+          });
 
-        existingTaskgroup.set({ name_task_group: name });
-        existingTaskgroup.save(function (err, updatedTaskgroup) {
-            if (err) {
-                return next(err);
-            }
-            res.json({status: 'OK'});
-        });
+        }
     });
 }
 
@@ -143,13 +156,17 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 
-    const TaskgroupID = req.body.id;
+    const TaskgroupID = req.params.id;
 
-    Taskgroup.deleteOne({ _id: TaskgroupID }, function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.json({status: 'OK'});
+    Taskgroup.findById(TaskgroupID, function(err, taskGroupResult) {
+      if (err) {
+          return next(err);
+      }
+      Taskgroup.deleteOne({ _id: TaskgroupID }, function (err) {
+          if (err) {
+              return next(err);
+          }
+          res.json({entity: taskGroupResult});
+      });
     });
 }
-*/

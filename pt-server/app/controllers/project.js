@@ -178,7 +178,6 @@ exports.update = function(req, res) {
  // Delete Route
  // -------------
 
-
  exports.delete = function(req, res) {
 
    const projectID = req.params.id;
@@ -192,30 +191,10 @@ exports.update = function(req, res) {
          // Cascade delete
          Project_User.deleteMany({ id_project: projectID }, function (err, project) {
            if (err) { return next(err); }
-           res.json({"Entity": projectResult });
-         });
-      });
-   });
-}
-
-/*
- exports.delete = function(req, res) {
-
-   const projectID = req.params.id;
-
-   // Return project to be deleted
-   Project.find({_id: projectID}, function(err, projectResult) {
-       if (err) { return next(err); }
-       // Delete Project
-       Project.deleteOne({ _id: projectID }, function (err, project) {
-         if (err) { return next(err); }
-         // Cascade delete
-         Project_User.deleteMany({ id_project: projectID }, function (err, project) {
-           if (err) { return next(err); }
-           Taskgroup.find({ id_task_group: projectID }, function(err, taskGroupResult) {
+           Taskgroup.find({ id_project: projectID }, function(err, taskGroupResult) {
              if (err) { return next(err); }
              const taskGroupIDs = taskGroupResult.map(function (tg) { return tg._id; });
-             Taskgroup.deleteMany({ id_task_group: projectID }, function (err, deletedTaskGroup) {
+             Taskgroup.deleteMany({ id_project: projectID }, function (err, deletedTaskGroup) {
                if (err) { return next(err) };
                Task.deleteMany({id_task_group: {$in: taskGroupIDs}}, function (err, deletedTask) {
                  if (err) { return next(err); }
@@ -228,4 +207,3 @@ exports.update = function(req, res) {
       });
    });
 }
-*/
