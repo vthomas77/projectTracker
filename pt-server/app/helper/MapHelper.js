@@ -56,3 +56,23 @@ exports.taskGroupHelper = function(taskGroup) {
 
     return objectArray;
 }
+
+exports.ressourceHelper = function(ressource) {
+    const objectArray = [];
+
+    for( var i = 0; i < ressource.length; i++ ) {
+        const object = {};
+        Object.keys(ressource[i].toObject()).map(function(key, index) {
+            if(key = '_id') object._id = ressource[i][key];
+            if(key = 'id_user') object.userId = ressource[i][key];
+            if(key = 'username') object.username = ressource[i][key];
+            if(key = 'email') object.email = ressource[i][key];
+            if(key = 'password') object.password = ressource[i][key];
+            if(key = 'cost') object.cost = ressource[i][key];
+            if(key = 'level') object.level = ressource[i][key];
+        });
+        objectArray.push(object);
+    }
+
+    return objectArray;
+}

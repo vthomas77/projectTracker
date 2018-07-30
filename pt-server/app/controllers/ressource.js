@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const Project_User = require('../models/userProjectModel');
 const Project = require('../models/projectModel');
+const MapHelper = require('../helper/MapHelper');
 
 // -------------
 // List Route
@@ -12,6 +13,7 @@ exports.list = function(req, res) {
   User.find({level:3}, function(err, existingUsers) {
 
       if (err) { return next(err); }
+      existingUsers = MapHelper.ressourceHelper(existingUsers);
       return res.json({"entityTypeList":existingUsers});
 
   });

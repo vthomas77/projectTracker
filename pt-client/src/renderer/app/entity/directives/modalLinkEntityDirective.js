@@ -46,6 +46,9 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                             case 'task':
                                 scope.id.push(entityList[0]._id);
                                 break;
+                            case 'ressource':
+                                scope.id = entityList[0]._id;
+                                break;
                         }
                     }
                     scope.entityList = entityList;
