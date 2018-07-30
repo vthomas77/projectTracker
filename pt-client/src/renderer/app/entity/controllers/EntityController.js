@@ -5,6 +5,8 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     var vm = this;
 
     vm.save = save;
+    vm.switchEdit = switchEdit;
+    vm.viewGantt = viewGantt;
 
     vm.entityActual = RouteHelperService.get();
 
@@ -21,26 +23,47 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
             if( data.hasOwnProperty('error') ) {
                 console.log('error');
             } else {
-                debugger;
-                console.log('sucess');
+                console.log(data);
+                vm.data = data.entity[0];
+                vm.relation = data.entityChild;
             }
         });
     }
 
     function save( bool ) {
-        debugger;
-    	EntityStore.createEntity(vm.data, vm.entityActual.entityType)
-        .then(function(data){
-            if( data.hasOwnProperty('error') ) {
-                PostalService.publish('alert', data.error);
-            } else {
-                PostalService.publish('sucess', 'Entity was sucessfully created');
-                if( bool ) {
-                    vm.data = {};
+        if( vm.entityActual.entityId == 0 ) {
+            debugger;
+        	EntityStore.createEntity(vm.data, vm.entityActual.entityType)
+            .then(function(data){
+                if( data.hasOwnProperty('error') ) {
+                    PostalService.publish('alert', data.error);
+                } else {
+                    PostalService.publish('sucess', 'Entity was sucessfully created');
+                    if( bool ) {
+                        vm.data = {};
+                    } else {
+                        $location.path('/entity/' + vm.entityActual.entityType);
+                    }
+                }
+            });
+        } else {
+            EntityStore.updateEntity(vm.entityActual.entityType, vm.entityActual.entityId, vm.data)
+            .then(function(data){
+                if( data.hasOwnProperty('error') ) {
+                    PostalService.publish('alert', data.error);
                 } else {
                     $location.path('/entity/' + vm.entityActual.entityType);
+                    PostalService.publish('sucess', 'Entity was sucessfully updated');
                 }
-            }
-        });
+            });
+        }
+    }
+
+    function switchEdit() {
+        vm.edit = !vm.edit;
+    }
+
+    function viewGantt() {
+        $location.path('/gantt/' + vm.entityActual.entityId);
     }
 };

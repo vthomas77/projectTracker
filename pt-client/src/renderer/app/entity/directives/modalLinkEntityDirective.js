@@ -1,7 +1,7 @@
 'use strict';
 
-modalLinkEntityDirective.$inject = ['$uibModal', 'EntityListStore'];
-export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, EntityListStore ) {
+modalLinkEntityDirective.$inject = ['$uibModal', 'EntityListStore', '$location'];
+export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, EntityListStore, $location ) {
     return {
         restrict: 'EA',
         template: require('../partials/linkEntity.html'),
@@ -10,10 +10,11 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
         	title: '@',
             display: '@',
             maxRelation: '=',
-            id: '='
+            id: '=',
+            clickable: '@',
+            entityList: '='
         },
-        link: function( scope, element, attrs, $scope ) {
-            scope.id = [];
+        link: function( scope, element, attrs ) {
 
             scope.showLinkModal = function() {
                 var modalInstance = $uibModal.open({
@@ -33,6 +34,7 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                     }
                 });
                 modalInstance.result.then(function(entityList) {
+                    scope.id = [];
                     for( var i = 0; i < entityList.length; i++ ) {
                         switch( attrs.entityLinked ) {
                             case 'project':
@@ -46,9 +48,12 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                                 break;
                         }
                     }
-
                     scope.entityList = entityList;
                 }, function () {});
+            }
+
+            scope.openEntity = function( entityId ) {
+                $location.path('/entity/' + scope.entityLinked + '/' + entityId);
             }
         }
     };

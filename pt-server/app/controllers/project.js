@@ -4,6 +4,7 @@ const Project_User = require('../models/userProjectModel');
 const User = require('../models/userModel');
 const Taskgroup = require('../models/taskgroupModel');
 const Task = require('../models/taskModel');
+const MapHelper = require('../helper/MapHelper');
 
 // -------------
 // List Route
@@ -19,6 +20,7 @@ exports.list = function(req, res) {
       if (err) { return next(err); }
       const projectIDs = projectUsers.map(function (project) { return project.id_project; });
       Project.find({_id: {$in: projectIDs}}, function(err, existingProjects) {
+          existingProjects = MapHelper.projectHelper(existingProjects);
 
           if (err) { return next(err); }
           return res.json({"entityTypeList":existingProjects});
@@ -43,6 +45,10 @@ exports.listOne = function(req, res) {
         User.find({_id:{$in: userIDs}}, function(err, users) {
           if (err) { return next(err); }
           Taskgroup.find({id_project:projectId}, function(err, taskGroups) {
+
+            project = MapHelper.projectHelper(project);
+            taskGroups = MapHelper.taskGroupHelper(taskGroups);
+
             if (err) { return next(err); }
             return res.json({
               "entity":project,
@@ -147,7 +153,6 @@ exports.create = function(req, res) {
 // -------------
 
 exports.update = function(req, res) {
-
   const projectID = req.params.id;
 
   const data = req.body.data;

@@ -55,24 +55,24 @@
                 </thead>
                 <tbody>
                     <tr ng-if="EntityListController.entityType == 'project' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
-                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_project }}</a></th>
+                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.projectId }}</a></th>
                         <td>{{ entity.name }}</td>
-                        <td>{{ entity.starting_date | dateFilter }}</td>
-                        <td>{{ entity.client_name }}</td>
+                        <td>{{ entity.startDate | dateFilter }}</td>
+                        <td>{{ entity.clientName }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'taskgroup' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
-                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_task_group }}</a></th>
-                        <td>{{ entity.name_task_group }}</td>
-                        <td>{{ entity.starting_date | dateFilter }}</td>
-                        <td>{{ entity.end_date | dateFilter }}</td>
+                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.taskGroupId }}</a></th>
+                        <td>{{ entity.nameTaskGroup }}</td>
+                        <td>{{ entity.startDate | dateFilter }}</td>
+                        <td>{{ entity.endDate | dateFilter }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'task' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
-                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_task }}</a></th>
-                        <td>{{ entity.name_task }}</td>
-                        <td>{{ entity.starting_date | dateFilter }}</td>
-                        <td>{{ entity.end_date | dateFilter }}</td>
+                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.taskId }}</a></th>
+                        <td>{{ entity.nameTask }}</td>
+                        <td>{{ entity.startDate | dateFilter }}</td>
+                        <td>{{ entity.endDate | dateFilter }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'ressource' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >

@@ -2,6 +2,7 @@ const Taskgroup = require('../models/taskgroupModel');
 const Project_User = require('../models/userProjectModel');
 const Task = require('../models/taskModel');
 const moment = require('moment');
+const MapHelper = require('../helper/MapHelper');
 
 // -------------
 // List Route
@@ -30,7 +31,7 @@ exports.list = function(req, res) {
                 if (err) {
                     return next(err);
                 }
-
+                existingTask = MapHelper.taskHelper(existingTask);
                 return res.json({"entityTypeList": existingTask});
             });
 
