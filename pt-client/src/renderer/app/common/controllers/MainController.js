@@ -4,6 +4,8 @@ MainController.$inject = ['LocalStorageService', '$rootScope', 'events', '$locat
 export default /*@ngInject*/ function MainController( LocalStorageService, $rootScope, events, $location ) {
     var vm = this;
 
+    vm.clientConfig = LocalStorageService.getClientConfig();
+
     vm.disconnect = disconnect;
     vm.createAccount = createAccount;
     vm.updateAction = updateAction;
@@ -41,7 +43,7 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     }
 
     function disconnect() {
-        LocalStorageService.deleteToken();
+        LocalStorageService.deleteClientConfig();
         $rootScope.$emit(events.LOGOUT);
         $location.path('/');
     }

@@ -20,7 +20,7 @@
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
               <ul class="nav navbar-nav list-ul">
-                <li><a class="pointer" ng-click="MainController.createAccount()" style="background-color: #357ea9;">Create account</a></li>
+                <li><a class="pointer" ng-click="MainController.createAccount()" ng-if="MainController.clientConfig.level == 'ADMIN'" style="background-color: #357ea9;">Create account</a></li>
                 <li><a class="pointer" ng-click="MainController.disconnect()">Disconnect</a></li>
               </ul>
           </div>

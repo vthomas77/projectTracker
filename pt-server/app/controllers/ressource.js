@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const Project_User = require('../models/userProjectModel');
 const Project = require('../models/projectModel');
+const MapHelper = require('../helper/MapHelper');
 
 // -------------
 // List Route
@@ -12,6 +13,7 @@ exports.list = function(req, res) {
   User.find({level:3}, function(err, existingUsers) {
 
       if (err) { return next(err); }
+      existingUsers = MapHelper.ressourceHelper(existingUsers);
       return res.json({"entityTypeList":existingUsers});
 
   });
@@ -33,6 +35,8 @@ exports.listOne = function(req, res) {
         Project.find({_id:projectID}, function(err, projects) {
 
           if (err) { return next(err); }
+          user = MapHelper.ressourceHelper(user);
+          projects = MapHelper.projectHelper(projects);
           return res.json({"entity":user,"entityChild": projects});
         });
 
@@ -131,7 +135,6 @@ exports.add = function(req, res) {
 // -------------
 
 exports.update = function(req, res) {
-
   const userID = req.params.id;
 
   const data = req.body.data;
@@ -142,8 +145,8 @@ exports.update = function(req, res) {
   const cost = data.cost;
 
   const ressourceID = data.ressourceID;
-  const projectID = data.ProjectId;
-
+  const projectID = data.projectId;
+  console.log(projectID);
   User.findById(userID, function (err, existingRessource) {
     if (err) { return next(err); }
 

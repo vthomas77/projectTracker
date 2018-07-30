@@ -7,7 +7,7 @@ exports.projectHelper = function(project) {
             if(key = '_id') object._id = project[i][key];
             if(key = 'id_project') object.projectId = project[i][key];
             if(key = 'name') object.name = project[i][key];
-            if(key = 'starting_date') object.startDate = new Date(project[i][key]);
+            if(key = 'starting_date') object.startDate = project[i][key].toDateString();
             if(key = 'client_name') object.clientName = project[i][key];
             if(key = 'budget') object.allocatedBudget = project[i][key];
         });
@@ -26,8 +26,8 @@ exports.taskHelper = function(task) {
             if(key = '_id') object._id = task[i][key];
             if(key = 'id_task_group') object.taskGroupId = task[i][key];
             if(key = 'id_task') object.taskId = task[i][key];
-            if(key = 'starting_date') object.startDate = new Date(task[i][key]);
-            if(key = 'end_date') object.endDate = new Date(task[i][key]);
+            if(key = 'starting_date') object.startDate = task[i][key].toDateString();
+            if(key = 'end_date') object.endDate = task[i][key].toDateString();
             if(key = 'name_task') object.nameTask = task[i][key];
             if(key = 'predecessor') object.predecessor = task[i][key];
         });
@@ -46,10 +46,30 @@ exports.taskGroupHelper = function(taskGroup) {
             if(key = '_id') object._id = taskGroup[i][key];
             if(key = 'id_task_group') object.taskGroupId = taskGroup[i][key];
             if(key = 'id_project') object.projectId = taskGroup[i][key];
-            if(key = 'starting_date') object.startDate = new Date(taskGroup[i][key]);
-            if(key = 'end_date') object.endDate = new Date(taskGroup[i][key]);
+            if(key = 'starting_date') object.startDate = taskGroup[i][key].toDateString();
+            if(key = 'end_date') object.endDate = taskGroup[i][key].toDateString();
             if(key = 'name_task_group') object.nameTaskGroup = taskGroup[i][key];
             if(key = 'position') object.position = taskGroup[i][key];
+        });
+        objectArray.push(object);
+    }
+
+    return objectArray;
+}
+
+exports.ressourceHelper = function(ressource) {
+    const objectArray = [];
+
+    for( var i = 0; i < ressource.length; i++ ) {
+        const object = {};
+        Object.keys(ressource[i].toObject()).map(function(key, index) {
+            if(key = '_id') object._id = ressource[i][key];
+            if(key = 'id_user') object.userId = ressource[i][key];
+            if(key = 'username') object.username = ressource[i][key];
+            if(key = 'email') object.email = ressource[i][key];
+            if(key = 'password') object.password = ressource[i][key];
+            if(key = 'cost') object.cost = ressource[i][key];
+            if(key = 'level') object.level = ressource[i][key];
         });
         objectArray.push(object);
     }

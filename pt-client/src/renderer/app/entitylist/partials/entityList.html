@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()" ng-if="EntityListController.entityType != 'ressource'">New</button>
+                <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityListController.createEntity()">New</button>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                         <th>ID Ressource</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th></th>
+                        <th>Cost</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -76,10 +76,10 @@
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'ressource' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
-                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.id_user }}</a></th>
+                        <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.userId }}</a></th>
                         <td>{{ entity.username }}</td>
                         <td>{{ entity.email }}</td>
-                        <td></td>
+                        <td>{{ entity.cost }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                 </tbody>

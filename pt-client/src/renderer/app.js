@@ -77,6 +77,12 @@ export default angular
   LOGOUT: 'auth-logout-success'
 })
 
+.constant('logLevel', {
+    ADMIN: '1',
+    PROJECT_MANAGER: '2',
+    DEVELOPER: '3'
+})
+
 .run(AppRun)
 
 .config(AppConfig)

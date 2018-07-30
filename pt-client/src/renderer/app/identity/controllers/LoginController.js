@@ -14,7 +14,7 @@ export default /*@ngInject*/ function LoginController( $scope, $rootScope, Ident
         
         IdentityStore.login(loginRequest)
         .then(function(data){
-            LocalStorageService.setToken(data.token);
+            LocalStorageService.clientConfig(data);
             $rootScope.$emit(events.LOGIN_SUCESS);
         });
     };

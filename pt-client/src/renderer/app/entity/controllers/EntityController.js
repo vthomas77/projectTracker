@@ -20,10 +20,10 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     if( !vm.edit ) {
         EntityStore.getEntity(vm.entityActual.entityId, vm.entityActual.entityType)
         .then(function(data){
+            console.log(data);
             if( data.hasOwnProperty('error') ) {
                 console.log('error');
             } else {
-                console.log(data);
                 vm.data = data.entity[0];
                 vm.relation = data.entityChild;
             }
@@ -47,6 +47,7 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
                 }
             });
         } else {
+            debugger;
             EntityStore.updateEntity(vm.entityActual.entityType, vm.entityActual.entityId, vm.data)
             .then(function(data){
                 if( data.hasOwnProperty('error') ) {
