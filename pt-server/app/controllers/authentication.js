@@ -27,7 +27,8 @@ exports.login = function(req, res, next) {
 
   res.status(200).json({
     token: generateToken(userInfo),
-    level: req.user.level
+    level: req.user.level,
+    username: req.user.username
   });
 
 }
