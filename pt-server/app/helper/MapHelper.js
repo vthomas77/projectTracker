@@ -7,8 +7,12 @@ exports.projectHelper = function(project) {
             if(key == '_id') object._id = project[i][key];
             if(key == 'id_project') object.projectId = project[i][key];
             if(key == 'name') object.name = project[i][key];
-            if(key == 'starting_date' && project[i][key] != null && project[i][key] != undefined) {
-                object.startDate = project[i][key].toDateString();
+            if(key == 'starting_date') {
+                if( project[i][key] != null && project[i][key] != undefined ){
+                    object.startDate = project[i][key].toDateString();
+                } else {
+                    object.startDate = '';
+                }
             }
             if(key == 'client_name') object.clientName = project[i][key];
             if(key == 'budget') object.allocatedBudget = project[i][key];
@@ -28,8 +32,20 @@ exports.taskHelper = function(task) {
             if(key == '_id') object._id = task[i][key];
             if(key == 'id_task_group') object.taskGroupId = task[i][key];
             if(key == 'id_task') object.taskId = task[i][key];
-            if(key == 'starting_date' && task[i][key] != null && task[i][key] != undefined) object.startDate = task[i][key].toDateString();
-            if(key == 'end_date' && task[i][key] != null && task[i][key] != undefined) object.endDate = task[i][key].toDateString();
+            if(key == 'starting_date') {
+                if( task[i][key] != null && task[i][key] != undefined ){
+                    object.startDate = task[i][key].toDateString();
+                } else {
+                    object.startDate = '';
+                }
+            }
+            if(key == 'end_date'){ 
+                if( task[i][key] != null && task[i][key] != undefined ){
+                    object.endDate = task[i][key].toDateString();
+                } else {
+                    object.endDate = '';
+                }
+            }
             if(key == 'name_task') object.nameTask = task[i][key];
             if(key == 'predecessor') object.predecessor = task[i][key];
         });
@@ -40,7 +56,8 @@ exports.taskHelper = function(task) {
 }
 
 exports.taskGroupHelper = function(taskGroup) {
-    const objectArray = [];
+    var objectArray = [];
+    console.log(taskGroup);
 
     for( var i = 0; i < taskGroup.length; i++ ) {
         const object = {};
@@ -48,14 +65,27 @@ exports.taskGroupHelper = function(taskGroup) {
             if(key == '_id') object._id = taskGroup[i][key];
             if(key == 'id_task_group') object.taskGroupId = taskGroup[i][key];
             if(key == 'id_project') object.projectId = taskGroup[i][key];
-            if(key == 'starting_date' && taskGroup[i][key] != null && taskGroup[i][key] != undefined) object.startDate = taskGroup[i][key].toDateString();
-            if(key == 'end_date' && taskGroup[i][key] != null && taskGroup[i][key] != undefined) object.endDate = taskGroup[i][key].toDateString();
+            if(key == 'starting_date') {
+                if( taskGroup[i][key] != null && taskGroup[i][key] != undefined ){
+                    object.startDate = taskGroup[i][key].toDateString();
+                } else {
+                    object.startDate = '';
+                }
+            }
+            if(key == 'end_date') {
+                if( taskGroup[i][key] != null && taskGroup[i][key] != undefined ){
+                    object.endDate = taskGroup[i][key].toDateString();
+                } else {
+                    object.endDate = '';
+                }
+            }
             if(key == 'name_task_group') object.nameTaskGroup = taskGroup[i][key];
             if(key == 'position') object.position = taskGroup[i][key];
         });
         objectArray.push(object);
+        // console.log('---BABABA----');
+        // console.log(object);
     }
-
     return objectArray;
 }
 

@@ -73,7 +73,8 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         EntityListStore.deleteEntity(entity._id, vm.entityType)
         .then(function(data){
             angular.forEach( vm.entityList, function(value, key) {
-                if( value._id == data.Entity[0]._id ) {
+                debugger;
+                if( value._id == data.entity[0]._id ) {
                     vm.entityList.splice(key, 1);
                 }
             });

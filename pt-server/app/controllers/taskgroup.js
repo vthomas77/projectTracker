@@ -46,9 +46,11 @@ exports.listOne = function(req, res) {
 
         Task.find({id_task_group: taskgroup._id}, function(err, tasks) {
           if (err) { return next(err); }
-
-            //project = MapHelper.projectHelper(project);
-            //taskGroups = MapHelper.taskGroupHelper(taskGroups);
+          
+            project = MapHelper.projectHelper(project);
+            taskgroup = MapHelper.taskGroupHelper(taskgroup);
+            tasks = MapHelper.taskHelper(tasks);
+            
 
             if (err) { return next(err); }
             return res.json({
@@ -98,7 +100,9 @@ exports.create = function(req, res) {
         if (err) {
             return next(err);
         }
-        const maxPosition = existingTaskgroup.position + 1;
+        if (existingTaskgroup) {
+          const maxPosition = existingTaskgroup.position + 1;
+        }
 
         Taskgroup.findOne({ name_task_group: name }, function(err, existingTaskgroup) {
 
