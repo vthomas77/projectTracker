@@ -93,6 +93,7 @@ module.exports = function(app) {
 
   // List task group route
   taskGroupRoutes.get('/list', requireAuth, TaskGroupController.list);
+  taskGroupRoutes.get('/:id', requireAuth, TaskGroupController.listOne);
 
   // Create task group route
   taskGroupRoutes.post('/create', requireAuth, TaskGroupController.create);

@@ -1,6 +1,8 @@
 const moment = require('moment');
 const Taskgroup = require('../models/taskgroupModel');
 const Project_User = require('../models/userProjectModel');
+const Project = require('../models/projectModel');
+const Task = require('../models/taskModel');
 const MapHelper = require('../helper/MapHelper');
 
 // -------------
@@ -28,6 +30,38 @@ exports.list = function(req, res) {
         });
 
     });
+}
+
+// Show relationship for a given task group
+exports.listOne = function(req, res) {
+
+  const taskgroupId = req.params.id;
+
+  Taskgroup.findById(taskgroupId, function(err, taskgroup) {
+
+      if (err) { return next(err); }
+
+      Project.find({_id : taskgroup.id_project}, function(err, project) {
+        if (err) { return next(err); }
+
+        Task.find({id_task_group: taskgroup._id}, function(err, tasks) {
+          if (err) { return next(err); }
+
+            //project = MapHelper.projectHelper(project);
+            //taskGroups = MapHelper.taskGroupHelper(taskGroups);
+
+            if (err) { return next(err); }
+            return res.json({
+              "entity":taskgroup,
+              "entityChild": { "projects" : project, "tasks" : tasks}
+            });
+
+        });
+
+      });
+
+  });
+
 }
 
 // -------------
@@ -59,7 +93,7 @@ exports.create = function(req, res) {
     // Default value
     // Add taskgroup at the last position
 
-    Taskgroup.findOne().sort('-position').exec(function(err, existingTaskgroup) {
+    Taskgroup.findOne({ id_project : projectId}).sort('-position').exec(function(err, existingTaskgroup) {
 
         if (err) {
             return next(err);
@@ -104,7 +138,27 @@ exports.create = function(req, res) {
                     return next(err);
                 }
 
-                return res.send({"entity":tg});
+                // Update other task group of same project
+                // Which are greater than position target
+                Taskgroup.find({id_project: projectId, _id : {$ne : tg._id}, position : {$gte : tg.position}}, function (err, taskgroupofsameproject) {
+                    if (err) {
+                        return next(err);
+                    }
+
+                    var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+
+                    for (i=0; i<taskGroupPosition.length; i++){
+                      Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position + 1}}, { new: true }, function (err, resultUpdate) {
+                          if (err) {
+                              return next(err);
+                          }
+                        });
+                    }
+
+                    return res.send({"entity":tg});
+                });
+
+
             });
         });
     });
@@ -127,8 +181,8 @@ exports.update = function(req, res) {
         if (err) {
             return next(err);
         }
-          //if (position < existingTaskgroup.position)
-          //{
+          if (position < existingTaskgroup.position)
+          {
           // Update task group
           existingTaskgroup.set({ name_task_group: name, position : position });
           existingTaskgroup.save(function (err, updatedTaskgroup) {
@@ -137,16 +191,56 @@ exports.update = function(req, res) {
               }
               //res.json({entity: existingTaskgroup});
               // Update other task group of same project
-              //, _id : {$ne : existingTaskgroup._id}
+              // Which are greater than position target
+              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}, position : {$gte : position}}, function (err, taskgroupofsameproject) {
+                  if (err) {
+                      return next(err);
+                  }
 
-              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}}, function (err, taskgroupofsameproject) {
-                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return tg; });
-                  res.json({entity: taskGroupPosition});
+                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+
+                  for (i=0; i<taskGroupPosition.length; i++){
+                    Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position + 1}}, { new: true }, function (err, resultUpdate) {
+                        if (err) {
+                            return next(err);
+                        }
+                      });
+                  }
+
+                  res.json({entity: existingTaskgroup});
               });
-
           });
 
-        //}
+        } else {
+          // Update task group
+          existingTaskgroup.set({ name_task_group: name, position : position-1});
+          existingTaskgroup.save(function (err, updatedTaskgroup) {
+              if (err) {
+                  return next(err);
+              }
+              //res.json({entity: existingTaskgroup});
+              // Update other task group of same project
+              // Which are greater than position target
+              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}, position : {$lt : position}}, function (err, taskgroupofsameproject) {
+                  if (err) {
+                      return next(err);
+                  }
+
+                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+
+                  for (i=0; i<taskGroupPosition.length; i++){
+                    Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position - 1}}, { new: true }, function (err, resultUpdate) {
+                        if (err) {
+                            return next(err);
+                        }
+                      });
+                  }
+
+                  res.json({entity: existingTaskgroup});
+              });
+          });
+
+        }
     });
 }
 
@@ -162,11 +256,37 @@ exports.delete = function(req, res) {
       if (err) {
           return next(err);
       }
+      // Delete task group
       Taskgroup.deleteOne({ _id: TaskgroupID }, function (err) {
           if (err) {
               return next(err);
           }
-          res.json({entity: taskGroupResult});
+          // Delete tasks linked to task group
+          Task.deleteMany({ id_task_group: TaskgroupID }, function (err, tasks) {
+            if (err) {
+                return next(err);
+            }
+            // Update position of remaining task group
+            Taskgroup.find({id_project: taskGroupResult.id_project, position : {$gt : taskGroupResult.position}}, function (err, taskgroupofsameproject) {
+                if (err) {
+                    return next(err);
+                }
+
+                var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+
+                for (i=0; i<taskGroupPosition.length; i++){
+                  Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position - 1}}, { new: true }, function (err, resultUpdate) {
+                      if (err) {
+                          return next(err);
+                      }
+                    });
+                }
+
+                res.json({entity: taskGroupResult});
+            });
+
+
+          });
       });
     });
 }
