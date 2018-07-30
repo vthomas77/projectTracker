@@ -210,7 +210,7 @@ Route : /api/ressource/:id
 Methode : PUT
 ```
 ```
-Parameter : data / email, username, password, cost
+Parameter : data / email, username, password, cost, ressourceID, ProjectId
 ```
 #### Delete ressource
 ```
