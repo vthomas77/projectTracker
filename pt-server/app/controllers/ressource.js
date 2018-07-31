@@ -139,7 +139,7 @@ exports.update = function(req, res) {
 
      userproject.save(function(err, user) {
        if (err) { return next(err); }
-       res.json({entity: userproject});
+       res.json({entity: existingRessource});
      });
     });
  });
