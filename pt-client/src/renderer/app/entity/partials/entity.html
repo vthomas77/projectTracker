@@ -77,7 +77,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1" id="EntityController.data.projectId" entity-list="" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="Poject" entity-linked="project" display="plus" max-relation="1" id="EntityController.data.projectId" entity-list="EntityController.relation.projects" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -133,7 +133,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1" id="EntityController.data.taskGroupId" entity-list="" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive title="taskgroup" entity-linked="taskgroup" display="plus" max-relation="1" id="EntityController.data.taskGroupId" entity-list="EntityController.relation.taskgroups" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -283,7 +283,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.project" display="plus" max-relation="1" id="EntityController.data.projectId" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.projects" display="plus" max-relation="1" id="EntityController.data.projectId" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -324,7 +324,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.projects" display="plus" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.projects" display="" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -380,7 +380,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive entity-linked="taskgroup" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.taskgroups" display="plus" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive entity-linked="taskgroup" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.taskgroups" display="plus" max-relation="1" id="EntityController.data.taskGroupId" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->

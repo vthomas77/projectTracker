@@ -65,6 +65,6 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     }
 
     function viewGantt() {
-        $location.path('/gantt/' + vm.entityActual.entityId);
+        $location.path('entity/project/' + vm.entityActual.entityId + '/gantt');
     }
 };

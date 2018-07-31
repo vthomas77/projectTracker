@@ -33,25 +33,26 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                         }
                     }
                 });
-                modalInstance.result.then(function(entityList) {
+                modalInstance.result.then(function(entityListUpdate) {
                     scope.id = [];
-                    for( var i = 0; i < entityList.length; i++ ) {
+                    for( var i = 0; i < entityListUpdate.length; i++ ) {
                         switch( attrs.entityLinked ) {
                             case 'project':
-                                scope.id = entityList[i]._id;
+                                console.log(entityListUpdate);
+                                scope.id = entityListUpdate[i]._id;
                                 break;
                             case 'taskgroup':
-                                scope.id = entityList[i]._id;
+                                scope.id = entityListUpdate[i]._id;
                                 break;
                             case 'task':
-                                scope.id.push(entityList[i].taskId);
+                                scope.id.push(entityListUpdate[i].taskId);
                                 break;
                             case 'ressource':
-                                scope.id = entityList[i]._id;
+                                scope.id = entityListUpdate[i]._id;
                                 break;
                         }
                     }
-                    scope.entityList = entityList;
+                    scope.entityList = entityListUpdate;
                 }, function () {});
             }
 
