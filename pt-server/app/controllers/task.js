@@ -110,8 +110,36 @@ exports.create = function(req, res) {
   // Insert project into database
   task.save(function(err, task) {
     if (err) { return next(err); }
-    // Return project created
-    return res.json({"entity":task});
+
+    // Recalculate date of task group
+    Task.findOne({id_task_group: taskGroupId}).sort('starting_date').exec(function(err, firstTask) {
+      if (err) {
+          return next(err);
+      }
+      const minDate = moment(firstTask.starting_date) //.format("YYYY-MM-DD HH-mm-ss").toString();
+      Task.findOne({id_task_group: taskGroupId}).sort('-end_date').exec(function(err, lastTask) {
+        if (err) {
+            return next(err);
+        }
+        const maxDate = moment(lastTask.end_date) //.format("YYYY-MM-DD HH-mm-ss").toString();
+        Taskgroup.findById(taskGroupId, function (err, existingTaskGroup) {
+          if (err) { return next(err); }
+          existingTaskGroup.set({ starting_date: minDate, end_date: maxDate});
+
+          existingTaskGroup.save(function (err, updatedTaskGroup) {
+           if (err) { return next(err); }
+           // Return project created
+           return res.json({"entity":task});
+          });
+
+
+       });
+      });
+
+      });
+
+
+
   });
 
 
@@ -138,33 +166,39 @@ exports.update = function(req, res) {
     existingTask.set({ num_task: 0, name_task: name, starting_date: startDate, end_date: endDate, predecessor: predecessor,id_task_group:taskGroupId});
     existingTask.save(function (err, updatedTask) {
      if (err) { return next(err); }
-     res.json({entity: updatedTask});
+
+
+     // Recalculate date of task group
+     Task.findOne({id_task_group: taskGroupId}).sort('starting_date').exec(function(err, firstTask) {
+       if (err) {
+           return next(err);
+       }
+       const minDate = moment(firstTask.starting_date) //.format("YYYY-MM-DD HH-mm-ss").toString();
+       Task.findOne({id_task_group: taskGroupId}).sort('-end_date').exec(function(err, lastTask) {
+         if (err) {
+             return next(err);
+         }
+         const maxDate = moment(lastTask.end_date) //.format("YYYY-MM-DD HH-mm-ss").toString();
+         Taskgroup.findById(taskGroupId, function (err, existingTaskGroup) {
+           if (err) { return next(err); }
+           existingTaskGroup.set({ starting_date: minDate, end_date: maxDate});
+
+           existingTaskGroup.save(function (err, updatedTaskGroup) {
+            if (err) { return next(err); }
+            res.json({entity: updatedTask});
+           });
+
+           //res.json({"min": existingTaskGroup,"max": maxDate});
+        });
+       });
+
+       });
+
+
+
     });
  });
 
- /*
- // Recalculate date of task group
- Task.findOne({id_task_group: taskGroupId}).sort('starting_date').exec(function(err, firstTask) {
-   if (err) {
-       return next(err);
-   }
-   const minDate = moment(firstTask.starting_date).format("YYYY-MM-DD HH-mm-ss").toString();
-   Task.findOne({id_task_group: taskGroupId}).sort('-end_date').exec(function(err, lastTask) {
-     if (err) {
-         return next(err);
-     }
-     const maxDate = moment(lastTask.end_date).format("YYYY-MM-DD HH-mm-ss").toString();
-     Taskgroup.findById(taskGroupId, function (err, existingTaskGroup) {
-       if (err) { return next(err); }
-       existingTaskGroup.set({ starting_date: minDate, end_date: maxDate});
-       existingTaskGroup.save(function (err, updatedTaskGroup) {
-        if (err) { return next(err); }
-       });
-    });
-   });
-
-   });
-   */
 }
 
 // -------------
