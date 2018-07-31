@@ -76,7 +76,7 @@ module.exports = function(app) {
   ressourceRoutes.post('/create', requireAuth, RessourceController.create);
 
   // Add ressource Route
-  ressourceRoutes.post('/add', requireAuth, RessourceController.add);
+  //ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
   ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
