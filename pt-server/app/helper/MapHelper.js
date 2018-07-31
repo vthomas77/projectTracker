@@ -46,7 +46,7 @@ exports.taskHelper = function(task) {
                     object.endDate = '';
                 }
             }
-            if(key == 'name_task') object.nameTask = task[i][key];
+            if(key == 'name_task') object.name = task[i][key];
             if(key == 'predecessor') object.predecessor = task[i][key];
         });
         objectArray.push(object);
@@ -79,12 +79,10 @@ exports.taskGroupHelper = function(taskGroup) {
                     object.endDate = '';
                 }
             }
-            if(key == 'name_task_group') object.nameTaskGroup = taskGroup[i][key];
+            if(key == 'name_task_group') object.name = taskGroup[i][key];
             if(key == 'position') object.position = taskGroup[i][key];
         });
         objectArray.push(object);
-        // console.log('---BABABA----');
-        // console.log(object);
     }
     return objectArray;
 }

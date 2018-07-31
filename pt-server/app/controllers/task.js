@@ -52,7 +52,7 @@ exports.listOne = function(req, res) {
         if (err) { return next(err); }
 
             task = MapHelper.taskHelper(task);
-            taskGroup = MapHelper.taskGroupHelper(taskGroup);
+            taskgroup = MapHelper.taskGroupHelper(taskgroup);
 
             if (err) { return next(err); }
             return res.json({

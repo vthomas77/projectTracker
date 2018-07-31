@@ -16,7 +16,6 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
             edit: '='
         },
         link: function( scope, element, attrs ) {
-
             scope.showLinkModal = function() {
                 var modalInstance = $uibModal.open({
                     animation: true,

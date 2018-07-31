@@ -63,7 +63,7 @@
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'taskgroup' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.taskGroupId }}</a></th>
-                        <td>{{ entity.nameTaskGroup }}</td>
+                        <td>{{ entity.name }}</td>
                         <td>{{ entity.startDate | dateFilter }}</td>
                         <td>{{ entity.endDate | dateFilter }}</td>
                         <td>{{ entity.position }}</td>
@@ -71,7 +71,7 @@
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'task' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
                         <th><a class="pointer view-entity" ng-click="EntityListController.openEntity(entity._id)">{{ entity.taskId }}</a></th>
-                        <td>{{ entity.nameTask }}</td>
+                        <td>{{ entity.name }}</td>
                         <td>{{ entity.startDate | dateFilter }}</td>
                         <td>{{ entity.endDate | dateFilter }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>

@@ -180,6 +180,7 @@
 
     <!-- If entity update -->
     <section class="content" ng-if="EntityController.entityActual.entityId != 0">
+        <!-- Project -->
         <div class="row" ng-if="EntityController.entityActual.entityType == 'project'">
             <!-- Left view -->
             <div class="col cold-lg-6 col-md-6 col-sm-6">
@@ -242,6 +243,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Ressource -->
         <div class="row" ng-if="EntityController.entityActual.entityType == 'ressource'">
             <!-- Left view -->
             <div class="col cold-lg-6 col-md-6 col-sm-6">
@@ -287,7 +290,9 @@
                 </div>
             </div>
         </div>
-                <div class="row" ng-if="EntityController.entityActual.entityType == 'taskgroup'">
+
+        <!-- Taskgroup -->
+        <div class="row" ng-if="EntityController.entityActual.entityType == 'taskgroup'">
             <!-- Left view -->
             <div class="col cold-lg-6 col-md-6 col-sm-6">
                 <!-- Actual entity -->
@@ -319,7 +324,7 @@
                     </div>
                     <div class="box-body">
                       <div class="row">
-                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.projects" display="" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
+                        <modal-link-entity-directive entity-linked="project" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.projects" display="plus" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
@@ -331,6 +336,51 @@
                     <div class="box-body">
                       <div class="row">
                         <modal-link-entity-directive entity-linked="task" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.tasks" display="" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Task -->
+        <div class="row" ng-if="EntityController.entityActual.entityType == 'task'">
+            <!-- Left view -->
+            <div class="col cold-lg-6 col-md-6 col-sm-6">
+                <!-- Actual entity -->
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Task : </h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <label>Name :</label>
+                            <input class="form-control" type="text" ng-model="EntityController.data.name" ng-disabled="!EntityController.edit">
+                        </div>
+                      </div>
+                      <div class="row pt-10">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <date-directive date="EntityController.data.startDate" title="Starting date :" disabled="EntityController.edit"></date-directive>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <date-directive date="EntityController.data.endDate" title="End date :" disabled="EntityController.edit"></date-directive>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+            </div>
+
+            <!-- Right View -->
+            <div class="col cold-lg-6 col-md-6 col-sm-6">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                      <h3 class="box-title"> TaskGroup : </h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <modal-link-entity-directive entity-linked="taskgroup" clickable="true" ng-if="EntityController.relation != undefined" entity-list="EntityController.relation.taskgroups" display="plus" max-relation="1" id="" edit="EntityController.edit"></modal-link-entity-directive>
                       </div>
                     </div>
                     <!-- /.box-body -->
