@@ -7,6 +7,7 @@ const ProjectController = require('../controllers/project');
 const RessourceController = require('../controllers/ressource');
 const TaskGroupController = require('../controllers/taskgroup');
 const TaskController = require('../controllers/task');
+const GanttController = require('../controllers/gantt');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -52,6 +53,9 @@ module.exports = function(app) {
   projectRoutes.get('/list', requireAuth, ProjectController.list);
   projectRoutes.get('/:id', requireAuth, ProjectController.listOne);
 
+  // Show Gantt
+  projectRoutes.get('/:id/gantt', requireAuth, GanttController.show);
+
   // Create project route
   projectRoutes.post('/create', requireAuth, ProjectController.create);
 
@@ -74,9 +78,6 @@ module.exports = function(app) {
 
   // Create ressource route
   ressourceRoutes.post('/create', requireAuth, RessourceController.create);
-
-  // Add ressource Route
-  //ressourceRoutes.post('/add', requireAuth, RessourceController.add);
 
   // Update ressource route
   ressourceRoutes.put('/:id', requireAuth, RessourceController.update);
