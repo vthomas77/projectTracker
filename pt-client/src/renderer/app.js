@@ -3,6 +3,7 @@
 // Vendor.js - Couldn't be done in one of the entry point to export as global variables (for angular/jquery)
 global.$ = global.jQuery = require('jquery');
 require('./adminLTE/index.js');
+require('./gantt/dhtmlxgantt.js');
 global.postal = require('postal');
 require('angular'); 
 require('angular-route');

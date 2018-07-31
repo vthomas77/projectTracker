@@ -35,7 +35,7 @@
                         <th>Taskgroup name</th>
                         <th>Starting date</th>
                         <th>Finishing date</th>
-                        <th></th>
+                        <th>Position</th>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'task' ">
                         <th>ID Task</th>
@@ -66,6 +66,7 @@
                         <td>{{ entity.nameTaskGroup }}</td>
                         <td>{{ entity.startDate | dateFilter }}</td>
                         <td>{{ entity.endDate | dateFilter }}</td>
+                        <td>{{ entity.position }}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="EntityListController.deleteEntity(entity)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                     <tr ng-if="EntityListController.entityType == 'task' " ng-repeat="entity in EntityListController.entityList | startFromFilter:(EntityListController.currentPage - 1) * EntityListController.maxPerPage | filter: EntityListController.searchBox | limitTo: EntityListController.maxPerPage" >
