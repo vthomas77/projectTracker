@@ -4,6 +4,13 @@ const config = require('./config/main');
 const bodyParser =require('body-parser');
 const mongoose = require('mongoose');
 const router = require('./routes/routes');
+const https = require("https")
+const fs = require("fs");
+
+const options = {
+  //key: fs.readFileSync("/var/www/html/pt-server/app/config/mykey.pem"),
+  //cert: fs.readFileSync("/var/www/html/pt-server/app/config/chain.pem")
+};
 
 //Database connection
 mongoose.connect(config.database);
@@ -19,6 +26,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 // Start the server
 app.listen(config.port);
+//https.createServer(options, app).listen(3030);
 console.log('Server is running on port ' + config.port + '.');
 
 // Enable CORS from client-side
