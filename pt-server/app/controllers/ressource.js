@@ -109,28 +109,6 @@ exports.create = function(req, res, next) {
 }
 
 // -------------
-// Add Route
-// -------------
-
-  // Add a ressource to a project
-exports.add = function(req, res) {
-
-  const userID = req.body.UserId;
-  const projectID = req.body.ProjectId;
-
-  let userproject = new Project_User({
-    id_project: projectID,
-    id_user: userID
-  });
-
-  userproject.save(function(err, user) {
-    if (err) { return next(err); }
-    res.json({status: 'OK'});
-  });
-
-}
-
-// -------------
 // Update Route
 // -------------
 
@@ -153,6 +131,7 @@ exports.update = function(req, res) {
     existingRessource.set({ email: email, username: username, password: password, cost: cost});
     existingRessource.save(function (err, updatedRessource) {
      if (err) { return next(err); }
+
      let userproject = new Project_User({
        id_project: projectID,
        id_user: ressourceID
@@ -160,7 +139,7 @@ exports.update = function(req, res) {
 
      userproject.save(function(err, user) {
        if (err) { return next(err); }
-       res.json({entity: existingRessource});
+       res.json({entity: userproject});
      });
     });
  });
