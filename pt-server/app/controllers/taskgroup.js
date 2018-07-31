@@ -40,11 +40,12 @@ exports.listOne = function(req, res) {
   Taskgroup.find({_id : taskgroupId}, function(err, taskgroup) {
 
       if (err) { return next(err); }
-
-      Project.find({_id : taskgroup.id_project}, function(err, project) {
+      const projectID = taskgroup.map(function (tg) { return tg.id_project; });
+      const taskGroupID = taskgroup.map(function (tg) { return tg._id; });
+      Project.find({_id : projectID}, function(err, project) {
         if (err) { return next(err); }
 
-        Task.find({id_task_group: taskgroup._id}, function(err, tasks) {
+        Task.find({id_task_group: taskGroupID}, function(err, tasks) {
           if (err) { return next(err); }
 
             project = MapHelper.projectHelper(project);
