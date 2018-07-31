@@ -11,11 +11,9 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     vm.openEntity = openEntity;
 
     var heightSize = $('#pickme').height();
-    // vm.size = modal != undefined ? 130 : 70;
     vm.size = 70;
 
     // Initialize value from arg in route
-    // vm.entityType = modal != undefined ? modal : RouteHelperService.get().entityType;
     vm.entityType = RouteHelperService.get().entityType;
 
     // Not in a function for asynchronous
