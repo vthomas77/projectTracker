@@ -8,8 +8,8 @@ const https = require("https")
 const fs = require("fs");
 
 const options = {
-  //key: fs.readFileSync("/var/www/html/pt-server/app/config/mykey.pem"),
-  //cert: fs.readFileSync("/var/www/html/pt-server/app/config/chain.pem")
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem")
 };
 
 //Database connection
@@ -26,7 +26,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 // Start the server
 app.listen(config.port);
-//https.createServer(options, app).listen(3030);
+https.createServer(options, app).listen(3030);
 console.log('Server is running on port ' + config.port + '.');
 
 // Enable CORS from client-side
