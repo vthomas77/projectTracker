@@ -37,7 +37,7 @@ exports.listOne = function(req, res) {
           if (err) { return next(err); }
           user = MapHelper.ressourceHelper(user);
           projects = MapHelper.projectHelper(projects);
-          return res.json({"entity":user,"entityChild": projects});
+          return res.json({"entity":user,"entityChild": { "projects" : projects}});
         });
 
       });
@@ -122,7 +122,7 @@ exports.update = function(req, res) {
   const password = data.password;
   const cost = data.cost;
 
-  const ressourceID = data.ressourceID;
+  //const ressourceID = data.ressourceID;
   const projectID = data.projectId;
   console.log(projectID);
   User.findById(userID, function (err, existingRessource) {
@@ -134,7 +134,7 @@ exports.update = function(req, res) {
 
      let userproject = new Project_User({
        id_project: projectID,
-       id_user: ressourceID
+       id_user: userID
      });
 
      userproject.save(function(err, user) {
