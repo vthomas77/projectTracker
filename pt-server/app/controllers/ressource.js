@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const Project_User = require('../models/userProjectModel');
 const Project = require('../models/projectModel');
 const MapHelper = require('../helper/MapHelper');
+const validator = require('validator');
 
 // -------------
 // List Route
@@ -68,6 +69,9 @@ exports.create = function(req, res, next) {
     if (!email) {
       return res.send({ error: 'You must enter an email address.'});
     }
+    if(!validator.isEmail(email)) {
+      return res.send({ error: 'Your email is not valid.'});
+    }
 
     // Return error if full name not provided
     if (!username) {
@@ -78,6 +82,19 @@ exports.create = function(req, res, next) {
     if (!password) {
       return res.send({ error: 'You must enter a password.' });
     }
+    if (!validator.isLength(password,{min:8,max:undefined})) {
+      return res.send({ error: 'The password must have at least 8 characters.' });
+    }
+    if (validator.isLowercase(password)) {
+      return res.send({ error: 'You must have at least one uppercase character.' });
+    }
+    if (validator.isAlpha(password)) {
+      return res.send({ error: 'The password must have at least one number.' });
+    }
+    if (validator.isAlphanumeric(password)) {
+      return res.send({ error: 'The password must have at least one special character.' });
+    }
+
 
     User.findOne({ email: email }, function(err, existingUser) {
 
