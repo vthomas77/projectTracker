@@ -59,6 +59,11 @@ return res.json({"data":dataArray});
 exports.show = function(req, res) {
 
   let dataArray = [];
+  let linkArray = [];
+  // Mapping table
+  // { id_task_bdd : id_task_gantt}
+  var tableMapping = { 0 : 0};
+  let linkIndex=0;
 
   const projectID = req.params.id;
 
@@ -89,6 +94,7 @@ exports.show = function(req, res) {
               duration : moment(tgs[j].end_date).diff(moment(tgs[j].starting_date),'days'),
               parent : 1
             });
+            retainIndex=k;
             for (i=0;i<tsks.length;i++){
               if (tsks[i].id_task_group == tgs[j]._id)
               {
@@ -100,10 +106,27 @@ exports.show = function(req, res) {
                   duration : moment(tsks[i].end_date).diff(moment(task[i].starting_date),'days'),
                   parent : tgIndex
                 });
+                // Relation table
+                tableMapping[tsks[i].id_task] = k;
+              }
+            }
+            for (i=0;i<tsks.length;i++){
+              if (tsks[i].id_task_group == tgs[j]._id)
+              {
+                retainIndex+=1;
+                for (m=0;m<tsks[i].predecessor.length;m++){
+                  linkIndex+=1;
+                  linkArray.push({
+                    id : linkIndex,
+                    source : tableMapping[tsks[i].predecessor[m]],
+                    target : retainIndex,
+                    type : 1,
+                  });
+                }
               }
             }
           }
-          return res.json({"data":dataArray});
+          return res.json({"data":dataArray,"links":linkArray});
         });
 
     });
