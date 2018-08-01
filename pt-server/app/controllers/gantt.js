@@ -65,6 +65,7 @@ exports.show = function(req, res) {
   var tableMapping = { 0 : 0};
   let linkIndex=0;
 
+
   const projectID = req.params.id;
 
   Project.findById(projectID, function(err, project) {
@@ -78,12 +79,7 @@ exports.show = function(req, res) {
           const tsks = task.map(function (tsk) { return tsk; });
           if (err) { return next(err); }
           k=1;
-          dataArray.push({
-            id : k,
-            text : project.name,
-            start_date : moment(project.starting_date).format("DD-MM-YYYY").toString(),
-            duration : 0,
-          });
+          let endProject= moment(project.starting_date);
           for (j=0;j<tgs.length;j++){
             k+=1;
             tgIndex=k;
@@ -92,8 +88,13 @@ exports.show = function(req, res) {
               text : tgs[j].name_task_group,
               start_date : moment(tgs[j].starting_date).format("DD-MM-YYYY").toString(),
               duration : moment(tgs[j].end_date).diff(moment(tgs[j].starting_date),'days'),
+              color:"green",
               parent : 1
             });
+            if (moment(tgs[j].end_date).diff(endProject) > 0)
+            {
+              endProject = moment(tgs[j].end_date);
+            }
             retainIndex=k;
             for (i=0;i<tsks.length;i++){
               if (tsks[i].id_task_group == tgs[j]._id)
@@ -120,12 +121,18 @@ exports.show = function(req, res) {
                     id : linkIndex,
                     source : tableMapping[tsks[i].predecessor[m]],
                     target : retainIndex,
-                    type : 1,
+                    type : 0,
                   });
                 }
               }
             }
           }
+          dataArray.push({
+            id : 1,
+            text : project.name,
+            start_date : moment(project.starting_date).format("DD-MM-YYYY").toString(),
+            duration : endProject.diff(moment(project.starting_date),'days') + 1,
+          });
           return res.json({"data":dataArray,"links":linkArray});
         });
 
