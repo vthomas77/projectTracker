@@ -22,20 +22,6 @@
 }
 
 /** Animate **/
-
-    /* Search */
-/*    .search-animate.ng-enter, .search-animate.ng-leave {
-        transition: 150ms linear all;
-    }
-    .search-animate.ng-leave.ng-leave-active {
-        opacity: 0;
-    }
-    .search-animate.ng-enter {
-        opacity: 0;
-    }
-    .search-animate.ng-enter.ng-enter-active {
-        opacity: 1;
-    }*/
     
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {

@@ -6,7 +6,7 @@ export default /*@ngInject*/ function GanttController( $scope, RouteHelperServic
     $scope.entityActual = RouteHelperService.get();
 
     // Jquery for height
-    $scope.heightSize = $('#pickme').height() - 100;
+    $scope.heightSize = $('#pickme').height() - 30;
 
     GanttStore.getGantt($scope.entityActual.entityId, $scope.entityActual.entityType)
     .then(function(data){

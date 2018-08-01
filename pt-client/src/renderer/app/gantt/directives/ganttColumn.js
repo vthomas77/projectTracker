@@ -21,9 +21,12 @@ export default /*@ngInject*/ function ganttColumn( $interpolate ) {
             if (!gantt.config.columnsSet)
                 gantt.config.columnsSet = gantt.config.columns = [];
 
-            if (!gantt.config.columns.length)
+            if ( !gantt.config.columns.length ) {
                 config.tree = true;
-            gantt.config.columns.push(config);
+            }
+            if( gantt.config.columns.length < 2 ) {
+                gantt.config.columns.push(config);
+            }
         }
     };
 };
