@@ -1,7 +1,7 @@
 <section class="content-wrapper">
 
     <div class="col col-lg-12 col-md-12 col-sm-12 content-actionbar entitylist-option-wrapper">
-        <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option2">
+        <div class="col col-lg-12 col-md-12 col-sm-12 entitylist-option2" ng-if="EntityController.hasAccess">
             <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(false)" ng-if="EntityController.edit">Save</button>
             <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.save(true)" ng-if="EntityController.edit && EntityController.entityActual.entityId == 0">Save and Add</button>
             <button type="button" class="btn blue-custom-primary btn-flat" ng-click="EntityController.switchEdit()" ng-if="!EntityController.edit">Edit</button>

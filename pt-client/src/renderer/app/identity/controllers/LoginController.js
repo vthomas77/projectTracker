@@ -1,7 +1,7 @@
 'use strict';
 
-LoginController.$inject = ['$scope', '$rootScope', 'IdentityStore', 'events', 'LocalStorageService', 'PostalService'];
-export default /*@ngInject*/ function LoginController( $scope, $rootScope, IdentityStore, events, LocalStorageService, PostalService ) {
+LoginController.$inject = ['$scope', '$rootScope', 'IdentityStore', 'events', 'LocalStorageService', 'PostalService', 'UserStore'];
+export default /*@ngInject*/ function LoginController( $scope, $rootScope, IdentityStore, events, LocalStorageService, PostalService, UserStore ) {
     var vm = this;
 
     vm.login = login;
