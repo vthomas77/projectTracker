@@ -53,7 +53,7 @@ exports.listOne = function(req, res) {
 exports.create = function(req, res, next) {
 
   // Check if user has project manager role
-  if (req.user.level == 1)
+  if ((req.user.level == 1) || (req.user.level == 2))
   {
 
     const data = req.body.data;
@@ -104,7 +104,7 @@ exports.create = function(req, res, next) {
         });
     });
   } else {
-    return res.send({ error: 'You need to be admin a ProjectManager to create a Developper Account'});
+    return res.send({ error: 'You need to be admin or ProjectManager to create a Developper Account'});
   }
 }
 
@@ -113,6 +113,10 @@ exports.create = function(req, res, next) {
 // -------------
 
 exports.update = function(req, res) {
+
+  // Check if user has project manager role
+  if ((req.user.level == 1) || (req.user.level == 2))
+  {
   const userID = req.params.id;
 
   const data = req.body.data;
@@ -143,7 +147,9 @@ exports.update = function(req, res) {
      });
     });
  });
-
+  } else {
+    return res.send({ error: 'You need to be admin or ProjectManager to edit a ressource'});
+  }
 }
 
 // -------------
@@ -152,6 +158,9 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 
+  // Check if user has project manager role
+  if ((req.user.level == 1) || (req.user.level == 2))
+  {
   const userID = req.params.id;
 
   // Return user to be deleted
@@ -167,5 +176,7 @@ exports.delete = function(req, res) {
         });
      });
  });
-
+  } else {
+    return res.send({ error: 'You need to be admin or ProjectManager to delete a ressource'});
+  }
 }
