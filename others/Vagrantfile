@@ -68,7 +68,7 @@ Vagrant.configure("2") do |config|
     # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
     # documentation for more information about their specific syntax and use.
     config.vm.provision "shell", inline: <<-SHELL
-        cd /var/www/html/projectTracker/pt-server/mongoose/
+        cd /var/www/html/projectTracker/pt-server/app/
         sudo apt-get update
         sudo apt-get upgrade -y
         sudo apt-get update
@@ -90,11 +90,6 @@ Vagrant.configure("2") do |config|
         sudo apt-get upgrade -y
         sudo apt-get update
         sudo service mongod restart
-        npm install mongoose
-        sudo apt-get update
-        sudo apt-get upgrade -y
-        sudo apt-get update
-        npm install mongoose
-        node scriptdb.js
+        npm run clean:install
         SHELL
 end
