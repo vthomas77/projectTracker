@@ -101,8 +101,15 @@ exports.create = function(req, res) {
         if (err) {
             return next(err);
         }
-        if (existingTaskgroup) {
-          const maxPosition = existingTaskgroup.position + 1;
+        let maxPosition;
+        if (!position) {
+          if (existingTaskgroup == null) {
+            maxPosition = 1;
+          } else {
+            maxPosition = existingTaskgroup.position + 1;
+          }
+        } else {
+          maxPosition = position;
         }
 
         Taskgroup.findOne({ name_task_group: name }, function(err, existingTaskgroup) {
@@ -113,13 +120,13 @@ exports.create = function(req, res) {
 
             // Check if taskgroup is unique
             if (existingTaskgroup) {
-                return res.status(422).send({
+                return res.send({
                     error: 'A task group named ' + existingTaskgroup.name + ' already exist.'
                 });
             }
 
             // Create taskgroup instance
-            if (!position) {
+
               var taskgroup = new Taskgroup({
                   name_task_group: name,
                   id_project: projectId,
@@ -127,15 +134,7 @@ exports.create = function(req, res) {
                   end_date: "",
                   position : maxPosition
               });
-            } else {
-              var taskgroup = new Taskgroup({
-                  name_task_group: name,
-                  id_project: projectId,
-                  starting_date: "",
-                  end_date: "",
-                  position : position
-                });
-            }
+
 
             // Insert taskgroup into database
             taskgroup.save(function(err, tg) {
@@ -186,66 +185,65 @@ exports.update = function(req, res) {
         if (err) {
             return next(err);
         }
-          if (position < existingTaskgroup.position)
-          {
-          // Update task group
-          existingTaskgroup.set({ name_task_group: name, position : position });
-          existingTaskgroup.save(function (err, updatedTaskgroup) {
-              if (err) {
-                  return next(err);
-              }
-              //res.json({entity: existingTaskgroup});
-              // Update other task group of same project
-              // Which are greater than position target
-              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}, position : {$gte : position}}, function (err, taskgroupofsameproject) {
-                  if (err) {
-                      return next(err);
-                  }
+;
+        if (position < existingTaskgroup.position)
+        {
+            // Update other task group of same project
+            // Which are greater than position target
+            Taskgroup.find({id_project: existingTaskgroup.id_project, position : {$gte : position, $lt : existingTaskgroup.position}}, function (err, taskgroupofsameproject) {
+                if (err) {
+                    return next(err);
+                }
 
-                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+                var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
 
-                  for (i=0; i<taskGroupPosition.length; i++){
-                    Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position + 1}}, { new: true }, function (err, resultUpdate) {
-                        if (err) {
-                            return next(err);
-                        }
-                      });
-                  }
+                for (i=0; i<taskGroupPosition.length; i++){
+                  Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position + 1}}, { new: true }, function (err, resultUpdate) {
+                      if (err) {
+                          return next(err);
+                      }
 
-                  res.json({entity: existingTaskgroup});
+                    });
+                }
+                existingTaskgroup.set({ name_task_group: name, position : position});
+                existingTaskgroup.save(function (err, updatedTaskgroup) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json({entity: existingTaskgroup});
               });
-          });
+
+            });
 
         } else {
-          // Update task group
-          existingTaskgroup.set({ name_task_group: name, position : position-1});
-          existingTaskgroup.save(function (err, updatedTaskgroup) {
-              if (err) {
-                  return next(err);
-              }
-              //res.json({entity: existingTaskgroup});
-              // Update other task group of same project
-              // Which are greater than position target
-              Taskgroup.find({id_project: existingTaskgroup.id_project, _id : {$ne : existingTaskgroup._id}, position : {$lt : position}}, function (err, taskgroupofsameproject) {
-                  if (err) {
-                      return next(err);
-                  }
 
-                  var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
+            Taskgroup.find({id_project: existingTaskgroup.id_project, position : { $gt : existingTaskgroup.position,  $lte : position}}, function (err, taskgroupofsameproject) {
+                if (err) {
+                    return next(err);
+                }
 
-                  for (i=0; i<taskGroupPosition.length; i++){
-                    Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position - 1}}, { new: true }, function (err, resultUpdate) {
-                        if (err) {
-                            return next(err);
-                        }
-                      });
-                  }
+                var taskGroupPosition = taskgroupofsameproject.map(function (tg) { return {"id":tg._id,"position":tg.position}; });
 
-                  res.json({entity: existingTaskgroup});
-              });
-          });
+                for (i=0; i<taskGroupPosition.length; i++){
+                  Taskgroup.findByIdAndUpdate(taskGroupPosition[i].id, { $set: { position: taskGroupPosition[i].position - 1}}, { new: true }, function (err, resultUpdate) {
+                      if (err) {
+                          return next(err);
+                      }
+
+                    });
+
+                }
+                existingTaskgroup.set({ name_task_group: name, position : position});
+                existingTaskgroup.save(function (err, updatedTaskgroup) {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.json({entity: existingTaskgroup});
+                });
+            });
 
         }
+
     });
 }
 
@@ -261,6 +259,9 @@ exports.delete = function(req, res) {
       if (err) {
           return next(err);
       }
+      const tgProjectId = taskGroupResult.map(function (tg) { return tg.id_project; });
+      const tgPosition = taskGroupResult.map(function (tg) { return tg.position; });
+
       // Delete task group
       Taskgroup.deleteOne({ _id: TaskgroupID }, function (err) {
           if (err) {
@@ -271,8 +272,9 @@ exports.delete = function(req, res) {
             if (err) {
                 return next(err);
             }
+
             // Update position of remaining task group
-            Taskgroup.find({id_project: taskGroupResult.id_project, position : {$gt : taskGroupResult.position}}, function (err, taskgroupofsameproject) {
+            Taskgroup.find({ id_project: tgProjectId, position : {$gt : tgPosition[0]}}, function (err, taskgroupofsameproject) {
                 if (err) {
                     return next(err);
                 }
@@ -289,8 +291,6 @@ exports.delete = function(req, res) {
 
                 res.json({entity: taskGroupResult});
             });
-
-
           });
       });
     });

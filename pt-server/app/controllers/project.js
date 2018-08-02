@@ -81,8 +81,7 @@ exports.create = function(req, res) {
   // Validate parameters
 
   if (!name) {
-    //return res.send({ error: 'You must enter a project name.'});
-    return res.send(typeof(data));
+    return res.send({ error: 'You must enter a project name.'});
   }
 
   // Default value
@@ -100,7 +99,7 @@ exports.create = function(req, res) {
 
       // Check if project is unique
       if (existingProject) {
-        return res.status(422).send({ error: 'A project named ' + existingProject.name + ' already exist.' });
+        return res.send({ error: 'A project named ' + existingProject.name + ' already exist.' });
       }
 
       // Create project instance
