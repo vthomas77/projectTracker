@@ -10,7 +10,6 @@ export default /*@ngInject*/ function GanttController( $scope, RouteHelperServic
 
     GanttStore.getGantt($scope.entityActual.entityId, $scope.entityActual.entityType)
     .then(function(data){
-        console.log(data);
         $scope.tasks = data;
     });
 };

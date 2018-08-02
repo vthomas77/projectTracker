@@ -22,7 +22,6 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     // Not in a function for asynchronous
     EntityListStore.getList(vm.entityType)
     .then(function(data){
-        console.log(data);
         vm.entityList = data.entityTypeList;
         vm.filteredLength = vm.entityList.length;
         addRemovePagination();
@@ -52,7 +51,7 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     }
 
     function deleteEntity( entity ){
-        if( vm.entityType != 'task') {
+        if( vm.entityType != 'task' && vm.entityType != 'ressource' ) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -74,7 +73,7 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         EntityListStore.deleteEntity(entity._id, vm.entityType)
         .then(function(data){
             angular.forEach( vm.entityList, function(value, key) {
-                if( value._id == data.entity._id ) {
+                if( value._id == data.entity[0]._id ) {
                     vm.entityList.splice(key, 1);
                 }
             });

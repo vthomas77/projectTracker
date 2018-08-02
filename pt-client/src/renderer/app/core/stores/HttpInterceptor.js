@@ -11,8 +11,6 @@ export default /*@ngInject*/ function HttpInterceptor( $q, PostalService, LocalS
 	return interceptor;
 
 	function request(config) {
-		console.log('Request')
-
         var token = LocalStorageService.token();
         config.headers = config.headers || {};
         config.headers.Authorization = "Bearer " + token;
@@ -21,17 +19,14 @@ export default /*@ngInject*/ function HttpInterceptor( $q, PostalService, LocalS
     }
 
     function requestError(config) {
-    	console.log('Error requestError');
         return config;
     }
 
     function response(res) {
-    	console.log('Response');
         return res;
     }
 
     function responseError(rejection) {
-    	console.log('Error responseError');
         if(rejection.statusText.length > 0) {
             PostalService.publish('alert', rejection.statusText);
         }

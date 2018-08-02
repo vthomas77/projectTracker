@@ -9,7 +9,6 @@ export default /*@ngInject*/ function UserStore( userRole ) {
 
     function hasAccess(userLevel) {
         var result = false;
-        console.log(userLevel);
         angular.forEach(userRole, function(key, value){
             if( key == userLevel && (value == 'ADMIN' || value == 'PROJECT_MANAGER') ) {
                 result =  true;

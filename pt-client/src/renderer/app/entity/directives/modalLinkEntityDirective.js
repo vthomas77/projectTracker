@@ -38,7 +38,6 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                     for( var i = 0; i < entityListUpdate.length; i++ ) {
                         switch( attrs.entityLinked ) {
                             case 'project':
-                                console.log(entityListUpdate);
                                 scope.id = entityListUpdate[i]._id;
                                 break;
                             case 'taskgroup':
