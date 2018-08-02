@@ -257,7 +257,7 @@ exports.delete = function(req, res) {
 
     const TaskgroupID = req.params.id;
 
-    Taskgroup.findById(TaskgroupID, function(err, taskGroupResult) {
+    Taskgroup.find({_id : TaskgroupID}, function(err, taskGroupResult) {
       if (err) {
           return next(err);
       }

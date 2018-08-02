@@ -189,7 +189,7 @@ exports.delete = function(req, res) {
         // Cascade delete
         Project_User.deleteMany({ id_user: userID }, function (err, user) {
           if (err) { return next(err); }
-          res.json({"Entity": userResult });
+          res.json({"entity": userResult });
         });
      });
  });
