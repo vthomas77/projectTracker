@@ -8,6 +8,7 @@ const RessourceController = require('../controllers/ressource');
 const TaskGroupController = require('../controllers/taskgroup');
 const TaskController = require('../controllers/task');
 const GanttController = require('../controllers/gantt');
+const DashboardController = require('../controllers/dashboard');
 
 // Authenticate with JSON Web Token
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -124,5 +125,11 @@ module.exports = function(app) {
 
   // Delete task route
   taskRoutes.delete('/:id', requireAuth, TaskController.delete);
+
+  // ----------
+  // Dashboard
+  // ---------
+  apiRoutes.get('/dashboard', requireAuth, DashboardController.show);
+
 
 };
