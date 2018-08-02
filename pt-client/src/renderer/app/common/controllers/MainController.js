@@ -5,7 +5,7 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     var vm = this;
 
     vm.clientConfig = LocalStorageService.getClientConfig();
-    vm.edit = UserStore.hasAccess(vm.clientConfig.level);
+    vm.edit = UserStore.isAdmin(vm.clientConfig.level);
     vm.action = 'dashboard';
     $location.path('/' + vm.action);
 

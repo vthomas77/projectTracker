@@ -22,7 +22,6 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     if( !vm.edit ) {
         EntityStore.getEntity(vm.entityActual.entityId, vm.entityActual.entityType)
         .then(function(data){
-            console.log(data);
             if( data.hasOwnProperty('error') ) {
                 PostalService.publish('alert', data.error);
             } else {

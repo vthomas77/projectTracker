@@ -26,7 +26,7 @@
                     <tr ng-if="entityLinked == 'task' " ng-repeat="entity in entityList" >
                         <th ng-if="clickable"><a class="pointer view-entity" ng-click="openEntity(entity._id)">{{ entity.taskId }}</a></th>
                         <th ng-if="clickable == undefined">{{ entity.taskId }}</th>
-                        <td>{{ entity.nameTask }}</td>
+                        <td>{{ entity.name }}</td>
                         <td>{{ entity.startDate | dateFilter }}</td>
                         <td>{{ entity.endDate | dateFilter }}</td>
                     </tr>

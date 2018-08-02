@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 modalLinkEntityDirective.$inject = ['$uibModal', 'EntityListStore', '$location'];
 export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, EntityListStore, $location ) {
@@ -17,6 +17,7 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
         },
         link: function( scope, element, attrs ) {
             scope.showLinkModal = function() {
+                scope.id = [];
                 var modalInstance = $uibModal.open({
                     animation: true,
                     ariaLabelledBy: 'modal-title',
@@ -34,7 +35,6 @@ export default /*@ngInject*/ function modalLinkEntityDirective( $uibModal, Entit
                     }
                 });
                 modalInstance.result.then(function(entityListUpdate) {
-                    scope.id = [];
                     for( var i = 0; i < entityListUpdate.length; i++ ) {
                         switch( attrs.entityLinked ) {
                             case 'project':
