@@ -1,10 +1,11 @@
 'use strict';
 
-MainController.$inject = ['LocalStorageService', '$rootScope', 'events', '$location'];
-export default /*@ngInject*/ function MainController( LocalStorageService, $rootScope, events, $location ) {
+MainController.$inject = ['LocalStorageService', '$rootScope', 'events', '$location', 'UserStore'];
+export default /*@ngInject*/ function MainController( LocalStorageService, $rootScope, events, $location, UserStore ) {
     var vm = this;
 
     vm.clientConfig = LocalStorageService.getClientConfig();
+    vm.edit = UserStore.hasAccess(vm.clientConfig.level);
 
     vm.disconnect = disconnect;
     vm.createAccount = createAccount;

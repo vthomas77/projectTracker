@@ -1,7 +1,7 @@
 'use strict';
 
-EntityController.$inject = ['RouteHelperService', '$location', 'EntityStore', 'PostalService'];
-export default /*@ngInject*/ function EntityController( RouteHelperService, $location, EntityStore, PostalService ) {
+EntityController.$inject = ['RouteHelperService', '$location', 'EntityStore', 'PostalService', 'LocalStorageService', 'UserStore'];
+export default /*@ngInject*/ function EntityController( RouteHelperService, $location, EntityStore, PostalService, LocalStorageService, UserStore ) {
     var vm = this;
 
     vm.save = save;
@@ -9,6 +9,8 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     vm.viewGantt = viewGantt;
 
     vm.entityActual = RouteHelperService.get();
+    vm.clientConfig = LocalStorageService.getClientConfig();
+    vm.hasAccess = UserStore.hasAccess(vm.clientConfig.level);
 
     vm.format = 'yyyy/MM/dd';
     vm.data = {};
@@ -65,6 +67,6 @@ export default /*@ngInject*/ function EntityController( RouteHelperService, $loc
     }
 
     function viewGantt() {
-        $location.path('/gantt/' + vm.entityActual.entityId);
+        $location.path('entity/project/' + vm.entityActual.entityId + '/gantt');
     }
 };

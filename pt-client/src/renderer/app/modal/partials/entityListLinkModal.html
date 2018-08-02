@@ -57,7 +57,7 @@
                 </tr>
                 <tr ng-if="EntityListModalController.entityType == 'taskgroup' " ng-repeat="entity in EntityListModalController.entityList | startFromFilter:(EntityListModalController.currentPage - 1) * EntityListModalController.maxPerPage | filter: EntityListModalController.searchBox | limitTo: EntityListModalController.maxPerPage" class="pointer entityList" ng-click="EntityListModalController.selected(entity)" ng-class="EntityListModalController.isSelected(entity)">
                     <th>{{ entity.taskGroupId }}</th>
-                    <td>{{ entity.nameTaskGroup }}</td>
+                    <td>{{ entity.name }}</td>
                     <td>{{ entity.startDate | dateFilter }}</td>
                     <td>{{ entity.endDate | dateFilter }}</td>
                 </tr>

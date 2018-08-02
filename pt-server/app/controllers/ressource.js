@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const Project_User = require('../models/userProjectModel');
 const Project = require('../models/projectModel');
 const MapHelper = require('../helper/MapHelper');
+const validator = require('validator');
 
 // -------------
 // List Route
@@ -53,7 +54,7 @@ exports.listOne = function(req, res) {
 exports.create = function(req, res, next) {
 
   // Check if user has project manager role
-  if (req.user.level == 1)
+  if ((req.user.level == 1) || (req.user.level == 2))
   {
 
     const data = req.body.data;
@@ -68,6 +69,9 @@ exports.create = function(req, res, next) {
     if (!email) {
       return res.send({ error: 'You must enter an email address.'});
     }
+    if(!validator.isEmail(email)) {
+      return res.send({ error: 'Your email is not valid.'});
+    }
 
     // Return error if full name not provided
     if (!username) {
@@ -78,6 +82,19 @@ exports.create = function(req, res, next) {
     if (!password) {
       return res.send({ error: 'You must enter a password.' });
     }
+    if (!validator.isLength(password,{min:8,max:undefined})) {
+      return res.send({ error: 'The password must have at least 8 characters.' });
+    }
+    if (validator.isLowercase(password)) {
+      return res.send({ error: 'You must have at least one uppercase character.' });
+    }
+    if (validator.isAlpha(password)) {
+      return res.send({ error: 'The password must have at least one number.' });
+    }
+    if (validator.isAlphanumeric(password)) {
+      return res.send({ error: 'The password must have at least one special character.' });
+    }
+
 
     User.findOne({ email: email }, function(err, existingUser) {
 
@@ -104,7 +121,7 @@ exports.create = function(req, res, next) {
         });
     });
   } else {
-    return res.send({ error: 'You need to be admin a ProjectManager to create a Developper Account'});
+    return res.send({ error: 'You need to be admin or ProjectManager to create a Developper Account'});
   }
 }
 
@@ -113,6 +130,10 @@ exports.create = function(req, res, next) {
 // -------------
 
 exports.update = function(req, res) {
+
+  // Check if user has project manager role
+  if ((req.user.level == 1) || (req.user.level == 2))
+  {
   const userID = req.params.id;
 
   const data = req.body.data;
@@ -143,7 +164,9 @@ exports.update = function(req, res) {
      });
     });
  });
-
+  } else {
+    return res.send({ error: 'You need to be admin or ProjectManager to edit a ressource'});
+  }
 }
 
 // -------------
@@ -152,6 +175,9 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 
+  // Check if user has project manager role
+  if ((req.user.level == 1) || (req.user.level == 2))
+  {
   const userID = req.params.id;
 
   // Return user to be deleted
@@ -167,5 +193,7 @@ exports.delete = function(req, res) {
         });
      });
  });
-
+  } else {
+    return res.send({ error: 'You need to be admin or ProjectManager to delete a ressource'});
+  }
 }

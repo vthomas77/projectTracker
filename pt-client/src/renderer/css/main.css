@@ -22,20 +22,6 @@
 }
 
 /** Animate **/
-
-    /* Search */
-/*    .search-animate.ng-enter, .search-animate.ng-leave {
-        transition: 150ms linear all;
-    }
-    .search-animate.ng-leave.ng-leave-active {
-        opacity: 0;
-    }
-    .search-animate.ng-enter {
-        opacity: 0;
-    }
-    .search-animate.ng-enter.ng-enter-active {
-        opacity: 1;
-    }*/
     
     /* Alert */
     .alert-wrapper div.ng-enter, .alert-wrapper.ng-leave {
@@ -81,7 +67,7 @@
 
 /** Main (random css)**/
 
-/*body {overflow: hidden !important;}*/
+body {overflow: hidden !important;}
 html, body, body > div, body > div > div{min-height: 100vh !important;}
 #pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
 .content-wrapper {display: flex; flex-direction: column;}
