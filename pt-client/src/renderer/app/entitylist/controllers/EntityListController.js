@@ -1,7 +1,7 @@
 'use strict';
 
-EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal'];
-export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal ) {
+EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal', 'LocalStorageService', 'UserStore'];
+export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal, LocalStorageService, UserStore ) {
     var vm = this;
 
     vm.createEntity = createEntity;
@@ -9,6 +9,9 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
     vm.deleteThis = deleteThis;
     vm.updateSearchBox = updateSearchBox;
     vm.openEntity = openEntity;
+
+    vm.clientConfig = LocalStorageService.getClientConfig();
+    vm.edit = UserStore.hasAccess(vm.clientConfig.level);
 
     var heightSize = $('#pickme').height();
     vm.size = 70;
@@ -71,8 +74,7 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         EntityListStore.deleteEntity(entity._id, vm.entityType)
         .then(function(data){
             angular.forEach( vm.entityList, function(value, key) {
-                debugger;
-                if( value._id == data.entity[0]._id ) {
+                if( value._id == data.entity._id ) {
                     vm.entityList.splice(key, 1);
                 }
             });
