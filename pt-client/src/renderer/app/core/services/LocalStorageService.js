@@ -1,7 +1,7 @@
 'use strict';
 
-LocalStorageService.$inject = ['$window', 'logLevel'];
-export default /*@ngInject*/ function LocalStorageService( $window, logLevel ) {
+LocalStorageService.$inject = ['$window'];
+export default /*@ngInject*/ function LocalStorageService( $window ) {
 	function LocalStorageService() {
 		this.localStorage = $window.localStorage;
 	};
@@ -11,13 +11,9 @@ export default /*@ngInject*/ function LocalStorageService( $window, logLevel ) {
 	};
 
 	LocalStorageService.prototype.clientConfig = function( data ) {
-		var clientLevel;
 		this.localStorage.token = data.token;
 		this.localStorage.username = data.username;
-		angular.forEach(logLevel, function(key, value){
-			if(data.level == key) clientLevel = value;
-		});
-		this.localStorage.level = clientLevel;
+		this.localStorage.level = data.level;
 	};
 
 	LocalStorageService.prototype.getClientConfig = function() {

@@ -25,7 +25,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.get('/', (req, res) => res.send('Hello World!'))
 
 // Start the server
-app.listen(config.port);
+//app.listen(config.port);
 https.createServer(options, app).listen(3030);
 console.log('Server is running on port ' + config.port + '.');
 

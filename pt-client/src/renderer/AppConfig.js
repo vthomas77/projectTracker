@@ -26,7 +26,7 @@ export default /*@ngInject*/ function AppConfig($httpProvider, $locationProvider
             controllerAs: 'EntityController'
         })
 
-        .when("/gantt/:entityId", {
+        .when("/entity/:entityType/:entityId/gantt", {
             template: require('./app/gantt/partials/gantt.html'),
             controller: 'GanttController'
         })
