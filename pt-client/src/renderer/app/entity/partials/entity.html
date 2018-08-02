@@ -376,6 +376,18 @@
             <div class="col cold-lg-6 col-md-6 col-sm-6">
                 <div class="box box-default">
                     <div class="box-header with-border">
+                      <h3 class="box-title"> Task Predecessor : </h3>
+                    </div>
+                    <div class="box-body">
+                      <div class="row">
+                        <p> {{EntityController.data.predecessor}} </p>
+                        <modal-link-entity-directive title="Predecessor" entity-linked="task" display="plus" max-relation="none" id="EntityController.data.predecessor" entity-list="" edit="EntityController.edit"></modal-link-entity-directive>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="box box-default">
+                    <div class="box-header with-border">
                       <h3 class="box-title"> TaskGroup : </h3>
                     </div>
                     <div class="box-body">

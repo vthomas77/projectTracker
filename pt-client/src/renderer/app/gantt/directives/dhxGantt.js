@@ -9,7 +9,8 @@ export default /*@ngInject*/ function dhxGantt() {
 
     link:function ($scope, $element, $attrs, $controller){
       //watch data collection, reload on changes
-      gantt.config.show_errors = false
+      gantt.config.show_errors = false;
+      gantt.config.readonly = true;
       $scope.$watch($attrs.data, function(collection){
         if ( collection ) {
           gantt.clearAll();

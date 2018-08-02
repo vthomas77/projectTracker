@@ -1,7 +1,7 @@
 'use strict';
 
-EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal', 'LocalStorageService', 'UserStore'];
-export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal, LocalStorageService, UserStore ) {
+EntityListController.$inject = ['RouteHelperService', 'EntityListStore', '$location', 'filterFilter', '$uibModal', 'LocalStorageService', 'UserStore', 'PostalService'];
+export default /*@ngInject*/ function EntityListController(RouteHelperService, EntityListStore, $location, filterFilter, $uibModal, LocalStorageService, UserStore, PostalService ) {
     var vm = this;
 
     vm.createEntity = createEntity;
@@ -74,7 +74,13 @@ export default /*@ngInject*/ function EntityListController(RouteHelperService, E
         .then(function(data){
             angular.forEach( vm.entityList, function(value, key) {
                 if( value._id == data.entity[0]._id ) {
-                    vm.entityList.splice(key, 1);
+                    PostalService.publish('sucess', 'Entity was successfully deleted');
+                    EntityListStore.getList(vm.entityType)
+                    .then(function(data){
+                        vm.entityList = data.entityTypeList;
+                        vm.filteredLength = vm.entityList.length;
+                        addRemovePagination();
+                    });
                 }
             });
         });

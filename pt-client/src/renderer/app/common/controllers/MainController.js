@@ -1,20 +1,26 @@
 'use strict';
 
-MainController.$inject = ['LocalStorageService', '$rootScope', 'events', '$location', 'UserStore'];
-export default /*@ngInject*/ function MainController( LocalStorageService, $rootScope, events, $location, UserStore ) {
+MainController.$inject = ['LocalStorageService', '$rootScope', 'events', '$location', 'UserStore', 'DashboardStore'];
+export default /*@ngInject*/ function MainController( LocalStorageService, $rootScope, events, $location, UserStore, DashboardStore ) {
     var vm = this;
 
     vm.clientConfig = LocalStorageService.getClientConfig();
     vm.edit = UserStore.hasAccess(vm.clientConfig.level);
+    vm.action = 'dashboard';
+    $location.path('/' + vm.action);
 
     vm.disconnect = disconnect;
     vm.createAccount = createAccount;
     vm.updateAction = updateAction;
     vm.isSelected = isSelected;
-
-    vm.action = 'dashboard';
-
     isLogged();
+
+    if( vm.action == 'dashboard' ) {
+        DashboardStore.getDashboard()
+        .then(function(data){
+            vm.dashboard = data;
+        });
+    }
 
     function isLogged() {
         var token = LocalStorageService.token();
