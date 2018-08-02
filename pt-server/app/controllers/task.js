@@ -79,15 +79,15 @@ exports.listOne = function(req, res) {
       Task.find({id_task: {$in:task[0].predecessor}}, function(err, predecessorTasks) {
 
         if (err) { return next(err); }
-
+        predecessorTasks = MapHelper.taskHelper(predecessorTasks);
         let newTaskObject = {
-          predecessor: predecessorTasks,
+          Predecessor: predecessorTasks,
           _id: task[0]._id,
-          name_task:task[0].name_task,
-          id_task: task[0].id_task,
-          starting_date: task[0].starting_date,
-          end_date: task[0].end_date,
-          id_task_group: task[0].id_task_group
+          name:task[0].name_task,
+          taskId: task[0].id_task,
+          startDate: task[0].starting_date,
+          endDate: task[0].end_date,
+          taskGroupId: task[0].id_task_group
         }
         newTaskArray.push(newTaskObject);
 
@@ -95,12 +95,11 @@ exports.listOne = function(req, res) {
         Taskgroup.find({_id : taskGroupID}, function(err, taskgroup) {
           if (err) { return next(err); }
 
-              task = MapHelper.taskHelper(task);
               taskgroup = MapHelper.taskGroupHelper(taskgroup);
 
               if (err) { return next(err); }
               return res.json({
-                "entity":newTaskObject,
+                "entity":newTaskArray,
                 "entityChild": { "taskgroups" : taskgroup }
               });
 
