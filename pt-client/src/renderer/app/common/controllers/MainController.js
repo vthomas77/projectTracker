@@ -27,6 +27,10 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
         vm.selected = entityType;
         vm.action = entityType;
         if( vm.action == 'dashboard' ) {
+            DashboardStore.getDashboard()
+            .then(function(data){
+                vm.dashboard = data;
+            });
             $location.path('/' + vm.action);
         } else {
             $location.path('/entity/' + vm.action);
@@ -54,7 +58,6 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     $rootScope.$on(events.LOGIN_SUCESS, function() {
         DashboardStore.getDashboard()
         .then(function(data){
-            console.log(data);
             vm.dashboard = data;
         });
         isLogged();
