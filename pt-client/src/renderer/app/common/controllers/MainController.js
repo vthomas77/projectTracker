@@ -6,7 +6,6 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
 
     vm.clientConfig = LocalStorageService.getClientConfig();
     vm.edit = UserStore.isAdmin(vm.clientConfig.level);
-    vm.action = 'dashboard';
     $location.path('/' + vm.action);
 
     vm.disconnect = disconnect;
@@ -14,13 +13,6 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     vm.updateAction = updateAction;
     vm.isSelected = isSelected;
     isLogged();
-
-    if( vm.action == 'dashboard' ) {
-        DashboardStore.getDashboard()
-        .then(function(data){
-            vm.dashboard = data;
-        });
-    }
 
     function isLogged() {
         var token = LocalStorageService.token();
@@ -60,6 +52,11 @@ export default /*@ngInject*/ function MainController( LocalStorageService, $root
     });
 
     $rootScope.$on(events.LOGIN_SUCESS, function() {
+        DashboardStore.getDashboard()
+        .then(function(data){
+            console.log(data);
+            vm.dashboard = data;
+        });
         isLogged();
     });
 };
