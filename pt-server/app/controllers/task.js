@@ -41,6 +41,7 @@ exports.list = function(req, res) {
 }
 
 // Show relationship for a given Task
+/*
 exports.listOne = function(req, res) {
 
   const taskId = req.params.id;
@@ -63,6 +64,49 @@ exports.listOne = function(req, res) {
 
       });
 
+  });
+
+}
+*/
+exports.listOne = function(req, res) {
+
+  const taskId = req.params.id;
+  let newTaskArray = [];
+  Task.find({_id : taskId}, function(err, task) {
+
+      if (err) { return next(err); }
+
+      Task.find({id_task: {$in:task[0].predecessor}}, function(err, predecessorTasks) {
+
+        if (err) { return next(err); }
+
+        let newTaskObject = {
+          predecessor: predecessorTasks,
+          _id: task[0]._id,
+          name_task:task[0].name_task,
+          id_task: task[0].id_task,
+          starting_date: task[0].starting_date,
+          end_date: task[0].end_date,
+          id_task_group: task[0].id_task_group
+        }
+        newTaskArray.push(newTaskObject);
+
+        const taskGroupID = task.map(function (tsk) { return tsk.id_task_group; });
+        Taskgroup.find({_id : taskGroupID}, function(err, taskgroup) {
+          if (err) { return next(err); }
+
+              task = MapHelper.taskHelper(task);
+              taskgroup = MapHelper.taskGroupHelper(taskgroup);
+
+              if (err) { return next(err); }
+              return res.json({
+                "entity":newTaskObject,
+                "entityChild": { "taskgroups" : taskgroup }
+              });
+
+        });
+
+      });
   });
 
 }
