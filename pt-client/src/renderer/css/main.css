@@ -69,7 +69,8 @@
 
 body {overflow: hidden !important;}
 html, body, body > div, body > div > div{min-height: 100vh !important;}
-#pickme, #pickme > section {min-height: calc(100vh - 50px) !important;}
+#pickme, #pickme > section, #pickme > section > .section  {min-height: calc(100vh - 50px) !important;}
+#pickme > section > .section > div {min-height: calc(100vh - 80px) !important;}
 .content-wrapper {display: flex; flex-direction: column;}
 .btn.focus, .btn:focus, .btn:hover {color: #FFF !important;}
 
