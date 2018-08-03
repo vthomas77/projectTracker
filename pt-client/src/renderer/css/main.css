@@ -117,7 +117,7 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 .entitylist-option2 > button {margin: 0 10px 0 10px !important;}
 
 /** Login **/
-.login-background{background-image: url('../files/surf.jpg');}
+.login-background{background-image: url('../files/login.jpg');}
 
 .fading{
     padding: 20px;
@@ -125,7 +125,7 @@ html, body, body > div, body > div > div{min-height: 100vh !important;}
 }
 
 /** Register **/
-.register-background{background-image: url('../files/skate.jpg');}
+.register-background{background-image: url('../files/login.jpg');}
 
 .pointer
 {
